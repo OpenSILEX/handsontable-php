@@ -1,6 +1,6 @@
 <?php
 
-namespace inra\handsontable\config;
+namespace openSILEX\handsontablePHP\config;
 
 class Config {
 

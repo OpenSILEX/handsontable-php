@@ -1,13 +1,13 @@
 <?php
 
-namespace inra\handsontable\adapter;
+namespace openSILEX\handsontablePHP\adapter;
 
 /**
  * Description of HandSoneTableZend
  *
  * @author charlero
  */
-class HandsontableSimple extends \inra\handsontable\classes\Handsontable {
+class HandsontableSimple extends \openSILEX\handsontablePHP\classes\Handsontable {
 
     /**
      * Load all required js librairies
@@ -16,7 +16,7 @@ class HandsontableSimple extends \inra\handsontable\classes\Handsontable {
      */
     public function loadJSLibraries($jquery = false, $librairiesPath = []) {
         if (empty($librairiesPath)) {
-            $librairiesPath = \inra\handsontable\config\Config::getLibrairiesPath();
+            $librairiesPath = \openSILEX\handsontablePHP\config\Config::getLibrairiesPath();
         }
 
         $js = '';
@@ -46,7 +46,7 @@ class HandsontableSimple extends \inra\handsontable\classes\Handsontable {
      */
     public function loadCSSLibraries($jquery = false,$librairiesPath = []) {
         if (empty($librairiesPath)) {
-            $librairiesPath = \inra\handsontable\config\Config::getLibrairiesPath();
+            $librairiesPath = \openSILEX\handsontablePHP\config\Config::getLibrairiesPath();
         }
         $css = '';
         if (isset($librairiesPath['handsontable'])) {

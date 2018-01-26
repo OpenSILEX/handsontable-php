@@ -1,6 +1,6 @@
 <?php
 
-namespace inra\handsontable\tools;
+namespace openSILEX\handsontablePHP\tools;
 
 /**
  * Description of JsonExpression

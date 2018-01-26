@@ -1,11 +1,11 @@
 <?php
 
-namespace inra\handsontable\classes;
+namespace openSILEX\handsontablePHP\classes;
 
-use inra\handsontable\tools\JsonExpression;
-use inra\handsontable\classes\Columns;
-use inra\handsontable\classes\CellsConfig;
-use inra\handsontable\classes\CellConfig;
+use openSILEX\handsontablePHP\tools\JsonExpression;
+use openSILEX\handsontablePHP\classes\Columns;
+use openSILEX\handsontablePHP\classes\CellsConfig;
+use openSILEX\handsontablePHP\classes\CellConfig;
 
 /**
  * Description of Handsontable

@@ -2,7 +2,7 @@
 
 require_once './config/ConfigLibrairy.php';
 
-use inra\handsontable\adapter\HandsontableSimple;
+use openSILEX\handsontablePHP\adapter\HandsontableSimple;
 
 $hd = new HandsontableSimple();
 $data = [

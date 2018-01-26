@@ -5,9 +5,9 @@ error_reporting(E_ALL);
 
 require_once '../../../vendor/autoload.php';
 
-use inra\handsontable\adapter\HandsontableSimple;
+use openSILEX\handsontablePHP\adapter\HandsontableSimple;
 
-use inra\handsontable\classes\CellConfigDefinition;
+use openSILEX\handsontablePHP\classes\CellConfigDefinition;
 
 $hd = new HandsontableSimple();
 $data = [

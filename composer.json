@@ -5,8 +5,10 @@
     "license": "AGPL-3.0",
     "version" : "1.0.0",
     "keywords" : [
-        "spreadsheet",
-        "php"
+        "handsontable",
+        "spreadsheet", 
+        "php",
+        "javascript"
     ],
     "authors": [
         {
@@ -20,11 +22,11 @@
     },
     "autoload": {
         "psr-4": {
-            "openSILEX\\handsontable-php\\": "src/"
+            "openSILEX\\handsontablePHP\\": "src/"
         }
     },
     "autoload-dev": {
-        "psr-4": { "penSILEX\\handsontable-php\\": "tests/" }
+        "psr-4": { "openSILEX\\handsontable-php\\": "tests/" }
     },
     "minimum-stability": "dev"
 }

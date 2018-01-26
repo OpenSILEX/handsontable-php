@@ -1,8 +1,8 @@
 <?php
 require_once './config/ConfigLibrairy.php';
 
-use inra\handsontable\adapter\HandsontableSimple;
-use inra\handsontable\classes\ColumnConfig;
+use openSILEX\handsontablePHP\adapter\HandsontableSimple;
+use openSILEX\handsontablePHP\classes\ColumnConfig;
 
 $hd = new HandsontableSimple();
 $data = [

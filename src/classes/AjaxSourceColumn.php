@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-namespace inra\handsontable\classes;
+namespace openSILEX\handsontablePHP\classes;
 
 /**
  * Description of AjaxSourceColumn
@@ -23,7 +23,7 @@ class AjaxSourceColumn implements \JsonSerializable{
     }
 
     public function jsonSerialize() {
-        return \inra\handsontable\tools\JsonExpression::buildJson("function (query, process) {
+        return \openSILEX\handsontablePHP\tools\JsonExpression::buildJson("function (query, process) {
           $.ajax({
             url: '" . $this->url . "',
             dataType: '" . $this->dataType . "',

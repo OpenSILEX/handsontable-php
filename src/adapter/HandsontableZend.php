@@ -1,12 +1,12 @@
 <?php
-namespace inra\handsontable\adapter;
+namespace openSILEX\handsontablePHP\adapter;
 //require_once 'views/helpers/loadViewLibrairies.php'; // Datatable
 /**
  * Description of HandSoneTableZend
  *
  * @author charlero
  */
-class HandSontableZend extends \inra\handsontable\classes\Handsontable{
+class HandSontableZend extends \openSILEX\handsontablePHP\classes\Handsontable{
     protected $view;
 
 

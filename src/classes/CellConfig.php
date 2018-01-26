@@ -6,10 +6,10 @@
  * and open the template in the editor.
  */
 
-namespace inra\handsontable\classes;
+namespace openSILEX\handsontablePHP\classes;
 
-//use \inra\handsontable\tools\JsonExpression;
-use \inra\handsontable\classes\CellConfigDefinition;
+//use \openSILEX\handsontablePHP\tools\JsonExpression;
+use \openSILEX\handsontablePHP\classes\CellConfigDefinition;
 
 /**
  * Represents cell configuration

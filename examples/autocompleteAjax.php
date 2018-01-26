@@ -2,9 +2,9 @@
 require_once './config/ConfigLibrairy.php';
 
 
-use inra\handsontable\adapter\HandsontableSimple;
-use inra\handsontable\classes\ColumnConfig;
-use inra\handsontable\classes\AjaxSourceColumn;
+use openSILEX\handsontablePHP\adapter\HandsontableSimple;
+use openSILEX\handsontablePHP\classes\ColumnConfig;
+use openSILEX\handsontablePHP\classes\AjaxSourceColumn;
 
 $hd = new HandsontableSimple();
 $data = [

@@ -1,9 +1,9 @@
 <?php
 
 
-namespace inra\handsontable\classes;
+namespace openSILEX\handsontablePHP\classes;
 
-use \inra\handsontable\tools\JsonExpression;
+use \openSILEX\handsontablePHP\tools\JsonExpression;
 
 /**
  * Represents cells configuration

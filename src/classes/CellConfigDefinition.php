@@ -1,7 +1,7 @@
 <?php
 
 
-namespace inra\handsontable\classes;
+namespace openSILEX\handsontablePHP\classes;
 
 /**
  * Represent a cell configuration unit
