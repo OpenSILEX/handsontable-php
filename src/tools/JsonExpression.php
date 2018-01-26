@@ -2,11 +2,18 @@
 
 namespace openSILEX\handsontablePHP\tools;
 
-/**
- * Description of JsonExpression
- *
- * @author blue
- */
+//******************************************************************************
+//                              JsonExpression.php
+//
+// Author(s): Arnaud Charleroy
+// SILEX version 1.0
+// Copyright © - INRA - 2018
+// Creation date: 26 janv. 2018
+// Contact: arnaud.charleroy@inra.fr, anne.tireau@inra.fr, pascal.neveu@inra.fr
+// Last modification date:  26 janv. 2018
+// Subject: A class used to format or transform data in JSON
+//******************************************************************************
+
 class JsonExpression {
     /* The javascript expression
      *
@@ -36,7 +43,7 @@ class JsonExpression {
     }
 
     /**
-     * This file is part of the DataTable package
+     * This file is a modified part of the DataTable package
      * 
      * (c) Marc Roulias <marc@lampjunkie.com>
      * 
@@ -48,30 +55,29 @@ class JsonExpression {
      * 
      * This key will get used later in replaceFunctions to replace
      * the key with the actual function to fix the final json string.
-     * 
+     * @param string $js represents js text
      * @return string
      */
     public static function buildJson($js) {
         // remove comments
-        $js = preg_replace('!/\*.*?\*/!s', '', $js);  // removes /* comments */
-        $js = preg_replace('!//.*?\n!', '', $js); // removes //comments
+        $jsWithoutComment = preg_replace('!/\*.*?\*/!s', '', $js);  // removes /* comments */
+        $jsWithoutNewLine = preg_replace('!//.*?\n!', '', $jsWithoutComment); // removes //newline
         // remove all extra whitespace
-        $js = str_replace(array("\t", "\n", "\r\n"), '', trim($js));
+        $jsWithoutExtraWhitespace = str_replace(array("\t", "\n", "\r\n"), '', trim($jsWithoutNewLine));
 
-        $js = str_replace('"', '', $js);
-//        // build a temporary key
-//        $jsonKey = md5($js);
-//
-//        // store key => function mapping
-//        $this->jsonFunctions[$jsonKey] = $js;
+        $jsWithoutDoubleQuote = str_replace('"', '', $jsWithoutExtraWhitespace);
 
-        return $js;
+        return $jsWithoutDoubleQuote;
     }
 
+    /**
+     * Create a clean array from an mutliple or simple dimension array to convert it in a JSON array
+     * @param array $array array which needs to be cleaned
+     * @return array cleaned array
+     */
     static function arrayRecursiveJsonFormat($array) {
         $newArray = [];
         foreach ($array as $key => $value) {
-            
             if(is_array($value) ){
                 $newValue = static::arrayRecursiveJsonFormat($value);
             }elseif (is_string($value)) {

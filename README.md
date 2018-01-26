@@ -11,8 +11,14 @@ Setup
 The recommended way to install handsontable-php is through  [`Composer`](http://getcomposer.org). Just create a ``composer.json`` file and run the ``php composer.phar install`` command to install it:
 ```json
 {
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/niio972/handsontable-php"
+        }
+    ],
     "require": {
-        "openSILEX/handsontable-php": "~1.0"
+        "openSILEX/handsontable-php": "dev-master"
     }
 }
 ```

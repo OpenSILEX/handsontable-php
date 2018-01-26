@@ -1,25 +1,41 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 namespace openSILEX\handsontablePHP\classes;
 
-/**
- * Description of AjaxSourceColumn
- *
- * @author blue
- */
+//******************************************************************************
+//                              AjaxSourceColumn.php
+//
+// Author(s): Arnaud Charleroy
+// SILEX version 1.0
+// Copyright © - INRA - 2018
+// Creation date: 26 janv. 2018
+// Contact: arnaud.charleroy@inra.fr, anne.tireau@inra.fr, pascal.neveu@inra.fr
+// Last modification date:  26 janv. 2018
+// Subject: A class to retreive handsontable JS needed librairies
+//******************************************************************************
+
 class AjaxSourceColumn implements \JsonSerializable{
+    /**
+     *
+     * @var string  datasource url or path
+     */
     protected $url;
+    /**
+     *
+     * @var string returned data type
+     */
     protected $dataType;
     
-    function __construct($url, $dataType = 'json') {
+    /**
+     *
+     * @var boolean if data need to be show in browser console
+     */
+    protected $debug;
+    
+    function __construct($url, $dataType = 'json' , $debug = false) {
         $this->url = $url;
         $this->dataType = $dataType;
+        $this->debug = $debug;
     }
 
     public function jsonSerialize() {
@@ -31,7 +47,7 @@ class AjaxSourceColumn implements \JsonSerializable{
               query: query
             },
             success: function (response) {
-              console.log('response', response);
+              " . ($this->debug) ? "console.log('response', response);" : "" . "
               process(response.data);
             }
           });
