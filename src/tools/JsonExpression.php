@@ -1,23 +1,33 @@
 <?php
 
-namespace openSILEX\handsontablePHP\tools;
-
 //******************************************************************************
 //                              JsonExpression.php
 //
 // Author(s): Arnaud Charleroy
 // SILEX version 1.0
-// Copyright © - INRA - 2018
-// Creation date: 26 janv. 2018
+// Copyright © INRA - 2018
+// Creation date: 26 Jan. 2018
 // Contact: arnaud.charleroy@inra.fr, anne.tireau@inra.fr, pascal.neveu@inra.fr
-// Last modification date:  26 janv. 2018
+// Last modification date:  29 Jan. 2018
 // Subject: A class used to format or transform data in JSON
 //******************************************************************************
+/**
+ * @link http://www.inra.fr/
+ * @copyright Copyright © INRA - 2018
+ * @license https://www.gnu.org/licenses/agpl-3.0.fr.html AGPL-3.0
+ */
 
+namespace openSILEX\handsontablePHP\tools;
+
+/**
+ * JsonExpression class convert any php array to json array and format javascript text
+ * @author Arnaud Charleroy <arnaud.charleroy@inra.fr>
+ * @license https://www.gnu.org/licenses/agpl-3.0.fr.html AGPL-3.0
+ * @since 1.0
+ */
 class JsonExpression {
-    /* The javascript expression
-     *
-     * @var string
+    /** 
+     * @var string Any javascript expression
      */
 
     private $expression;
@@ -73,7 +83,7 @@ class JsonExpression {
     /**
      * Create a clean array from an mutliple or simple dimension array to convert it in a JSON array
      * @param array $array array which needs to be cleaned
-     * @return array cleaned array
+     * @return array cleaned array for a json conversion
      */
     static function arrayRecursiveJsonFormat($array) {
         $newArray = [];
