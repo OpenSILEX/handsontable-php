@@ -1,6 +1,24 @@
 <?php
+//******************************************************************************
+//                              Handsontable.php
+//
+// Author(s): Arnaud Charleroy
+// SILEX version 1.0
+// Copyright © - INRA - 2018
+// Creation date: 26 janv. 2018
+// Contact: arnaud.charleroy@inra.fr, anne.tireau@inra.fr, pascal.neveu@inra.fr
+// Last modification date:  26 janv. 2018
+// Subject: A class which represents a spreadsheet table
+//******************************************************************************
+
+/**
+ * @link http://www.inra.fr/
+ * @copyright Copyright © INRA - 2018
+ * @license https://www.gnu.org/licenses/agpl-3.0.fr.html AGPL-3.0
+ */
 
 namespace openSILEX\handsontablePHP\classes;
+
 
 use openSILEX\handsontablePHP\tools\JsonExpression;
 use openSILEX\handsontablePHP\classes\Columns;
@@ -8,19 +26,53 @@ use openSILEX\handsontablePHP\classes\CellsConfig;
 use openSILEX\handsontablePHP\classes\CellConfig;
 
 /**
- * Description of Handsontable
- *
- * @author charlero
+ * Handsontable class represents a spreadsheet table
+ * @author Arnaud Charleroy <arnaud.charleroy@inra.fr>
+ * @license https://www.gnu.org/licenses/agpl-3.0.fr.html AGPL-3.0
+ * @since 1.0
  */
 abstract class Handsontable {
-
+    /**
+     *
+     * @var string id of the div container
+     */
     protected $containerName;
+    /**
+     *
+     * @var boolean define if librairies need to be loaded or not 
+     */
     protected $loadLibrairy = true;
+    /**
+     *
+     * @var string the path to the datasource or script which will load json data in the table
+     * Example : 'ajax/data.php' or  'data.json'
+     */
     protected $loadDataSource;
+    /**
+     *
+     * @var string the path to the script which will save table data in json
+     * Example : 'ajax/data.php' 
+     */
     protected $saveDataSource;
+    /**
+     *
+     * @var string id of the div which will give you information about the table
+     */
     protected $infoDivId;
+    /**
+     *
+     * @var boolean define if a save button will be created and if the function associated need to be generated
+     */
     protected $save = false;
+    /**
+     * 
+     * @var boolean iIf the table need to be saved at every modification or not
+     */
     protected $autosave = false;
+     /**
+     *
+     * @var boolean define if a load button will be created and if the function associated need to be generated
+     */
     protected $loadAction = false;
     protected $loadElementId;
     protected $saveElementId;
