@@ -8,7 +8,7 @@
 
 namespace openSILEX\handsontablePHP\classes;
 
-use \openSILEX\handsontablePHP\tools\JsonExpression;
+use \openSILEX\handsontablePHP\tools\JavascriptFormatter;
 
 /**
  * Description of Columns
@@ -64,8 +64,7 @@ class Columns implements \JsonSerializable {
         }
         if ($this->columns instanceof \Closure) {
             $columnsFunction = $this->columns;
-            $functionJS = new JsonExpression($columnsFunction());
-            return 'function(column){ ' .JsonExpression::buildJson($functionJS->getExpression()) . '}';
+            return 'function(column){ ' .JavascriptFormatter::prepareJavascriptText($columnsFunction(),true) . '}';
         }
         return null;
     }

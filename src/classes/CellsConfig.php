@@ -3,7 +3,7 @@
 
 namespace openSILEX\handsontablePHP\classes;
 
-use \openSILEX\handsontablePHP\tools\JsonExpression;
+use \openSILEX\handsontablePHP\tools\JavascriptFormatter;
 
 /**
  * Represents cells configuration
@@ -27,8 +27,7 @@ class CellsConfig extends CellConfig {
     public function jsonSerialize() {
         if ($this->cellsConfig instanceof \Closure) {
             $cellsConfigsFunction = $this->cellsConfig;
-            $functionJS = new JsonExpression($cellsConfigsFunction());
-            return 'function(row, col, prop){ ' . JsonExpression::buildJson($functionJS->getExpression()) . '}';
+            return 'function(row, col, prop){ ' . JavascriptFormatter::prepareJavascriptText($cellsConfigsFunction(),true) . '}';
         }
         return null;
     }

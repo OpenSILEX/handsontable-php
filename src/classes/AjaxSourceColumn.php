@@ -39,7 +39,7 @@ class AjaxSourceColumn implements \JsonSerializable{
     }
 
     public function jsonSerialize() {
-        return \openSILEX\handsontablePHP\tools\JsonExpression::buildJson("function (query, process) {
+        return \openSILEX\handsontablePHP\tools\JavascriptFormatter::prepareJavascriptText("function (query, process) {
           $.ajax({
             url: '" . $this->url . "',
             dataType: '" . $this->dataType . "',

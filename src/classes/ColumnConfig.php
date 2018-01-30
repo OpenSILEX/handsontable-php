@@ -8,7 +8,7 @@
 
 namespace openSILEX\handsontablePHP\classes;
 
-use openSILEX\handsontablePHP\tools\JsonExpression;
+use openSILEX\handsontablePHP\tools\JavascriptFormatter;
 
 /**
  * Description of Data
@@ -35,7 +35,7 @@ class ColumnConfig implements \JsonSerializable {
         if (!isset($this->properties) || empty($this->properties)) {
             return '{}';
         }
-        $newArray = JsonExpression::arrayRecursiveJsonFormat($this->properties);
+        $newArray = JavascriptFormatter::preparePHPArrayToJSArray($this->properties);
         return $newArray;
     }
     

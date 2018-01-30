@@ -8,7 +8,7 @@
 
 namespace openSILEX\handsontablePHP\classes;
 
-use \openSILEX\handsontablePHP\tools\JsonExpression;
+use \openSILEX\handsontablePHP\tools\JavascriptFormatter;
 
 /**
  * Description of contextMenuOption
@@ -67,13 +67,13 @@ class ContextMenuOption implements \JsonSerializable {
             $disabledFunc = "disabled: function() { " .
                     $this->disabled
                     . " }";
-            $js .= ',' .  JsonExpression::buildJson($disabledFunc);
+            $js .= ',' .  JavascriptFormatter::prepareJavascriptText($disabledFunc);
         }
         if (isset($this->disabled) && !is_null($this->callback)) {
             $callbackFunc = "callback: function() { " .
                     $this->callback
                     . " }";
-            $js .= ',' . JsonExpression::buildJson($callbackFunc);
+            $js .= ',' . JavascriptFormatter::prepareJavascriptText($callbackFunc);
         }
     }
 

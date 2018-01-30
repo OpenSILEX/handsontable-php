@@ -20,7 +20,7 @@
 namespace openSILEX\handsontablePHP\classes;
 
 
-use openSILEX\handsontablePHP\tools\JsonExpression;
+use openSILEX\handsontablePHP\tools\JavascriptFormatter;
 use openSILEX\handsontablePHP\classes\Columns;
 use openSILEX\handsontablePHP\classes\CellsConfig;
 use openSILEX\handsontablePHP\classes\CellConfig;
@@ -442,7 +442,7 @@ abstract class Handsontable {
                     $result = $method->invoke($this);
                     if (!is_null($result)) {
                         if ($result instanceof \JsonSerializable) {
-                            $js_table_code .= $propName . ' : ' . JsonExpression::buildJson(json_encode($result, JSON_PRETTY_PRINT)) . ', ' . PHP_EOL;
+                            $js_table_code .= $propName . ' : ' . JavascriptFormatter::prepareJavascriptText(json_encode($result, JSON_PRETTY_PRINT)) . ', ' . PHP_EOL;
                         } else {
                             $js_table_code .= $propName . ' : ' . json_encode($result, JSON_PRETTY_PRINT) . ', ' . PHP_EOL;
                         }
