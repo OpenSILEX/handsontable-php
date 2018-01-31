@@ -20,7 +20,7 @@
 namespace openSILEX\handsontablePHP\tools;
 
 /**
- * JavascriptFormatter class is used to format PHP object or prepare javascript text
+ * JavascriptFormatter class is used to format PHP object or prepare javascript text to be printed in a web page
  * @author Arnaud Charleroy <arnaud.charleroy@inra.fr>
  * @since 1.0
  */
@@ -30,21 +30,19 @@ class JavascriptFormatter {
      * This static method permits to clean any javascript text in order to be understood by a browser
      * @param string $javascriptText javascript text which will be cleaned 
      * @param boolean $utf8 if needed to be convert in UTF-8
+     * 
      * @return string formatted javascript text
      */
     public static function prepareJavascriptText($javascriptText, $utf8 = false) {
-        if($utf8){
-            // characters need to be convert to UTF-8
+        if($utf8){ // if characters need to be convert to UTF-8
             $javascriptText = iconv(
                     mb_detect_encoding($javascriptText), "UTF-8", $javascriptText
             );
         }
-        // remove comments
+        
         $jsWithoutComment = preg_replace('!/\*.*?\*/!s', '', $javascriptText);  // removes /* comments */
-        $jsWithoutNewLine = preg_replace('!//.*?\n!', '', $jsWithoutComment); // removes //newline
-        // remove all extra whitespace
-        $jsWithoutExtraWhitespace = str_replace(array("\t", "\n", "\r\n"), '', trim($jsWithoutNewLine));
-
+        $jsWithoutNewLine = preg_replace('!//.*?\n!', '', $jsWithoutComment); // removes // newline
+        $jsWithoutExtraWhitespace = str_replace(array("\t", "\n", "\r\n"), '', trim($jsWithoutNewLine)); // remove all extra whitespace
         $jsWithoutDoubleQuote = str_replace('"', '', $jsWithoutExtraWhitespace);
 
         return $jsWithoutDoubleQuote;
@@ -53,6 +51,7 @@ class JavascriptFormatter {
     /**
      * Create a clean array from an mutliple or simple dimension array to convert it in a JS array
      * @param array $array array which needs to be cleaned
+     * 
      * @return array cleaned array for a json conversion
      */
     static function preparePHPArrayToJSArray($array) {
@@ -61,13 +60,12 @@ class JavascriptFormatter {
             if (is_array($value)) {
                 $newValue = static::preparePHPArrayToJSArray($value);
             } elseif (is_string($value)) {
-                $newValue = '\'' . $value . '\'';
+                $newValue = '\'' . $value . '\''; // replace double quote by simple quote
             } else {
                 $newValue = $value;
             }
             $newArray[$key] = $newValue;
         }
-
         return $newArray;
     }
 

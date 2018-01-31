@@ -1,9 +1,21 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+//******************************************************************************
+//                              ContextMenuOption.php
+//
+// Author(s): Arnaud Charleroy
+// SILEX version 1.0
+// Copyright © - INRA - 2018
+// Creation date: 26 janv. 2018
+// Contact: arnaud.charleroy@inra.fr, anne.tireau@inra.fr, pascal.neveu@inra.fr
+// Last modification date:  26 janv. 2018
+// Subject: A class which represents a ContextMenu handsontable option
+//******************************************************************************
+
+/**
+ * @link http://www.inra.fr/
+ * @copyright Copyright © INRA - 2018
+ * @license https://www.gnu.org/licenses/agpl-3.0.fr.html AGPL-3.0
  */
 
 namespace openSILEX\handsontablePHP\classes;
@@ -11,15 +23,35 @@ namespace openSILEX\handsontablePHP\classes;
 use \openSILEX\handsontablePHP\tools\JavascriptFormatter;
 
 /**
- * Description of contextMenuOption
- *
- * @author blue
+ * Class which represents ContextMenu handsontable option 
+ * @author Arnaud Charleroy <arnaud.charleroy@inra.fr>
+ * @since 1.0
+ * @see https://docs.handsontable.com/latest/demo-context-menu.html#page-default
  */
 class ContextMenuOption implements \JsonSerializable {
 
+    /**
+     *
+     * @var string menu item key (id) 
+     */
     protected $key;
+
+    /**
+     *
+     * @var string menu item name
+     */
     protected $name;
+
+    /**
+     *
+     * @var string menu item disabled javascript function
+     */
     protected $disabled;
+
+    /**
+     *
+     * @var string menu item callback javascript function
+     */
     protected $callback;
 
     function __construct($key, $name) {
@@ -67,7 +99,7 @@ class ContextMenuOption implements \JsonSerializable {
             $disabledFunc = "disabled: function() { " .
                     $this->disabled
                     . " }";
-            $js .= ',' .  JavascriptFormatter::prepareJavascriptText($disabledFunc);
+            $js .= ',' . JavascriptFormatter::prepareJavascriptText($disabledFunc);
         }
         if (isset($this->disabled) && !is_null($this->callback)) {
             $callbackFunc = "callback: function() { " .

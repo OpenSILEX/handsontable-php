@@ -1,5 +1,21 @@
 <?php
+//******************************************************************************
+//                              CellsConfig.php
+//
+// Author(s): Arnaud Charleroy
+// SILEX version 1.0
+// Copyright © - INRA - 2018
+// Creation date: 26 janv. 2018
+// Contact: arnaud.charleroy@inra.fr, anne.tireau@inra.fr, pascal.neveu@inra.fr
+// Last modification date:  26 janv. 2018
+// Subject: A class which represents cells configuration
+//******************************************************************************
 
+/**
+ * @link http://www.inra.fr/
+ * @copyright Copyright © INRA - 2018
+ * @license https://www.gnu.org/licenses/agpl-3.0.fr.html AGPL-3.0
+ */
 
 namespace openSILEX\handsontablePHP\classes;
 
@@ -7,7 +23,7 @@ use \openSILEX\handsontablePHP\tools\JavascriptFormatter;
 
 /**
  * Represents cells configuration
- * @see https://docs.handsontable.com/0.34.5/tutorial-setting-options.html
+ * @see https://docs.handsontable.com/0.35.1/Options.html#cells
  *
  * @author blue
  */

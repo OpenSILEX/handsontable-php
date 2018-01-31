@@ -30,7 +30,7 @@ $hd->setData($data);
     </div>
     <script>
         <?php
-        echo $hd->renderJavascriptCode();
+        echo $hd->generateJavascriptCode();
         ?>
     </script>
 </html>

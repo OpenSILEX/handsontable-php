@@ -38,7 +38,7 @@ $hd->setColumns([new ColumnConfig(['data' => 0,
     </div>
     <script>
         <?php
-        echo $hd->renderJavascriptCode();
+        echo $hd->generateJavascriptCode();
         ?>
     </script>
 </html>

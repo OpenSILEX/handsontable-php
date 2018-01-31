@@ -60,7 +60,7 @@ $hd->setColumns(function(){
     </div>
     <script>
         <?php
-        echo $hd->renderJavascriptCode();
+        echo $hd->generateJavascriptCode();
         ?>
     </script>
 </html>

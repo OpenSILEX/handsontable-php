@@ -1,18 +1,37 @@
 <?php
 
+//******************************************************************************
+//                              HandsontableSimple.php
+//
+// Author(s): Arnaud Charleroy
+// SILEX version 1.0
+// Copyright © - INRA - 2018
+// Creation date: 26 janv. 2018
+// Contact: arnaud.charleroy@inra.fr, anne.tireau@inra.fr, pascal.neveu@inra.fr
+// Last modification date:  31 janv. 2018
+// Subject: A class class which specify Handsontable class for native PHP usage
+//******************************************************************************
+
+/**
+ * @link http://www.inra.fr/
+ * @copyright Copyright © INRA - 2018
+ * @license https://www.gnu.org/licenses/agpl-3.0.fr.html AGPL-3.0
+ */
+
 namespace openSILEX\handsontablePHP\adapter;
 
 /**
- * Description of HandSoneTableZend
- *
- * @author charlero
+ * HandsontableSimple is a class which specify Handsontable class for native PHP usage
+ * @author Arnaud Charleroy <arnaud.charleroy@inra.fr>
+ * @since 1.0
  */
 class HandsontableSimple extends \openSILEX\handsontablePHP\classes\Handsontable {
 
     /**
      * Load all required js librairies
      * @param array $librairiesPath [ handsontable => ['js => '...', 'css' => ['...']], 'jquery' => ['js => '...', 'css' => ['...']]]
-     * @return string Script 
+     * 
+     * @return string string contains html script tag which will be put in head tags   
      */
     public function loadJSLibraries($jquery = false, $librairiesPath = []) {
         if (empty($librairiesPath)) {
@@ -42,7 +61,8 @@ class HandsontableSimple extends \openSILEX\handsontablePHP\classes\Handsontable
     /**
      * Load all required css librairies
      * @param array $librairiesPath [ handsontable => ['js => '...', 'css' => ['...']], 'jquery' => ['js => '...', 'css' => ['...']]]
-     * @return string Script 
+     * 
+     * @return string contains html link tag which will be put in head tags   
      */
     public function loadCSSLibraries($jquery = false,$librairiesPath = []) {
         if (empty($librairiesPath)) {
@@ -68,9 +88,11 @@ class HandsontableSimple extends \openSILEX\handsontablePHP\classes\Handsontable
 
         return $css;
     }
-
+    /**
+     * @see \openSILEX\handsontablePHP\classes\Handsontable
+     */
     public function render() {
-        
+        return $this->generateTableJSCode();
     }
 
 }
