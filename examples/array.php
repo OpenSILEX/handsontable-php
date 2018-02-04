@@ -1,6 +1,6 @@
 <?php
 
-require_once './config/ConfigLibrairy.php';
+require_once './config/configLibrairy.php';
 
 use openSILEX\handsontablePHP\adapter\HandsontableSimple;
 
