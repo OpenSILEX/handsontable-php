@@ -24,7 +24,7 @@ namespace openSILEX\handsontablePHP\classes;
  * Represents ajax source data
  * @author Arnaud Charleroy <arnaud.charleroy@inra.fr>
  * @since 1.0
- * @see https://docs.handsontable.com/0.35.1/demo-autocomplete.html
+ * @see https://docs.handsontable.com/latest/demo-autocomplete.html
  */
 class AjaxSourceColumn implements \JsonSerializable {
 

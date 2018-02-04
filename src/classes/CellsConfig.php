@@ -24,8 +24,8 @@ use \openSILEX\handsontablePHP\classes\CellConfigDefinition;
 
 /**
  * Represents a set of cell configuration unit or a function for cells configuration
- * @see https://docs.handsontable.com/0.35.1/Options.html#cells
- * @see https://docs.handsontable.com/0.35.1/Options.html#cell
+ * @see https://docs.handsontable.com/latest/Options.html#cells
+ * @see https://docs.handsontable.com/latest/Options.html#cell
  * @author Arnaud Charleroy <arnaud.charleroy@inra.fr>
  * @since 1.0
  */
@@ -72,7 +72,7 @@ class CellsConfig implements \JsonSerializable {
      */
     public function jsonSerialize() {
         /**
-         *  @see https://docs.handsontable.com/0.35.1/Options.html#cells
+         *  @see https://docs.handsontable.com/latest/Options.html#cells
          */
         if ($this->cellMode == static::CELLS_MODE) {
             if ($this->cellsConfig instanceof \Closure) {
@@ -81,7 +81,7 @@ class CellsConfig implements \JsonSerializable {
             }
         }
         /**
-         *  @see https://docs.handsontable.com/0.35.1/Options.html#cell
+         *  @see https://docs.handsontable.com/latest/Options.html#cell
          */
         if ($this->cellMode == static::CELL_MODE) {
             if (is_array($this->cellsConfig)) {

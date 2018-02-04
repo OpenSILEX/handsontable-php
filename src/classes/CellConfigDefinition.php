@@ -23,7 +23,7 @@ namespace openSILEX\handsontablePHP\classes;
  * Represents a cell configuration unit
  * @author Arnaud Charleroy <arnaud.charleroy@inra.fr>
  * @since 1.0
- * @see https://docs.handsontable.com/0.35.1/Options.html#cells
+ * @see https://docs.handsontable.com/latest/Options.html#cells
  */
 class CellConfigDefinition implements \JsonSerializable{
     /**
