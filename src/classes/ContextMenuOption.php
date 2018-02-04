@@ -23,16 +23,17 @@ namespace openSILEX\handsontablePHP\classes;
 use \openSILEX\handsontablePHP\tools\JavascriptFormatter;
 
 /**
- * Class which represents ContextMenu handsontable option 
+ * Class which represents ContextMenu handsontable option
  * @author Arnaud Charleroy <arnaud.charleroy@inra.fr>
  * @since 1.0
  * @see https://docs.handsontable.com/latest/demo-context-menu.html#page-default
  */
-class ContextMenuOption implements \JsonSerializable {
+class ContextMenuOption implements \JsonSerializable
+{
 
     /**
      *
-     * @var string menu item key (id) 
+     * @var string menu item key (id)
      */
     protected $key;
 
@@ -54,40 +55,49 @@ class ContextMenuOption implements \JsonSerializable {
      */
     protected $callback;
 
-    function __construct($key, $name) {
+    public function __construct($key, $name)
+    {
         $this->key = $key;
         $this->name = $name;
     }
 
-    function getKey() {
+    public function getKey()
+    {
         return $this->key;
     }
 
-    function getName() {
+    public function getName()
+    {
         return $this->name;
     }
 
-    function getDisabled() {
+    public function getDisabled()
+    {
         return $this->disabled;
     }
 
-    function getCallback() {
+    public function getCallback()
+    {
         return $this->callback;
     }
 
-    function setKey($key) {
+    public function setKey($key)
+    {
         $this->key = $key;
     }
 
-    function setName($name) {
+    public function setName($name)
+    {
         $this->name = $name;
     }
 
-    function setDisabled(\Closure $disabled) {
+    public function setDisabled(\Closure $disabled)
+    {
         $this->disabled = $disabled;
     }
 
-    function setCallback(\Closure $callback) {
+    public function setCallback(\Closure $callback)
+    {
         $this->callback = $callback;
     }
 
@@ -100,7 +110,8 @@ class ContextMenuOption implements \JsonSerializable {
      *  }
      * }
      */
-    public function jsonSerialize() {
+    public function jsonSerialize()
+    {
         $js = "{
           key: '{$this->key}',"
                 . "name: '{$this->name}'";
@@ -119,5 +130,4 @@ class ContextMenuOption implements \JsonSerializable {
             $js .= ',' . JavascriptFormatter::prepareJavascriptText($callbackFunc);
         }
     }
-
 }

@@ -24,19 +24,23 @@ namespace openSILEX\handsontablePHP\tools;
  * @author Arnaud Charleroy <arnaud.charleroy@inra.fr>
  * @since 1.0
  */
-class JavascriptFormatter {
+class JavascriptFormatter
+{
 
     /**
      * This static method permits to clean any javascript text in order to be understood by a browser
-     * @param string $javascriptText javascript text which will be cleaned 
+     * @param string $javascriptText javascript text which will be cleaned
      * @param boolean $utf8 if needed to be convert in UTF-8
-     * 
+     *
      * @return string formatted javascript text
      */
-    public static function prepareJavascriptText($javascriptText, $utf8 = false) {
-        if($utf8){ // if characters need to be convert to UTF-8
+    public static function prepareJavascriptText($javascriptText, $utf8 = false)
+    {
+        if ($utf8) { // if characters need to be convert to UTF-8
             $javascriptText = iconv(
-                    mb_detect_encoding($javascriptText), "UTF-8", $javascriptText
+                    mb_detect_encoding($javascriptText),
+                "UTF-8",
+                $javascriptText
             );
         }
         
@@ -51,10 +55,11 @@ class JavascriptFormatter {
     /**
      * Create a clean array from an mutliple or simple dimension array to convert it in a JS array
      * @param array $array array which needs to be cleaned
-     * 
+     *
      * @return array cleaned array for a json conversion
      */
-    static function preparePHPArrayToJSArray($array) {
+    public static function preparePHPArrayToJSArray($array)
+    {
         $newArray = [];
         foreach ($array as $key => $value) {
             if (is_array($value)) {
@@ -68,5 +73,4 @@ class JavascriptFormatter {
         }
         return $newArray;
     }
-
 }

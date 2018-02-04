@@ -25,33 +25,34 @@ namespace openSILEX\handsontablePHP\adapter;
  * @author Arnaud Charleroy <arnaud.charleroy@inra.fr>
  * @since 1.0
  */
-class HandSontableZend extends \openSILEX\handsontablePHP\classes\Handsontable{
+class HandSontableZend extends \openSILEX\handsontablePHP\classes\Handsontable
+{
     
     /**
      * Used to render table and load handsontable js/css library
-     * @var Zend_View zend view object 
+     * @var Zend_View zend view object
      */
     protected $view;
 
 
-    public function setView($view) {
+    public function setView($view)
+    {
         $this->view = $view;
     }
 
     
-    public function loadJSLibraries() {
+    public function loadJSLibraries()
+    {
 //        $this->view->loadViewLibrairies(array('handsontable' => array()));
-       
     }
 
-    public function render() {
+    public function render()
+    {
 //        $this->loadJSLibraries();
         $this->view->jQuery()->addOnLoad($this->generateJavascriptCode());
-     
     }
 
-    public function loadCSSLibraries() {
-        
+    public function loadCSSLibraries()
+    {
     }
-
 }

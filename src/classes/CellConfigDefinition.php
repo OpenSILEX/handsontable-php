@@ -25,7 +25,8 @@ namespace openSILEX\handsontablePHP\classes;
  * @since 1.0
  * @see https://docs.handsontable.com/latest/Options.html#cells
  */
-class CellConfigDefinition implements \JsonSerializable{
+class CellConfigDefinition implements \JsonSerializable
+{
     /**
      *
      * @var int row number
@@ -38,27 +39,29 @@ class CellConfigDefinition implements \JsonSerializable{
     protected $column;
     /**
      *
-     * @var boolean if the cell can be modified or not 
+     * @var boolean if the cell can be modified or not
      */
     protected $readOnly = false;
     
-    function __construct($row, $col, $readOnly) {
+    public function __construct($row, $col, $readOnly)
+    {
         $this->row = $row;
         $this->column = $col;
         $this->readOnly = $readOnly;
     }
     /**
      * If this cell is correctly defined
-     * @return boolean 
+     * @return boolean
      */
-    public function isValid() {
+    public function isValid()
+    {
         return (!is_null($this->row) && !is_null($this->column));
     }
     /**
      * @example  {row: 0, col: 0, readOnly: true}
      */
-    public function jsonSerialize() {
+    public function jsonSerialize()
+    {
         return ['row' => $this->row, 'col' => $this->column,'readOnly' => $this->readOnly];
     }
-
 }

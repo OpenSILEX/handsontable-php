@@ -26,7 +26,8 @@ namespace openSILEX\handsontablePHP\classes;
  * @since 1.0
  * @see https://docs.handsontable.com/latest/demo-autocomplete.html
  */
-class AjaxSourceColumn implements \JsonSerializable {
+class AjaxSourceColumn implements \JsonSerializable
+{
 
     /**
      *
@@ -46,7 +47,8 @@ class AjaxSourceColumn implements \JsonSerializable {
      */
     protected $debug;
 
-    function __construct($url, $dataType = 'json', $debug = false) {
+    public function __construct($url, $dataType = 'json', $debug = false)
+    {
         $this->url = $url;
         $this->dataType = $dataType;
         $this->debug = $debug;
@@ -71,10 +73,11 @@ class AjaxSourceColumn implements \JsonSerializable {
      *       }
      *     });
      *   }
-     * 
+     *
      * @return string json text
      */
-    public function jsonSerialize() {
+    public function jsonSerialize()
+    {
         return \openSILEX\handsontablePHP\tools\JavascriptFormatter::prepareJavascriptText("function (query, process) {
           $.ajax({
             url: '" . $this->url . "',
@@ -89,5 +92,4 @@ class AjaxSourceColumn implements \JsonSerializable {
           });
         }");
     }
-
 }

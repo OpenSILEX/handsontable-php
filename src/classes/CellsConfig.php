@@ -29,7 +29,8 @@ use \openSILEX\handsontablePHP\classes\CellConfigDefinition;
  * @author Arnaud Charleroy <arnaud.charleroy@inra.fr>
  * @since 1.0
  */
-class CellsConfig implements \JsonSerializable {
+class CellsConfig implements \JsonSerializable
+{
 
     /**
      * List of the cell definition that will be specified
@@ -38,7 +39,7 @@ class CellsConfig implements \JsonSerializable {
     protected $cellsConfig = null;
 
     /**
-     * Define if the attribute is cell or cells 
+     * Define if the attribute is cell or cells
      * @var int number of the mode used
      */
     protected $cellMode = null;
@@ -53,7 +54,8 @@ class CellsConfig implements \JsonSerializable {
      */
     const CELLS_MODE = 1;
 
-    public function __construct($cellsConfig, $cellMode = static::CELLS_MODE) {
+    public function __construct($cellsConfig, $cellMode = static::CELLS_MODE)
+    {
         $this->cellsConfig = $cellsConfig;
         $this->cellMode = $cellMode;
     }
@@ -70,7 +72,8 @@ class CellsConfig implements \JsonSerializable {
      * return cellProperties;
      *  }
      */
-    public function jsonSerialize() {
+    public function jsonSerialize()
+    {
         /**
          *  @see https://docs.handsontable.com/latest/Options.html#cells
          */
@@ -96,5 +99,4 @@ class CellsConfig implements \JsonSerializable {
         }
         return null;
     }
-
 }

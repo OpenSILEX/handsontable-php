@@ -23,7 +23,7 @@ $hd->setData($data);
 $hd->setCell([
     new CellConfigDefinition(0, 0, true)
     ]);
-$hd->setCells(function(){
+$hd->setCells(function () {
     return 'var cellProperties = {};
 
       if (row === 0 && col === 0) {
@@ -32,8 +32,7 @@ $hd->setCells(function(){
 
       return cellProperties;
       ';
-    
-}); 
+});
 
 
 

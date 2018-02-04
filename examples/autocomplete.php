@@ -5,7 +5,7 @@ use openSILEX\handsontablePHP\adapter\HandsontableSimple;
 use openSILEX\handsontablePHP\classes\ColumnConfig;
 
 /**
- * An example to load a PHP array in Handsontable with an autocomplete column create from a PHP array  
+ * An example to load a PHP array in Handsontable with an autocomplete column create from a PHP array
  */
 
 $hd = new HandsontableSimple();
@@ -21,16 +21,16 @@ $hd->setData($data);
 $hd->setColumns([
     new ColumnConfig(),
     new ColumnConfig([
-    'data' => 1, 
-    'type' => 'autocomplete',  
+    'data' => 1,
+    'type' => 'autocomplete',
     'source' => [
-            'yellow', 
-            'red', 
-            'orange', 
-            'green', 
-            'blue', 
-            'gray', 
-            'black', 
+            'yellow',
+            'red',
+            'orange',
+            'green',
+            'blue',
+            'gray',
+            'black',
             'white'
         ]
     ]),
@@ -38,7 +38,7 @@ $hd->setColumns([
     new ColumnConfig(),
     new ColumnConfig(),
     new ColumnConfig()
-    ]); 
+    ]);
 
 ?>
 <html>

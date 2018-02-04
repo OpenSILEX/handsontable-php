@@ -20,7 +20,7 @@ $data = [
 $hd->setData($data);
 $hd->setColumns([
     new ColumnConfig(['data' => 1])
-    ]); 
+    ]);
 
 ?>
 <html>

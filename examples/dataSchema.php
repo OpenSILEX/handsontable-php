@@ -13,21 +13,22 @@ $data = [
       ['id' => 1, 'name' => ['first' =>  'Ted','last' => 'Right'], 'address' => ''],
       ['id' => 2, 'address' => ''],
       ['id' => 3, 'name' => ['first' => 'Joan', 'last' => 'Well'], 'address' => '']
-    ];   
+    ];
 
 $hd->setData($data);
 $hd->setColHeaders(['ID', 'First Name', 'Last Name', 'Address']);
-$hd->setDataSchema(new DataSchema([
-                    'id' => null, 
+$hd->setDataSchema(new DataSchema(
+    [
+                    'id' => null,
                     'name' => [
-                        'first' => null, 
-                        'last' => null], 
+                        'first' => null,
+                        'last' => null],
                         'address' => null
                     ]
                 ));
 
 //
-$hd->setColumns(function(){
+$hd->setColumns(function () {
     return "var columnMeta = {};
 
       if (column === 0) {

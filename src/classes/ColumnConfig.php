@@ -23,35 +23,39 @@ namespace openSILEX\handsontablePHP\classes;
 use openSILEX\handsontablePHP\tools\JavascriptFormatter;
 
 /**
- * Class which represents a column element in Columns handsontable option 
+ * Class which represents a column element in Columns handsontable option
  * @author Arnaud Charleroy <arnaud.charleroy@inra.fr>
  * @since 1.0
  * @see openSILEX\handsontablePHP\classes\Columns
  */
-class ColumnConfig implements \JsonSerializable {
+class ColumnConfig implements \JsonSerializable
+{
 
     /**
      *
-     * @var array defines a column properties 
+     * @var array defines a column properties
      */
     protected $properties;
 
-    function __construct($properties = null) {
+    public function __construct($properties = null)
+    {
         $this->properties = $properties;
     }
 
-    function setAttribute($attribute) {
+    public function setAttribute($attribute)
+    {
         $this->attribute = $attribute;
     }
 
-    function setValue($value) {
+    public function setValue($value)
+    {
         $this->value = $value;
     }
 
     /**
      * columns: [
      * {},
-     *  ..., 
+     *  ...,
      * {data: 0},
      *  ...,
      *  {data: 'id'},
@@ -76,12 +80,12 @@ class ColumnConfig implements \JsonSerializable {
      *  ]
      * @return string
      */
-    public function jsonSerialize() {
+    public function jsonSerialize()
+    {
         if (!isset($this->properties) || empty($this->properties)) {
             return '{}';
         }
         $newArray = JavascriptFormatter::preparePHPArrayToJSArray($this->properties);
         return $newArray;
     }
-
 }

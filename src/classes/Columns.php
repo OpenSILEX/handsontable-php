@@ -23,12 +23,13 @@ namespace openSILEX\handsontablePHP\classes;
 use \openSILEX\handsontablePHP\tools\JavascriptFormatter;
 
 /**
- * A class which represents Columns handsontable option 
+ * A class which represents Columns handsontable option
  * @author Arnaud Charleroy <arnaud.charleroy@inra.fr>
  * @since 1.0
  * @see https://docs.handsontable.com/latest/Options.html#columns
  */
-class Columns implements \JsonSerializable {
+class Columns implements \JsonSerializable
+{
 
     /**
      * @var mixed array of ColumnConfig instances or function javascript string
@@ -36,7 +37,7 @@ class Columns implements \JsonSerializable {
     protected $columns = null;
 
     /**
-     * @example the following array  
+     * @example the following array
      * columns : [
      * {data: 0},
      * {data: 2},
@@ -49,20 +50,20 @@ class Columns implements \JsonSerializable {
      * $handsontable_instance->setColumns(
      * [new ColumnConfig('data' => 0),new ColumnConfig('data' => 1),....]
      * );
-     * 
+     *
      * Other parameters can be put :
      * $handsontable_instance->setColumns([
      * new ColumnConfig([
-     * 'data' => 0, 
-     * 'type' => 'autocomplete', 
+     * 'data' => 0,
+     * 'type' => 'autocomplete',
      * 'source' => new AjaxSourceColumn('ajax/array.php')
      * ]);
-     * 
+     *
      * @example
      * a javascript function text function may be used instead of ColumnConfig instances
      * $handsontable_instance->setColumns(function(){
      *       return "var columnMeta = {};
-     *    
+     *
      *             if (column === 0) {
      *               columnMeta.data = 'id';
      *
@@ -85,21 +86,22 @@ class Columns implements \JsonSerializable {
      *    });
      * @param mixed $columns may be a function or an  array
      */
-    public function __construct($columns) {
+    public function __construct($columns)
+    {
         $this->columns = $columns;
     }
 
-    public function jsonSerialize() {
+    public function jsonSerialize()
+    {
         // if array convert array in javascript format
         if (is_array($this->columns)) {
             return $this->columns;
         }
-        // if is a PHP function it return a string string 
+        // if is a PHP function it return a string string
         if ($this->columns instanceof \Closure) {
             $columnsFunction = $this->columns;
             return 'function(column){ ' . JavascriptFormatter::prepareJavascriptText($columnsFunction(), true) . '}';
         }
         return null;
     }
-
 }
