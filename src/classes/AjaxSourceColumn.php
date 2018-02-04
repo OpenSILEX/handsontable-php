@@ -20,6 +20,8 @@
 
 namespace openSILEX\handsontablePHP\classes;
 
+use \openSILEX\handsontablePHP\tools\JavascriptFormatter;
+
 /**
  * Represents ajax source data
  * @author Arnaud Charleroy <arnaud.charleroy@inra.fr>
@@ -79,7 +81,7 @@ class AjaxSourceColumn implements \JsonSerializable
     public function jsonSerialize()
     {
         $debugString = ($this->debug) ? "console.log('response', response);" : "" ;
-        return \openSILEX\handsontablePHP\tools\JavascriptFormatter::prepareJavascriptText("function (query, process) {
+        return JavascriptFormatter::prepareJavascriptText("function (query, process) {
           $.ajax({
             url: '" . $this->url . "',
             dataType: '" . $this->dataType . "',

@@ -21,6 +21,7 @@
 namespace openSILEX\handsontablePHP\classes;
 
 use \openSILEX\handsontablePHP\classes\CellConfigDefinition;
+use \openSILEX\handsontablePHP\tools\JavascriptFormatter;
 
 /**
  * Represents a set of cell configuration unit or a function for cells configuration
