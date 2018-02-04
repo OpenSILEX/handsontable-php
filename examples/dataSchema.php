@@ -3,6 +3,7 @@ require_once './config/configLibrairy.php';
 
 use openSILEX\handsontablePHP\adapter\HandsontableSimple;
 use openSILEX\handsontablePHP\classes\DataSchema;
+
 /**
  * An example to load a PHP array which represents an object in Handsontable with a data schema
  */
