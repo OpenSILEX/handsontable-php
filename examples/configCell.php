@@ -1,13 +1,13 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
-require_once '../../../vendor/autoload.php';
+require_once './config/ConfigLibrairy.php';
 
 use openSILEX\handsontablePHP\adapter\HandsontableSimple;
-
 use openSILEX\handsontablePHP\classes\CellConfigDefinition;
+
+/**
+ * An example to load a PHP array in Handsontable with a cell definition
+ */
+
 
 $hd = new HandsontableSimple();
 $data = [
@@ -20,7 +20,9 @@ $data = [
     ];
 $hd->setData($data);
 // Cell config $row, $col, $readOnly
-$hd->setCell([new CellConfigDefinition(0, 0, true)]);
+$hd->setCell([
+    new CellConfigDefinition(0, 0, true)
+    ]);
 $hd->setCells(function(){
     return 'var cellProperties = {};
 

@@ -1,14 +1,13 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
-require_once 'vendor/autoload.php';
+require_once './config/ConfigLibrairy.php';
 
 use openSILEX\handsontablePHP\adapter\HandsontableSimple;
 
-$hd = new HandsontableSimple();
+/**
+ * An example to load a PHP array which represents an object in Handsontable with a data schema
+ */
 
+$hd = new HandsontableSimple();
 
 $data = [
       ['id' => 1, 'name' => ['first' =>  'Ted','last' => 'Right'], 'address' => ''],
@@ -18,7 +17,14 @@ $data = [
 
 $hd->setData($data);
 $hd->setColHeaders(['ID', 'First Name', 'Last Name', 'Address']);
-$hd->setDataSchema(new DataSchema(['id' => null, 'name' => ['first' => null, 'last' => null], 'address' => null]));
+$hd->setDataSchema(new DataSchema([
+                    'id' => null, 
+                    'name' => [
+                        'first' => null, 
+                        'last' => null], 
+                        'address' => null
+                    ]
+                ));
 
 //
 $hd->setColumns(function(){

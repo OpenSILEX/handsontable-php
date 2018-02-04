@@ -23,12 +23,17 @@ namespace openSILEX\handsontablePHP\classes;
 use openSILEX\handsontablePHP\tools\JavascriptFormatter;
 
 /**
- * Class which represents Columns handsontable option 
+ * Class which represents a column element in Columns handsontable option 
  * @author Arnaud Charleroy <arnaud.charleroy@inra.fr>
  * @since 1.0
+ * @see openSILEX\handsontablePHP\classes\Columns
  */
 class ColumnConfig implements \JsonSerializable {
 
+    /**
+     *
+     * @var array defines a column properties 
+     */
     protected $properties;
 
     function __construct($properties = null) {
@@ -43,6 +48,34 @@ class ColumnConfig implements \JsonSerializable {
         $this->value = $value;
     }
 
+    /**
+     * columns: [
+     * {},
+     *  ..., 
+     * {data: 0},
+     *  ...,
+     *  {data: 'id'},
+     *  ...,
+     *  {
+     *   type: 'autocomplete',
+     *   source: function (query, process) {
+     *    $.ajax({
+     *      //url: 'php/cars.php', // commented out because our website is hosted as a set of static pages
+     *      url: 'scripts/json/autocomplete.json',
+     *      dataType: 'json',
+     *      data: {
+     *        query: query
+     *      },
+     *     success: function (response) {
+     *        console.log("response", response);
+     *        //process(JSON.parse(response.data)); // JSON.parse takes string as a argument
+     *        process(response.data);
+     *      }
+     *    });
+     *  }
+     *  ]
+     * @return string
+     */
     public function jsonSerialize() {
         if (!isset($this->properties) || empty($this->properties)) {
             return '{}';
@@ -50,7 +83,5 @@ class ColumnConfig implements \JsonSerializable {
         $newArray = JavascriptFormatter::preparePHPArrayToJSArray($this->properties);
         return $newArray;
     }
-    
-  
 
 }

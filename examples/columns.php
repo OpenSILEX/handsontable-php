@@ -4,6 +4,10 @@ require_once './config/ConfigLibrairy.php';
 use openSILEX\handsontablePHP\adapter\HandsontableSimple;
 use openSILEX\handsontablePHP\classes\ColumnConfig;
 
+/**
+ * An example to load a PHP array in Handsontable with a column definition
+ */
+
 $hd = new HandsontableSimple();
 $data = [
       ['', 'Tesla', 'Nissan', 'Toyota', 'Honda', 'Mazda', 'Ford'],
@@ -14,16 +18,16 @@ $data = [
       ['2021', 10, 11, 12, 13, 15, 16]
     ];
 $hd->setData($data);
-$hd->setColumns([new ColumnConfig(['data' => 1])]); 
+$hd->setColumns([
+    new ColumnConfig(['data' => 1])
+    ]); 
 
 ?>
 <html>
     <head>
-
         <?php
         echo $hd->loadJSLibraries(true);
         echo $hd->loadCSSLibraries();
-        
         ?>
     </head>
     <div id='<?= $hd->getContainerName() ?>'>

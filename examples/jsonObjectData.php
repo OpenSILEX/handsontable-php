@@ -1,11 +1,12 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
-require_once '../../../vendor/autoload.php';
+require_once './config/ConfigLibrairy.php'; 
 
 use openSILEX\handsontablePHP\adapter\HandsontableSimple;
+
+/**
+ * An example to load a PHP array which represents an object in Handsontable 
+ * with a column JavaScript function schema 
+ */
 
 $hd = new HandsontableSimple();
 
@@ -35,9 +36,7 @@ $hd->setColumns(function(){
 
       } else {
         columnMeta = null;
-
       }
-
       return columnMeta;";
 });
 

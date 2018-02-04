@@ -4,6 +4,10 @@ require_once './config/ConfigLibrairy.php';
 use openSILEX\handsontablePHP\adapter\HandsontableSimple;
 use openSILEX\handsontablePHP\classes\ColumnConfig;
 
+/**
+ * An example to load a PHP array in Handsontable with an autocomplete column create from a PHP array  
+ */
+
 $hd = new HandsontableSimple();
 $data = [
       ['', 'Tesla', 'Nissan', 'Toyota', 'Honda', 'Mazda', 'Ford'],
@@ -14,18 +18,27 @@ $data = [
       ['2021', 10, 11, 12, 13, 15, 16]
     ];
 $hd->setData($data);
-$hd->setColumns([new ColumnConfig(),
-                new ColumnConfig([
-                    'data' => 1, 
-                    'type' => 'autocomplete',  
-                    'source' => ['yellow', 'red', 'orange', 'green', 'blue', 'gray', 'black', 'white']]),
+$hd->setColumns([
+    new ColumnConfig(),
+    new ColumnConfig([
+    'data' => 1, 
+    'type' => 'autocomplete',  
+    'source' => [
+            'yellow', 
+            'red', 
+            'orange', 
+            'green', 
+            'blue', 
+            'gray', 
+            'black', 
+            'white'
+        ]
+    ]),
     new ColumnConfig(),
     new ColumnConfig(),
     new ColumnConfig(),
     new ColumnConfig()
     ]); 
-
-
 
 ?>
 <html>

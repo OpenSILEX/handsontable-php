@@ -1,4 +1,5 @@
 <?php
+
 //******************************************************************************
 //                              CellsConfig.php
 //
@@ -19,31 +20,79 @@
 
 namespace openSILEX\handsontablePHP\classes;
 
-use \openSILEX\handsontablePHP\tools\JavascriptFormatter;
+use \openSILEX\handsontablePHP\classes\CellConfigDefinition;
 
 /**
- * Represents cells configuration
+ * Represents a set of cell configuration unit or a function for cells configuration
  * @see https://docs.handsontable.com/0.35.1/Options.html#cells
- *
- * @author blue
+ * @see https://docs.handsontable.com/0.35.1/Options.html#cell
+ * @author Arnaud Charleroy <arnaud.charleroy@inra.fr>
+ * @since 1.0
  */
-class CellsConfig extends CellConfig {
-
+class CellsConfig implements \JsonSerializable {
 
     /**
-     * @example  javscript_code cells: function (row, col, prop) {
-        var cellProperties = {}
+     * List of the cell definition that will be specified
+     * @var mixed array of CellConfigDefinition or Closure object
+     */
+    protected $cellsConfig = null;
 
-        if (row === 0 && col === 0) {
-        cellProperties.readOnly = true;
-        }
-      return cellProperties;
-      
+    /**
+     * Define if the attribute is cell or cells 
+     * @var int number of the mode used
+     */
+    protected $cellMode = null;
+
+    /**
+     * Used to save information about cell attribute
+     */
+    const CELL_MODE = 0;
+    
+    /**
+     * Used to save information about cells attribute
+     */
+    const CELLS_MODE = 1;
+
+    public function __construct($cellsConfig, $cellMode = static::CELLS_MODE) {
+        $this->cellsConfig = $cellsConfig;
+        $this->cellMode = $cellMode;
+    }
+
+    /**
+     * @example
+     * cells: function (row, col, prop) {
+     * var cellProperties = {}
+     *
+     * if (row === 0 && col === 0) {
+     *  cellProperties.readOnly = true;
+     * }
+     *
+     * return cellProperties;
+     *  }
      */
     public function jsonSerialize() {
-        if ($this->cellsConfig instanceof \Closure) {
-            $cellsConfigsFunction = $this->cellsConfig;
-            return 'function(row, col, prop){ ' . JavascriptFormatter::prepareJavascriptText($cellsConfigsFunction(),true) . '}';
+        /**
+         *  @see https://docs.handsontable.com/0.35.1/Options.html#cells
+         */
+        if ($this->cellMode == static::CELLS_MODE) {
+            if ($this->cellsConfig instanceof \Closure) {
+                $cellConfigsFunction = $this->cellsConfig;
+                return 'function(row, col, prop){ ' . JavascriptFormatter::prepareJavascriptText($cellConfigsFunction(), true) . '}';
+            }
+        }
+        /**
+         *  @see https://docs.handsontable.com/0.35.1/Options.html#cell
+         */
+        if ($this->cellMode == static::CELL_MODE) {
+            if (is_array($this->cellsConfig)) {
+                $temporaryCellsArray = [];
+                foreach ($this->cellsConfig as $cell) {
+                    if ($cell instanceof CellConfigDefinition) {
+                        $temporaryCellsArray[] = $cell;
+                    }
+                }
+                return $temporaryCellsArray;
+            }
         }
         return null;
     }

@@ -1,10 +1,13 @@
 <?php
 require_once './config/ConfigLibrairy.php';
 
-
 use openSILEX\handsontablePHP\adapter\HandsontableSimple;
 use openSILEX\handsontablePHP\classes\ColumnConfig;
 use openSILEX\handsontablePHP\classes\AjaxSourceColumn;
+
+/**
+ * An example to load a PHP array in Handsontable with an autocomplete column create from an ajax source  
+ */
 
 $hd = new HandsontableSimple();
 $data = [
@@ -16,14 +19,15 @@ $data = [
       ['2021', 10, 11, 12, 13, 15, 16]
     ];
 $hd->setData($data);
-$hd->setColumns([new ColumnConfig(['data' => 0, 
+$hd->setColumns([
+    new ColumnConfig([
+    'data' => 0, 
     'type' => 'autocomplete', 
     'source' => new AjaxSourceColumn('ajax/array.php')]),
-    new ColumnConfig()]); 
-
-
-
+    new ColumnConfig()
+    ]); 
 ?>
+
 <html>
     <head>
 

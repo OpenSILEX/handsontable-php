@@ -23,7 +23,6 @@ namespace openSILEX\handsontablePHP\classes;
 use openSILEX\handsontablePHP\tools\JavascriptFormatter;
 use openSILEX\handsontablePHP\classes\Columns;
 use openSILEX\handsontablePHP\classes\CellsConfig;
-use openSILEX\handsontablePHP\classes\CellConfig;
 
 /**
  * Handsontable class represents a spreadsheet table
@@ -99,7 +98,13 @@ abstract class Handsontable {
      * @var int number of handsontable instance created
      */
     public static $table_created = 0;
-    // Handsontable JS library attributes
+
+    /**
+     * ######################################
+     * Handsontable JS library attributes
+     * ######################################
+     */
+
     /**
      * 
      * @see https://docs.handsontable.com/latest/Options.html#cell
@@ -222,7 +227,7 @@ abstract class Handsontable {
 
     public function __construct($container_name = null, $cellConfig = null) {
         if ($cellConfig != null) { // load cell configuration
-            $this->cell = $cellConfig;
+            $this->setCell($cellConfig);
         }
         if (is_null($container_name)) { // create handsontable instance if it doesn't exist
             $this->containerName = 'handsontable' . Handsontable::$table_created;
@@ -462,11 +467,11 @@ abstract class Handsontable {
     }
 
     function setCells($cells) {
-        $this->cells = new CellsConfig($cells);
+        $this->cells = new CellsConfig($cells, CellsConfig::CELLS_MODE);
     }
 
     function setCell($cell) {
-        $this->cell = new CellConfig($cell);
+        $this->cell = new CellsConfig($cell, CellsConfig::CELL_MODE);
     }
 
     function setColumns($columns) {
@@ -504,25 +509,25 @@ abstract class Handsontable {
     }
 
     /**
-    * Generate an html load button to trigger a handsontable from ajax source
-    * 
-    * @return string javascript text generated
-    */
+     * Generate an html load button to trigger a handsontable from ajax source
+     * 
+     * @return string javascript text generated
+     */
     public function generateLoadButton() {
         //SILEX:conception
-        // Need to be more generic
+        // Need to be more generic, maybe only get element id and implement own button
         //\SILEX:conception
         return '<button name="' . $this->getLoadElementId() . '" id="' . $this->getLoadElementId() . '" >Load</button>';
     }
-    
+
     /**
-    * Generate an html load button to trigger a handsontable from ajax source
-    * 
-    * @return string javascript text generated
-    */
+     * Generate an html load button to trigger a handsontable from ajax source
+     * 
+     * @return string javascript text generated
+     */
     public function generateSaveButton() {
         //SILEX:conception
-        // Need to be more generic
+        // Need to be more generic, maybe only get element id and implement own button
         //\SILEX:conception
         return '<button name="' . $this->getSaveElementId() . '" id="' . $this->getSaveElementId() . '" >Save</button>';
     }
@@ -567,43 +572,49 @@ abstract class Handsontable {
         }
         return $js_code;
     }
-    
+
     /**
      * Method which generate the javascript table code needed
      * @example var hot1 = new Handsontable(container, {
-                    data: data(),
-                    startRows: 2,
-                    startCols: 8,
-                    width: 900,
-                    height: 700,
-                    rowHeaders: true,
-                    autoWrapRow: true,
-                    maxCols : 8,
-                    colHeaders: [
-                        'ID',
-                        'Country',
-                        'Code',
-                        'Currency',
-                        'Level',
-                        'Units',
-                        'Date',
-                        'Change'
-                    ]";
-        });
+      data: data(),
+      startRows: 2,
+      startCols: 8,
+      width: 900,
+      height: 700,
+      rowHeaders: true,
+      autoWrapRow: true,
+      maxCols : 8,
+      colHeaders: [
+      'ID',
+      'Country',
+      'Code',
+      'Currency',
+      'Level',
+      'Units',
+      'Date',
+      'Change'
+      ]";
+      });
      * @see http://jsfiddle.net/handsoncode/s6t768pq/
      * 
      * @return string handsontable javascript text 
      */
     public function generateTableJSCode() {
-        // class attributes which will not rendered
-        $method_not_rendered = array('data', 'containername', 'loadlibrairy', 'loaddatasource',
-            'infodivid', 'save', 'autosave', 'loadaction', 'savedatasource', 'loadelementid');
+        // internal class attributes which will not rendered  
+        $method_not_rendered = array(
+            'data', 'containername', 'loadlibrairy', 'loaddatasource',
+            'infodivid', 'save', 'autosave', 'loadaction', 'savedatasource', 'loadelementid'
+        );
+        //SILEX:conception
+        // It's easier to remove getMethod for attribute that will not be rendered but some
+        // attribute need to be modified before be retreived
+        //SILEx:conception
         // javascript handsontable variable
         $js_table_code = 'var hot' . Handsontable::$table_created . ' = new Handsontable(container, {';
-        
+
         // this instance
         $handsontable_reflection_class = new \ReflectionClass(__CLASS__);
-        
+
         // if data is set (not ajax or pre data)
         if (isset($this->data) && !is_null($this->data)) {
             $js_table_code .= 'data : ' . json_encode($this->data, JSON_PRETTY_PRINT) . ', ' . PHP_EOL;
@@ -630,7 +641,7 @@ abstract class Handsontable {
         }
         // remove th last comma
         $js_table_code[strrpos($js_table_code, ',')] = ' ';
-        
+
         return $js_table_code;
     }
 
@@ -704,6 +715,7 @@ abstract class Handsontable {
         }
    ";
     }
+
     /**
      * Generate an event to save a handsontable to ajax source
      * 
@@ -732,7 +744,7 @@ abstract class Handsontable {
         });    
     }); ";
     }
-    
+
     /**
      * Method which permits to render the table (pattern adapter used) regardless of the framework used.
      * Need to defined a class per framework (Zend,Yii2,Laravel,CodeIgniter ...) and use HandsontableSimple for a native PHP usage.

@@ -9,7 +9,7 @@
 // Creation date: 26 janv. 2018
 // Contact: arnaud.charleroy@inra.fr, anne.tireau@inra.fr, pascal.neveu@inra.fr
 // Last modification date:  31 janv. 2018
-// Subject: A class class which specify Handsontable class for native PHP usage
+// Subject: A class which specify Handsontable class for native PHP usage
 //******************************************************************************
 
 /**
@@ -21,7 +21,7 @@
 namespace openSILEX\handsontablePHP\adapter;
 
 /**
- * HandsontableSimple is a class which specify Handsontable class for native PHP usage
+ * HandsontableSimple is a class which extends Handsontable class for native PHP usage
  * @author Arnaud Charleroy <arnaud.charleroy@inra.fr>
  * @since 1.0
  */

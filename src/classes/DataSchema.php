@@ -26,18 +26,24 @@ namespace openSILEX\handsontablePHP\classes;
  * @since 1.0
  * @see https://docs.handsontable.com/latest/Options.html#dataSchema
  */
-class DataSchema implements \JsonSerializable{
+class DataSchema implements \JsonSerializable {
+
     /**
-     * @var contains dataschema value 
+     * @var array contains dataschema value 
      */
-    protected $schema =null;
-    
+    protected $schema = null;
+
     public function __construct($schema) {
         $this->schema = $schema;
     }
 
+    /**
+     * @example
+     * dataSchema: {id: null, name: {first: null, last: null}, address: null},
+     * 
+     * @return string json text
+     */
     public function jsonSerialize() {
         return $this->schema;
     }
-
 }

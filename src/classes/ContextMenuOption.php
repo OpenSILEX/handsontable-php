@@ -91,17 +91,28 @@ class ContextMenuOption implements \JsonSerializable {
         $this->callback = $callback;
     }
 
+    /**
+     * @example  {
+     *      name: "Copy",
+     *      callback: function(key, opt){
+     *          alert("Clicked on " + key);
+     *      }
+     *  }
+     * }
+     */
     public function jsonSerialize() {
         $js = "{
           key: '{$this->key}',"
                 . "name: '{$this->name}'";
+        // if a disabled function is set
         if (isset($this->disabled) && !is_null($this->disabled)) {
             $disabledFunc = "disabled: function() { " .
                     $this->disabled
                     . " }";
             $js .= ',' . JavascriptFormatter::prepareJavascriptText($disabledFunc);
         }
-        if (isset($this->disabled) && !is_null($this->callback)) {
+        // if a callback function is set
+        if (isset($this->callback) && !is_null($this->callback)) {
             $callbackFunc = "callback: function() { " .
                     $this->callback
                     . " }";
