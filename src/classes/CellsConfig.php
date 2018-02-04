@@ -54,7 +54,7 @@ class CellsConfig implements \JsonSerializable
      */
     const CELLS_MODE = 1;
 
-    public function __construct($cellsConfig, $cellMode = self::CELLS_MODE)
+    public function __construct($cellsConfig, $cellMode = CellsConfig::CELLS_MODE)
     {
         $this->cellsConfig = $cellsConfig;
         $this->cellMode = $cellMode;
@@ -77,7 +77,7 @@ class CellsConfig implements \JsonSerializable
         /**
          *  @see https://docs.handsontable.com/latest/Options.html#cells
          */
-        if ($this->cellMode == self::CELLS_MODE) {
+        if ($this->cellMode == CellsConfig::CELLS_MODE) {
             if ($this->cellsConfig instanceof \Closure) {
                 $cellConfigsFunction = $this->cellsConfig;
                 return 'function(row, col, prop){ ' . JavascriptFormatter::prepareJavascriptText($cellConfigsFunction(), true) . '}';
@@ -86,7 +86,7 @@ class CellsConfig implements \JsonSerializable
         /**
          *  @see https://docs.handsontable.com/latest/Options.html#cell
          */
-        if ($this->cellMode == self::CELL_MODE) {
+        if ($this->cellMode == CellsConfig::CELL_MODE) {
             if (is_array($this->cellsConfig)) {
                 $temporaryCellsArray = [];
                 foreach ($this->cellsConfig as $cell) {
