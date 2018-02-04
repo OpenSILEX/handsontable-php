@@ -26,7 +26,7 @@ The recommended way to install handsontable-php is through  [`Composer`](http://
 Usage
 -----
 
-#### Simple case 
+** Simple case **
 
 ```php
 require_once './config/configLibrairy.php';
@@ -70,7 +70,7 @@ $hd->setData($data);
 </html>
 
 ```
-#### Ajax case
+** Ajax case **
 
 ```php
 <?php
