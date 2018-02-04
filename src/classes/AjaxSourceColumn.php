@@ -78,6 +78,7 @@ class AjaxSourceColumn implements \JsonSerializable
      */
     public function jsonSerialize()
     {
+        $debugString = ($this->debug) ? "console.log('response', response);" : "" ;
         return \openSILEX\handsontablePHP\tools\JavascriptFormatter::prepareJavascriptText("function (query, process) {
           $.ajax({
             url: '" . $this->url . "',
@@ -86,7 +87,7 @@ class AjaxSourceColumn implements \JsonSerializable
               query: query
             },
             success: function (response) {
-              " . ($this->debug) ? "console.log('response', response);" : "" . "
+              " . $debugString . "
               process(response.data);
             }
           });
