@@ -3,8 +3,8 @@
     "description": "A php wrapper of handsontable js library",
     "type": "library",
     "license": "AGPL-3.0",
-    "version" : "1.0.0",
-    "keywords" : [
+    "version": "1.0.0",
+    "keywords": [
         "handsontable",
         "spreadsheet", 
         "php",
@@ -18,7 +18,10 @@
         }
     ],
     "require": {
-        "php" : "^5.5 || ^7.0"
+        "php": "^5.5 || ^7.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.5"
     },
     "autoload": {
         "psr-4": {
@@ -26,7 +29,9 @@
         }
     },
     "autoload-dev": {
-        "psr-4": { "openSILEX\\handsontable-php\\": "tests/" }
+        "psr-4": {
+            "openSILEX\\handsontable-php\\": "tests/"
+        }
     },
     "minimum-stability": "dev"
 }
