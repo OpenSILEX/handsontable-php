@@ -14,7 +14,7 @@ The recommended way to install handsontable-php is through  [`Composer`](http://
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/niio972/handsontable-php"
+            "url": "https://github.com/openSILEX/handsontable-php"
         }
     ],
     "require": {
