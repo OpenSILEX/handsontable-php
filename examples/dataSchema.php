@@ -28,7 +28,6 @@ $hd->setDataSchema(new DataSchema(
                     ]
                 ));
 
-//
 $hd->setColumns(function () {
     return "var columnMeta = {};
 

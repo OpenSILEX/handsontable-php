@@ -226,6 +226,16 @@ abstract class Handsontable
      */
     protected $manualRowResize = false;
 
+    /**
+     *
+     * @param type $container_name represents the div tag id use by handsontable instance
+     * If not set it will be automatically create
+     * @param array $cellConfig represents the configuration of cells in a handsontable
+     * instance (array of openSILEX\handsontablePHP\classe\CellConfigDefinition)
+     * @see https://docs.handsontable.com/latest/Options.html#cell
+     * @see https://docs.handsontable.com/latest/Options.html#cell
+     *
+     */
     public function __construct($container_name = null, $cellConfig = null)
     {
         if ($cellConfig != null) { // load cell configuration
@@ -312,6 +322,21 @@ abstract class Handsontable
         return $this->colHeaders;
     }
 
+    /**
+     * Possibly values :
+     *
+     * Implemented :
+     * true (to enable default options),
+     * false (to disable completely)
+     * an array of predefined options,
+     *
+     * Not implemented :
+     * an object with defined structure
+
+     * @see https://docs.handsontable.com/latest/Options.html#contextMenu
+     *
+     * @return mixed the contextMenu value
+     */
     public function getContextMenu()
     {
         if (!is_array($this->contextMenu) && !is_bool($this->contextMenu)) {
@@ -481,10 +506,21 @@ abstract class Handsontable
         $this->rowHeaders = $rowHeaders;
     }
 
-    public function setColHeaders(array $colHeaders)
+    /**
+     * Possibly values :
+     * Implemented
+     * Setting true or false will enable or disable the default column headers (A, B, C).
+     * You can also define an array ['One', 'Two', 'Three', ...]
+     * Not Implemented
+     * or a function to define the headers.
+     * @see https://docs.handsontable.com/0.35.1/Options.html#colHeaders
+     *
+     * @return mixed colHeaders value
+     */
+    public function setColHeaders($colHeaders)
     {
         if (!is_array($this->colHeaders) && !is_bool($this->colHeaders)) {
-            return true;
+            return true; // default value
         }
         $this->colHeaders = $colHeaders;
     }
@@ -598,13 +634,17 @@ abstract class Handsontable
 
     /**
      * This method permits to implement framework specific ways to load Handsontable and JQuery javascript librairies
+     *
+     * @return void|mixed It is defined by the developper
      */
-    abstract public function loadJSLibraries();
+    abstract public function loadJSLibraries($jquery = false, $librairiesPath = []);
 
     /**
      * This method permits to implement framework specific ways to load Handsontable and JQuery css librairies
+     *
+     * @return void|mixed It is defined by the developper
      */
-    abstract public function loadCSSLibraries();
+    abstract public function loadCSSLibraries($jquery = false, $librairiesPath = []);
 
     /**
      * Generate javascript text to write in a web page in order to render a handsontable instance
@@ -614,52 +654,53 @@ abstract class Handsontable
     public function generateJavascriptCode()
     {
         $js_code = $this->prepareInfo();
-        $js_code.= $this->prepareContainer();
+        $js_code .= $this->prepareContainer();
         if ($this->getSave()) { // if a table need to be saved
-            $js_code.= $this->prepareSave();
+            $js_code .= $this->prepareSave();
         }
         if ($this->getAutoSave()) { // if a table need to be saved automatically
-            $js_code.= $this->prepareAutoSave();
+            $js_code .= $this->prepareAutoSave();
         }
         if ($this->getLoadAction()) { // if a table need to be loaded
-            $js_code.= $this->prepareLoad();
+            $js_code .= $this->prepareLoad();
         }
         $js_code .= $this->generateTableJSCode();
         if ($this->getAutosave()) { // generate autosave custom functions
-            $js_code.= ',' . PHP_EOL . $this->saveTableChangesFunctions();
+            $js_code .= ',' . PHP_EOL . $this->saveTableChangesFunctions();
         }
-        $js_code.= PHP_EOL . ' });';
+        $js_code .= PHP_EOL . ' });';
         if ($this->getSave()) { // generate save custom functions
-            $js_code.= PHP_EOL . $this->saveTableFunctions();
+            $js_code .= PHP_EOL . $this->saveTableFunctions();
         }
         if ($this->getLoadAction()) { // generate load custom functions
-            $js_code.= $this->loadTable();
+            $js_code .= $this->loadTable();
         }
         return $js_code;
     }
 
     /**
      * Method which generate the javascript table code needed
-     * @example var hot1 = new Handsontable(container, {
-      data: data(),
-      startRows: 2,
-      startCols: 8,
-      width: 900,
-      height: 700,
-      rowHeaders: true,
-      autoWrapRow: true,
-      maxCols : 8,
-      colHeaders: [
-      'ID',
-      'Country',
-      'Code',
-      'Currency',
-      'Level',
-      'Units',
-      'Date',
-      'Change'
-      ]";
-      });
+     * @example var hot1 = new Handsontable(
+     *  container, {
+     * data: data(),
+     * startRows: 2,
+     * startCols: 8,
+     * width: 900,
+     * height: 700,
+     * rowHeaders: true,
+     * autoWrapRow: true,
+     * maxCols : 8,
+     * colHeaders: [
+     *  'ID',
+     *  'Country',
+     *  'Code',
+     *  'Currency',
+     *  'Level',
+     *  'Units',
+     *  'Date',
+     *  'Change'
+     *  ]";
+     * });
      * @see http://jsfiddle.net/handsoncode/s6t768pq/
      *
      * @return string handsontable javascript text

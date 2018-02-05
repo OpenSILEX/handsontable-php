@@ -62,6 +62,10 @@ class CellConfigDefinition implements \JsonSerializable
      */
     public function jsonSerialize()
     {
-        return ['row' => $this->row, 'col' => $this->column,'readOnly' => $this->readOnly];
+        return [
+            'row' => $this->row,
+            'col' => $this->column,
+            'readOnly' => $this->readOnly
+            ];
     }
 }

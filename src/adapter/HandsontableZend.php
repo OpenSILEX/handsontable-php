@@ -40,19 +40,70 @@ class HandSontableZend extends \openSILEX\handsontablePHP\classes\Handsontable
         $this->view = $view;
     }
 
-    
-    public function loadJSLibraries()
+    public function loadJSLibraries($jquery = false, $librairiesPath = [])
     {
-//        $this->view->loadViewLibrairies(array('handsontable' => array()));
+        if (empty($librairiesPath)) {
+            $librairiesPath = \openSILEX\handsontablePHP\config\Config::getLibrairiesPath();
+        }
+
+        if (isset($librairiesPath['handsontable'])) {
+            if (isset($librairiesPath['handsontable']['js'])) {
+                foreach ($librairiesPath['handsontable']['js'] as $jsScript) {
+                      $this->view->HeadScript()->appendFile($jsScript);
+                }
+            }
+        }
+        if ($jquery) {
+            if (isset($librairiesPath['jquery'])) {
+                if (isset($librairiesPath['jquery']['js'])) {
+                    foreach ($librairiesPath['jquery']['js'] as $jsScript) {
+                      $this->view->jQuery()->setLocalPath($jsScript);
+                    }
+                }
+            }
+        }
+        
     }
 
     public function render()
     {
-//        $this->loadJSLibraries();
         $this->view->jQuery()->addOnLoad($this->generateJavascriptCode());
     }
 
-    public function loadCSSLibraries()
-    {
+      /**
+     * Load all required css librairies
+     * @param boolean $jquery if jquery need to be loaded
+     * @param array $librairiesPath array which contains required Javascript librairy 
+     *              $librairiesPath = [
+     *                      'handsontable' => [
+     *                          'js => '...',
+     *                          'css' => '...'],
+     *                       'jquery' => [
+     *                          'js => '...',
+     *                          'css' => ['...']
+     *                      ]
+     *
+    */
+    public function loadCSSLibraries($jquery = false, $librairiesPath = []) {
+        if (empty($librairiesPath)) {
+            $librairiesPath = \openSILEX\handsontablePHP\config\Config::getLibrairiesPath();
+        }
+        if (isset($librairiesPath['handsontable'])) {
+            if (isset($librairiesPath['handsontable']['css'])) {
+                foreach ($librairiesPath['handsontable']['css'] as $cssScript) {
+                    $this->view->headLink()->appendStylesheet($cssScript);
+                }
+            }
+        }
+        if ($jquery) {
+            if (isset($librairiesPath['jquery'])) {
+                if (isset($librairiesPath['jquery']['css'])) {
+                    foreach ($librairiesPath['jquery']['css'] as $cssScript) {
+                       $this->view->jQuery()->addStylesheet($cssScript);
+                    }
+                }
+            }
+        }   
     }
+
 }
