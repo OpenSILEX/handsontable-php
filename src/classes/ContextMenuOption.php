@@ -26,7 +26,7 @@ use \openSILEX\handsontablePHP\tools\JavascriptFormatter;
  * Class which represents ContextMenu handsontable option
  * @author Arnaud Charleroy <arnaud.charleroy@inra.fr>
  * @since 1.0
- * @see https://docs.handsontable.com/latest/demo-context-menu.html#page-default
+ * @link https://docs.handsontable.com/latest/demo-context-menu.html#page-default
  */
 class ContextMenuOption implements \JsonSerializable
 {

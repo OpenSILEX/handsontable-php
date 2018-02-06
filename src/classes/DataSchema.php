@@ -24,7 +24,7 @@ namespace openSILEX\handsontablePHP\classes;
  * Class which represents DataSchema handsontable option
  * @author Arnaud Charleroy <arnaud.charleroy@inra.fr>
  * @since 1.0
- * @see https://docs.handsontable.com/latest/Options.html#dataSchema
+ * @link https://docs.handsontable.com/latest/Options.html#dataSchema
  */
 class DataSchema implements \JsonSerializable {
 

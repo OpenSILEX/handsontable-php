@@ -26,7 +26,7 @@ use \openSILEX\handsontablePHP\tools\JavascriptFormatter;
  * A class which represents Columns handsontable option
  * @author Arnaud Charleroy <arnaud.charleroy@inra.fr>
  * @since 1.0
- * @see https://docs.handsontable.com/latest/Options.html#columns
+ * @link https://docs.handsontable.com/latest/Options.html#columns
  */
 class Columns implements \JsonSerializable {
 

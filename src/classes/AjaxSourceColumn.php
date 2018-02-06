@@ -26,7 +26,7 @@ use \openSILEX\handsontablePHP\tools\JavascriptFormatter;
  * Represents ajax source data
  * @author Arnaud Charleroy <arnaud.charleroy@inra.fr>
  * @since 1.0
- * @see https://docs.handsontable.com/latest/demo-autocomplete.html
+ * @link https://docs.handsontable.com/latest/demo-autocomplete.html
  */
 class AjaxSourceColumn implements \JsonSerializable
 {
