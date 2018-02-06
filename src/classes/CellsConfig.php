@@ -30,8 +30,7 @@ use \openSILEX\handsontablePHP\tools\JavascriptFormatter;
  * @author Arnaud Charleroy <arnaud.charleroy@inra.fr>
  * @since 1.0
  */
-class CellsConfig implements \JsonSerializable
-{
+class CellsConfig implements \JsonSerializable {
 
     /**
      * List of the cell definition that will be specified
@@ -49,32 +48,34 @@ class CellsConfig implements \JsonSerializable
      * Used to save information about cell attribute
      */
     const CELL_MODE = 0;
-    
+
     /**
      * Used to save information about cells attribute
      */
     const CELLS_MODE = 1;
 
-    public function __construct($cellsConfig, $cellMode = CellsConfig::CELLS_MODE)
-    {
+    public function __construct($cellsConfig, $cellMode = CellsConfig::CELLS_MODE) {
         $this->cellsConfig = $cellsConfig;
         $this->cellMode = $cellMode;
     }
 
     /**
+     * Specify data which should be serialized to JSON
+     * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
+     * Inherited from \JsonSerializable::jsonSerialize() method
      * @example
      * cells: function (row, col, prop) {
-     * var cellProperties = {}
+     *      var cellProperties = {}
      *
-     * if (row === 0 && col === 0) {
-     *  cellProperties.readOnly = true;
+     *      if (row === 0 && col === 0) {
+     *       cellProperties.readOnly = true;
+     *      }
+     *
+     *      return cellProperties;
      * }
-     *
-     * return cellProperties;
-     *  }
+     * @return mixed data which can be serialized by <b>json_encode</b>
      */
-    public function jsonSerialize()
-    {
+    public function jsonSerialize() {
         /**
          *  @see https://docs.handsontable.com/latest/Options.html#cells
          */
@@ -100,4 +101,5 @@ class CellsConfig implements \JsonSerializable
         }
         return null;
     }
+
 }

@@ -28,8 +28,7 @@ use openSILEX\handsontablePHP\tools\JavascriptFormatter;
  * @since 1.0
  * @see openSILEX\handsontablePHP\classes\Columns
  */
-class ColumnConfig implements \JsonSerializable
-{
+class ColumnConfig implements \JsonSerializable {
 
     /**
      *
@@ -37,22 +36,23 @@ class ColumnConfig implements \JsonSerializable
      */
     protected $properties;
 
-    public function __construct($properties = null)
-    {
+    public function __construct($properties = null) {
         $this->properties = $properties;
     }
 
-    public function setAttribute($attribute)
-    {
+    public function setAttribute($attribute) {
         $this->attribute = $attribute;
     }
 
-    public function setValue($value)
-    {
+    public function setValue($value) {
         $this->value = $value;
     }
 
     /**
+     * Specify data which should be serialized to JSON
+     * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
+     * Inherited from \JsonSerializable::jsonSerialize() method
+     * @example 
      * columns: [
      * {},
      *  ...,
@@ -78,14 +78,14 @@ class ColumnConfig implements \JsonSerializable
      *    });
      *  }
      *  ]
-     * @return string
+     * @return mixed data which can be serialized by <b>json_encode</b>
      */
-    public function jsonSerialize()
-    {
+    public function jsonSerialize() {
         if (!isset($this->properties) || empty($this->properties)) {
             return '{}';
         }
         $newArray = JavascriptFormatter::preparePHPArrayToJSArray($this->properties);
         return $newArray;
     }
+
 }

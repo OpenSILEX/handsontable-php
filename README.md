@@ -26,7 +26,17 @@ The recommended way to install handsontable-php is through  [`Composer`](http://
 Usage
 -----
 
-**Simple case**
+Configure examples : 
+
+After installing handsontable-php (through ``"Composer"``), put the examples directory in a web server accessible path.
+Set the right vendor path in ``examples/config/configLibrairy.php``
+
+After you will be able to use example, try this :
+
+(http://localhost/examples/array.php)
+
+
+**Simple case (array.php) **
 
 ```php
 require_once './config/configLibrairy.php';
@@ -71,7 +81,7 @@ $hd->setData($data);
 
 ```
 
-**Ajax case**
+**Ajax case (autocompleteAjax.php)**
 
 ```php
 <?php

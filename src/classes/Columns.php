@@ -28,8 +28,7 @@ use \openSILEX\handsontablePHP\tools\JavascriptFormatter;
  * @since 1.0
  * @see https://docs.handsontable.com/latest/Options.html#columns
  */
-class Columns implements \JsonSerializable
-{
+class Columns implements \JsonSerializable {
 
     /**
      * @var mixed array of ColumnConfig instances or function javascript string
@@ -86,13 +85,48 @@ class Columns implements \JsonSerializable
      *    });
      * @param mixed $columns may be a function or an  array
      */
-    public function __construct($columns)
-    {
+    public function __construct($columns) {
         $this->columns = $columns;
     }
 
-    public function jsonSerialize()
-    {
+    /**
+     * Specify data which should be serialized to JSON
+     * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
+     * Inherited from \JsonSerializable::jsonSerialize() method
+     * @example columns : function(column){
+     *             var columnMeta = {};
+     *
+     *             if (column === 0) {
+     *               columnMeta.data = 'id';
+     *
+     *             } else if (column === 1) {
+     *               columnMeta.data = 'name.first';
+     *
+     *             } else if (column === 2) {
+     *               columnMeta.data = 'name.last';
+     *
+     *
+     *              } else if (column === 3) {
+     *         columnMeta.data = 'address';
+     *
+     *          } else {
+     *          columnMeta = null;
+     *
+     *         }
+     *
+     *         return columnMeta;";
+     * }
+     * @example  columns : [
+     *              {data: 0},
+     *              {data: 2},
+     *              {data: 3},
+     *              {data: 4},
+     *              {data: 5},
+     *              {data: 6}
+     *              ]
+     * @return mixed data which can be serialized by <b>json_encode</b>
+     */
+    public function jsonSerialize() {
         // if array convert array in javascript format
         if (is_array($this->columns)) {
             return $this->columns;
@@ -104,4 +138,5 @@ class Columns implements \JsonSerializable
         }
         return null;
     }
+
 }

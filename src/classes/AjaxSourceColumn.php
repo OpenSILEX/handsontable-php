@@ -57,6 +57,9 @@ class AjaxSourceColumn implements \JsonSerializable
     }
 
     /**
+     * Specify data which should be serialized to JSON
+     * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
+     * Inherited from \JsonSerializable::jsonSerialize() method
      * @example {
      *   type: 'autocomplete',
      *   source: function (query, process) {
@@ -76,7 +79,7 @@ class AjaxSourceColumn implements \JsonSerializable
      *     });
      *   }
      *
-     * @return string json text
+     *  @return mixed data which can be serialized by <b>json_encode</b>
      */
     public function jsonSerialize()
     {

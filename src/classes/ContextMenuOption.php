@@ -30,7 +30,6 @@ use \openSILEX\handsontablePHP\tools\JavascriptFormatter;
  */
 class ContextMenuOption implements \JsonSerializable
 {
-
     /**
      *
      * @var string menu item key (id)
@@ -101,15 +100,20 @@ class ContextMenuOption implements \JsonSerializable
         $this->callback = $callback;
     }
 
+    
     /**
-     * @example  {
-     *      name: "Copy",
-     *      callback: function(key, opt){
-     *          alert("Clicked on " + key);
-     *      }
-     *  }
-     * }
-     */
+    * Specify data which should be serialized to JSON
+    * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
+    * Inherited from \JsonSerializable::jsonSerialize() method
+    * @example  {
+    *      name: "Copy",
+    *      callback: function(key, opt){
+    *          alert("Clicked on " + key);
+    *      }
+    *  }
+    * }
+    * @return mixed data which can be serialized by <b>json_encode</b>
+    */
     public function jsonSerialize()
     {
         $js = "{
