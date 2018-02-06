@@ -53,7 +53,15 @@ class CellsConfig implements \JsonSerializable {
      * Used to save information about cells attribute
      */
     const CELLS_MODE = 1;
-
+    
+    /**
+     * Value to put in cell or cells attribute which define global or 
+     * single cell configuration
+     * @param mixed $cellsConfig array of openSILEX\handsontablePHP\classes\CellConfigDefinition 
+     *  in case of cells attribute or \Closure in case of cell attribute
+     * @param int $cellMode for cell openSILEX\handsontablePHP\classes\CellsConfig::CELLS_MODE 
+     * or cells attribute openSILEX\handsontablePHP\classes\CellsConfig::CELLS_MODE
+     */
     public function __construct($cellsConfig, $cellMode = CellsConfig::CELLS_MODE) {
         $this->cellsConfig = $cellsConfig;
         $this->cellMode = $cellMode;
