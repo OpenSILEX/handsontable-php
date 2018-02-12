@@ -43,19 +43,8 @@ $hd->setColumns([
 ?>
 <html>
     <head>
-
-        <?php
-        echo $hd->loadJSLibraries(true);
-        echo $hd->loadCSSLibraries();
-        
-        ?>
+        <?= $hd->loadJSLibraries(true); ?>
+        <?= $hd->loadCSSLibraries(); ?>
     </head>
-    <div id='<?= $hd->getContainerName() ?>'>
-        
-    </div>
-    <script>
-        <?php
-        echo $hd->generateJavascriptCode();
-        ?>
-    </script>
+    <?= $hd->render() ?>
 </html>

@@ -58,7 +58,7 @@ class CellsConfig implements \JsonSerializable {
      * Value to put in cell or cells attribute which define global or 
      * single cell configuration
      * @param mixed $cellsConfig array of openSILEX\handsontablePHP\classes\CellConfigDefinition 
-     *  in case of cells attribute or \Closure in case of cell attribute
+     *  in case of cells attribute or \Closure and string in case of cell attribute
      * @param int $cellMode for cell openSILEX\handsontablePHP\classes\CellsConfig::CELLS_MODE 
      * or cells attribute openSILEX\handsontablePHP\classes\CellsConfig::CELLS_MODE
      */
@@ -91,6 +91,13 @@ class CellsConfig implements \JsonSerializable {
             if ($this->cellsConfig instanceof \Closure) {
                 $cellConfigsFunction = $this->cellsConfig;
                 return 'function(row, col, prop){ ' . JavascriptFormatter::prepareJavascriptText($cellConfigsFunction(), true) . '}';
+            }
+        }
+        
+        if ($this->cellMode == CellsConfig::CELLS_MODE) {
+            if (is_string($this->cellsConfig)) {
+                $cellConfigsString = $this->cellsConfig;
+                return 'function(row, col, prop){ ' . JavascriptFormatter::prepareJavascriptText($cellConfigsString, true) . '}';
             }
         }
         /**

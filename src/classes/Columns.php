@@ -60,6 +60,7 @@ class Columns implements \JsonSerializable {
      *
      * @example
      * a javascript function text function may be used instead of ColumnConfig instances
+     * // php function
      * $handsontable_instance->setColumns(function(){
      *       return "var columnMeta = {};
      *
@@ -83,6 +84,30 @@ class Columns implements \JsonSerializable {
      *
      *         return columnMeta;";
      *    });
+     *   A string 
+     *  $handsontable_instance->setColumns(
+     *       "var columnMeta = {};
+     *
+     *             if (column === 0) {
+     *               columnMeta.data = 'id';
+     *
+     *             } else if (column === 1) {
+     *               columnMeta.data = 'name.first';
+     *
+     *             } else if (column === 2) {
+     *               columnMeta.data = 'name.last';
+     *
+     *
+     *              } else if (column === 3) {
+     *         columnMeta.data = 'address';
+     *
+     *          } else {
+     *          columnMeta = null;
+     *
+     *         }
+     *
+     *         return columnMeta;";
+     *    );
      * @param mixed $columns may be a function or an  array
      */
     public function __construct($columns) {
@@ -131,7 +156,12 @@ class Columns implements \JsonSerializable {
         if (is_array($this->columns)) {
             return $this->columns;
         }
-        // if is a PHP function it return a string string
+        // if is a string
+        if (is_string($this->columns)) {
+            $columnsString = $this->columns;
+            return 'function(column){ ' . JavascriptFormatter::prepareJavascriptText($columnsString, true) . '}';
+        }
+        // if is a PHP function it return a string
         if ($this->columns instanceof \Closure) {
             $columnsFunction = $this->columns;
             return 'function(column){ ' . JavascriptFormatter::prepareJavascriptText($columnsFunction(), true) . '}';

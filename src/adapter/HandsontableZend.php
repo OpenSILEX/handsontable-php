@@ -81,7 +81,7 @@ class HandSontableZend extends \openSILEX\handsontablePHP\classes\Handsontable {
      * @see \openSILEX\handsontablePHP\classes\Handsontable
      */
     public function render() {
-        $this->view->jQuery()->addOnLoad($this->generateJavascriptCode());
+        return $this->generateContainerAndScript();
     }
 
     /**

@@ -7,5 +7,5 @@ error_reporting(E_ALL);
  * config vendor path to use examples
  */
 
-//require_once __DIR__ . '/vendor/autoload.php';
+require_once '/home/blue/App/testHT/vendor/autoload.php';
 //require_once __DIR__ . '/../../vendor/autoload.php';

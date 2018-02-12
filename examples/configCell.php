@@ -23,16 +23,16 @@ $hd->setData($data);
 $hd->setCell([
     new CellConfigDefinition(0, 0, true)
     ]);
-$hd->setCells(function () {
-    return 'var cellProperties = {};
+$hd->setCells(
+    'var cellProperties = {};
 
       if (row === 0 && col === 0) {
         cellProperties.readOnly = true;
       }
 
       return cellProperties;
-      ';
-});
+      '
+);
 
 
 
@@ -40,19 +40,8 @@ $hd->setCells(function () {
 ?>
 <html>
     <head>
-
-        <?php
-        echo $hd->loadJSLibraries(true);
-        echo $hd->loadCSSLibraries();
-        
-        ?>
+        <?= $hd->loadJSLibraries(true); ?>
+        <?= $hd->loadCSSLibraries(); ?>
     </head>
-    <div id='<?= $hd->getContainerName() ?>'>
-        
-    </div>
-    <script>
-        <?php
-        echo $hd->generateJavascriptCode();
-        ?>
-    </script>
+    <?= $hd->render() ?>
 </html>

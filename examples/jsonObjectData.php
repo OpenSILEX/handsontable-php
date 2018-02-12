@@ -19,8 +19,8 @@ $data = [
 $hd->setData($data);
 $hd->setColHeaders(['ID', 'First Name', 'Last Name', 'Address']);
 
-$hd->setColumns(function () {
-    return "var columnMeta = {};
+$hd->setColumns(
+    "var columnMeta = {};
 
       if (column === 0) {
         columnMeta.data = 'id';
@@ -37,26 +37,15 @@ $hd->setColumns(function () {
       } else {
         columnMeta = null;
       }
-      return columnMeta;";
-});
+      return columnMeta;"
+);
 
 
 ?>
 <html>
     <head>
-
-        <?php
-        echo $hd->loadJSLibraries(true);
-        echo $hd->loadCSSLibraries();
-        
-        ?>
+        <?= $hd->loadJSLibraries(true); ?>
+        <?= $hd->loadCSSLibraries(); ?>
     </head>
-    <div id='<?= $hd->getContainerName() ?>'>
-        
-    </div>
-    <script>
-        <?php
-        echo $hd->generateJavascriptCode();
-        ?>
-    </script>
+    <?= $hd->render() ?>
 </html>
