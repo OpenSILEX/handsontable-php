@@ -565,8 +565,10 @@ abstract class Handsontable {
         return $this->cells;
     }
     /**
+     *
+     * @param string|\Closure $cells represents the cascading handsontable cell configuration
+     * For more information look at the link
      * @link https://docs.handsontable.com/0.35.1/tutorial-setting-options.html
-     * @param string|\Closure $cells
      */
     public function setCells($cells) {
         $this->cells = new CellsConfig($cells, CellsConfig::CELLS_MODE);
@@ -574,8 +576,10 @@ abstract class Handsontable {
     
     /**
      * 
+     * 
+     * @param array $cell represent array of cell config
+     * For more information look at the link
      * @link https://docs.handsontable.com/0.35.1/tutorial-setting-options.html
-     * @param array $cell array of cell config
      */
     public function setCell(array $cell) {
         $this->cell = new CellsConfig($cell, CellsConfig::CELL_MODE);
