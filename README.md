@@ -36,7 +36,7 @@ After you will be able to use example, try this :
 (http://localhost/examples/array.php)
 
 
-**Simple case (array.php) **
+**Simple case (array.php)**
 
 ```php
 require_once './config/configLibrairy.php';
