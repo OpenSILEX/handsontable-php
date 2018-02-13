@@ -2,7 +2,7 @@ handsontable-php
 =============
 
 handsontable-php is a PHP library that works as a wrapper for the **Handsontable js** library (https://handsontable.com/) and it was built with flexibility and maintainability in mind.
-It is a simple port of the JavaScript library to PHP, it was designed in a way to evolve in order that developer only needs to learn one API. This software is under AGPL-3.0 LICENCE.
+It is a simple port of the JavaScript library to PHP, it was designed in a way to evolve in order that developer only needs to learn one API. This software is under [AGPL-3.0 LICENCE](https://choosealicense.com/licenses/agpl-3.0/).
 
 
 Setup
