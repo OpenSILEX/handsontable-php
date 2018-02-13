@@ -564,12 +564,20 @@ abstract class Handsontable {
     public function getCells() {
         return $this->cells;
     }
-
+    /**
+     * @link https://docs.handsontable.com/0.35.1/tutorial-setting-options.html
+     * @param string|\Closure $cells
+     */
     public function setCells($cells) {
         $this->cells = new CellsConfig($cells, CellsConfig::CELLS_MODE);
     }
-
-    public function setCell($cell) {
+    
+    /**
+     * 
+     * @link https://docs.handsontable.com/0.35.1/tutorial-setting-options.html
+     * @param array $cell array of cell config
+     */
+    public function setCell(array $cell) {
         $this->cell = new CellsConfig($cell, CellsConfig::CELL_MODE);
     }
 
