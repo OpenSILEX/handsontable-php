@@ -39,7 +39,7 @@ abstract class Handsontable {
 
     /**
      *
-     * @var boolean define if librairies need to be loaded or not
+     * @var bool define if librairies need to be loaded or not
      */
     protected $loadLibrairy = true;
 
@@ -65,19 +65,19 @@ abstract class Handsontable {
 
     /**
      *
-     * @var boolean define if a save button will be created and if the function associated need to be generated
+     * @var bool define if a save button will be created and if the function associated need to be generated
      */
     protected $save = false;
 
     /**
      *
-     * @var boolean iIf the table need to be saved at every modification or not
+     * @var bool iIf the table need to be saved at every modification or not
      */
     protected $autosave = false;
 
     /**
      *
-     * @var boolean define if a load button will be created and if the function associated need to be generated
+     * @var bool define if a load button will be created and if the function associated need to be generated
      */
     protected $load = false;
 
@@ -97,7 +97,20 @@ abstract class Handsontable {
      *
      * @var int number of handsontable instance created
      */
-    public static $table_created = 0;
+    public static $createdTables = 0;
+
+    /**
+     *
+     * @var string used to generate data for examples
+     */
+    protected $spreadsheetDataHelper;
+
+// french langage is in a pull request at this time maybe soon
+// @link https://github.com/handsontable/handsontable/pull/4775
+//  const LANGUAGE_FRENCH = 'fr-FR';
+
+    const LANGUAGE_POLISH = 'pl-PL  ';
+    const LANGUAGE_ENGLISH = 'en-US';
 
     /**
      * ######################################
@@ -219,7 +232,7 @@ abstract class Handsontable {
 
     /**
      * If true, pressing TAB or right arrow in the last column will move to first column in next row.
-     * @var boolean autoWrapRow
+     * @var bool autoWrapRow
      * @link https://docs.handsontable.com/0.35.1/Options.html#autoWrapRow
      */
     protected $autoWrapRow = true;
@@ -261,13 +274,13 @@ abstract class Handsontable {
     protected $colWidths;
 
     /**
-     * @var boolean Set whether to display the current sorting order indicator
+     * @var bool Set whether to display the current sorting order indicator
      * @link https://docs.handsontable.com/0.35.1/Options.html#sortIndicator
      */
     protected $sortIndicator = false;
 
     /**
-     * @var boolean To enable resizing on columns
+     * @var bool To enable resizing on columns
      * /SILEX:notImplemented  
      *  as array
      * //\SILEX:notImplemented  
@@ -276,21 +289,37 @@ abstract class Handsontable {
     protected $manualColumnResize = false;
 
     /**
-     * @var boolean To enable resizing on rows
+     * @var bool To enable resizing on rows
      * * /SILEX:notImplemented  
      *  as array
      * //\SILEX:notImplemented  
      * @link https://docs.handsontable.com/0.35.1/Options.html#manualRowResize
      */
     protected $manualRowResize = false;
-    
-    
-    /**
-     * @var string Define the table language 
-     * @link https://docs.handsontable.com/0.35.1/Options.html#manualRowResize
-     */
-    protected $language = 'fr-FR';
 
+    /**
+     * @var bool To enable freezing on columns
+     * @link https://docs.handsontable.com/0.35.1/demo-freezing.html
+     */
+    protected $manualColumnFreeze = false;
+
+    /**
+     * @var int Number of fixed columns on left
+     * @link https://docs.handsontable.com/0.35.1/demo-freezing.html
+     */
+    protected $fixedColumnsLeft;
+
+    /**
+     * @var int Number of fixed rows on top
+     * @link https://docs.handsontable.com/0.35.1/demo-freezing.html
+     */
+    protected $fixedRowsTop;
+
+    /**
+     * @var string Define the table language use Handsontable::LANGUAGE_XXXXX define language
+     * @link https://docs.handsontable.com/0.35.1/Options.html#language
+     */
+    protected $language = Handsontable::LANGUAGE_ENGLISH;
 
     /**
      * @param type $container_name represents the div tag id use by handsontable instance
@@ -305,8 +334,8 @@ abstract class Handsontable {
         }
         if (is_null($container_name)) { // create handsontable instance if it doesn't exist
             $hash = new \DateTime();
-            $this->containerName = 'handsontable' . Handsontable::$table_created . md5($hash->getTimestamp());
-            Handsontable::$table_created++;
+            $this->containerName = 'handsontable' . Handsontable::$createdTables . md5($hash->getTimestamp());
+            Handsontable::$createdTables++;
         } else {
             $this->containerName = $container_name;
         }
@@ -342,7 +371,7 @@ abstract class Handsontable {
 
     public function getSaveElementId() {
         if (is_null($this->saveElementId)) {
-            $this->saveElementId = 'save' . Handsontable::$table_created;
+            $this->saveElementId = 'save' . Handsontable::$createdTables;
         }
         return $this->saveElementId;
     }
@@ -438,39 +467,101 @@ abstract class Handsontable {
         return $this->sortIndicator;
     }
 
-    public function setSortIndicator($sortIndicator) {
+    function getFixedColumnsLeft() {
+        return $this->fixedColumnsLeft;
+    }
+
+    function getFixedRowsTop() {
+        return $this->fixedRowsTop;
+    }
+
+    function getLanguage() {
+        return $this->language;
+    }
+
+    public function getColumns() {
+        return $this->columns;
+    }
+
+    public function getCell() {
+        return $this->cell;
+    }
+
+    public function getCells() {
+        return $this->cells;
+    }
+
+    function getManualColumnFreeze() {
+        return $this->manualColumnFreeze;
+    }
+
+    function setManualColumnFreeze(bool $manualColumnFreeze) {
+        // context menu must be set on before activate manual columnFreeze
+        if ($manualColumnFreeze) {
+            $contextMenu = $this->getContextMenu();
+            // activation of context menu
+            if (isset($contextMenu) && is_array($contextMenu)) {
+                if (!in_array("freeze_column", $contextMenu)) {
+                    $contextMenu[] = "freeze_column";
+                }
+                if (!in_array("unfreeze_column", $contextMenu)) {
+                    $contextMenu[] = "unfreeze_column";
+                }
+                $this->contextMenu = $contextMenu;
+            }
+            // if is not an array set it true
+            if (!isset($contextMenu) || $contextMenu === false) {
+                $this->contextMenu = true;
+            }
+        }
+        $this->manualColumnFreeze = $manualColumnFreeze;
+    }
+
+    function setFixedColumnsLeft(int $fixedColumnsLeft) {
+        $this->fixedColumnsLeft = $fixedColumnsLeft;
+    }
+
+    function setFixedRowsTop(int $fixedRowsTop) {
+        $this->fixedRowsTop = $fixedRowsTop;
+    }
+
+    function setLanguage(string $language) {
+        $this->language = $language;
+    }
+
+    public function setSortIndicator(bool $sortIndicator) {
         $this->sortIndicator = $sortIndicator;
     }
 
-    public function setRowHeights($rowHeights) {
+    public function setRowHeights(int $rowHeights) {
         $this->rowHeights = $rowHeights;
     }
 
-    public function setColWidths($colWidths) {
+    public function setColWidths(int $colWidths) {
         $this->colWidths = $colWidths;
     }
 
-    public function setManualColumnResize($manualColumnResize) {
+    public function setManualColumnResize(bool $manualColumnResize) {
         $this->manualColumnResize = $manualColumnResize;
     }
 
-    public function setManualRowResize($manualRowResize) {
+    public function setManualRowResize(bool $manualRowResize) {
         $this->manualRowResize = $manualRowResize;
     }
 
-    public function setMinSpareRows($minSpareRows) {
+    public function setMinSpareRows(int $minSpareRows) {
         $this->minSpareRows = $minSpareRows;
     }
 
-    public function setDataSchema($dataSchema) {
+    public function setDataSchema(\openSILEX\handsontablePHP\classes\DataSchema $dataSchema) {
         $this->dataSchema = $dataSchema;
     }
 
-    public function setData($data) {
+    public function setData(array $data) {
         $this->data = $data;
     }
 
-    public function setContainerName($containerName) {
+    public function setContainerName(string $containerName) {
         $this->containerName = $containerName;
     }
 
@@ -486,19 +577,19 @@ abstract class Handsontable {
         $this->saveElementId = $saveElementId;
     }
 
-    public function setStartRows($startRows) {
+    public function setStartRows(int $startRows) {
         $this->startRows = $startRows;
     }
 
-    public function setStartCols($startCols) {
+    public function setStartCols(int $startCols) {
         $this->startCols = $startCols;
     }
 
-    public function setWidth($width) {
+    public function setWidth(int $width) {
         $this->width = $width;
     }
 
-    public function setHeight($height) {
+    public function setHeight(int $height) {
         $this->height = $height;
     }
 
@@ -514,8 +605,8 @@ abstract class Handsontable {
         $this->save = true;
         $this->saveDataSource = $saveDataSource;
     }
-    
-     /**
+
+    /**
      * 
      * @param string $loadDataSource path to load json
      */
@@ -523,6 +614,16 @@ abstract class Handsontable {
         $this->load = true;
         $this->loadDataSource = $loadDataSource;
     }
+
+    /**
+     * Create a example set
+     * @param int $rowNumber number of rows that need to be created
+     * @param int $columnNumber number of columns that need to be created
+     */
+    public function generateSpreadsheetDataHelper(int $rowNumber, int $columnNumber) {
+        $this->spreadsheetDataHelper = "var myData" . Handsontable::$createdTables . " = Handsontable.helper.createSpreadsheetData({$rowNumber}, {$columnNumber})";
+    }
+
     /**
      * Possibly values :
      * Implemented
@@ -553,17 +654,6 @@ abstract class Handsontable {
         $this->maxCols = $maxCols;
     }
 
-    public function getColumns() {
-        return $this->columns;
-    }
-
-    public function getCell() {
-        return $this->cell;
-    }
-
-    public function getCells() {
-        return $this->cells;
-    }
     /**
      *
      * @param string|\Closure $cells represents the cascading handsontable cell configuration
@@ -573,9 +663,8 @@ abstract class Handsontable {
     public function setCells($cells) {
         $this->cells = new CellsConfig($cells, CellsConfig::CELLS_MODE);
     }
-    
+
     /**
-     * 
      * 
      * @param array $cell represent array of cell config
      * For more information look at the link
@@ -590,12 +679,12 @@ abstract class Handsontable {
     }
 
     public static function setTable_created($table_created) {
-        self::$table_created = $table_created;
+        self::$createdTables = $table_created;
     }
 
     public function getLoadElementId() {
         if (is_null($this->loadElementId)) {
-            $this->loadElementId = 'load' . Handsontable::$table_created;
+            $this->loadElementId = "load" . Handsontable::$createdTables;
         }
         return $this->loadElementId;
     }
@@ -606,7 +695,7 @@ abstract class Handsontable {
 
     protected function getInfoDivId() {
         if (is_null($this->infoDivId)) {
-            $this->infoDivId = 'tableconsole' . Handsontable::$table_created;
+            $this->infoDivId = "tableconsole" . Handsontable::$createdTables;
         }
         return $this->infoDivId;
     }
@@ -668,6 +757,9 @@ abstract class Handsontable {
         if ($this->getSave()) { // if a table need to be saved
             $js_code .= $this->prepareSave();
         }
+        if (isset($this->spreadsheetDataHelper)) {
+            $js_code .= $this->spreadsheetDataHelper . PHP_EOL;
+        }
         if ($this->getAutoSave()) { // if a table need to be saved automatically
             $js_code .= $this->prepareAutoSave();
         }
@@ -676,9 +768,9 @@ abstract class Handsontable {
         }
         $js_code .= $this->generateTableJSCode();
         if ($this->getAutosave()) { // generate autosave custom functions
-            $js_code .= ',' . PHP_EOL . $this->saveTableChangesFunctions();
+            $js_code .= "," . PHP_EOL . $this->saveTableChangesFunctions();
         }
-        $js_code .= PHP_EOL . ' });';
+        $js_code .= PHP_EOL . " });";
         if ($this->getSave()) { // generate save custom functions
             $js_code .= PHP_EOL . $this->saveTableFunctions();
         }
@@ -718,27 +810,34 @@ abstract class Handsontable {
     public function generateTableJSCode() {
         // internal class attributes which will not rendered
         $method_not_rendered = array(
-            'data', 'containername', 'loadlibrairy', 'loaddatasource',
-            'infodivid', 'save', 'autosave', 'load', 'savedatasource', 'loadelementid'
+            "data", "containername", "loadlibrairy", "loaddatasource",
+            "infodivid", "save", "autosave", "load", "savedatasource",
+            "loadelementid", "spreadsheetDataHelper", "createdTables"
         );
         //SILEX:conception
         // It's easier to remove getMethod for attribute that will not be rendered but some
         // attribute need to be modified before be retreived
         //SILEx:conception
         // javascript handsontable variable
-        $js_table_code = 'var hot' . Handsontable::$table_created . ' = new Handsontable(container, {';
+        $js_table_code = "var hot" . Handsontable::$createdTables . " = new Handsontable(container, {";
 
         // this instance
         $handsontable_reflection_class = new \ReflectionClass(__CLASS__);
 
         // if data is set (not ajax or pre data)
         if (isset($this->data) && !is_null($this->data)) {
-            $js_table_code .= 'data : ' . json_encode($this->data, JSON_PRETTY_PRINT) . ', ' . PHP_EOL;
+            $js_table_code .= "data : " . json_encode($this->data, JSON_PRETTY_PRINT) . ", " . PHP_EOL;
+        } else {
+            // if example data
+            if (isset($this->spreadsheetDataHelper) && !is_null($this->spreadsheetDataHelper)) {
+                $js_table_code .= "data : myData" . Handsontable::$createdTables . ", " . PHP_EOL;
+            }
         }
+
         // Loop over this class attributes
         foreach ($handsontable_reflection_class->getMethods() as $method) {
             // only use get method
-            if (substr($method->name, 0, 3) == 'get') {
+            if (substr($method->name, 0, 3) == "get") {
                 $propName = strtolower(substr($method->name, 3, 1)) . substr($method->name, 4);
                 // if it an allowed method
                 if (!in_array(strtolower($propName), $method_not_rendered)) {
@@ -747,16 +846,16 @@ abstract class Handsontable {
                     if (!is_null($result)) {
                         // If a specific serialization is defined
                         if ($result instanceof \JsonSerializable) {
-                            $js_table_code .= $propName . ' : ' . JavascriptFormatter::prepareJavascriptText(json_encode($result, JSON_PRETTY_PRINT)) . ', ' . PHP_EOL;
+                            $js_table_code .= $propName . " : " . JavascriptFormatter::prepareJavascriptText(json_encode($result, JSON_PRETTY_PRINT)) . ', ' . PHP_EOL;
                         } else {
-                            $js_table_code .= $propName . ' : ' . json_encode($result, JSON_PRETTY_PRINT) . ', ' . PHP_EOL;
+                            $js_table_code .= $propName . " : " . json_encode($result, JSON_PRETTY_PRINT) . ", " . PHP_EOL;
                         }
                     }
                 }
             }
         }
-        // remove th last comma
-        $js_table_code[strrpos($js_table_code, ',')] = ' ';
+        // remove the last comma
+        $js_table_code[strrpos($js_table_code, ",")] = " ";
 
         return $js_table_code;
     }
@@ -792,10 +891,10 @@ abstract class Handsontable {
             $.ajax('" . $this->loadDataSource . "')
                 .done(function (res) {
                     var data = JSON.parse(res);
-                    hot" . Handsontable::$table_created . ".loadData(data.data);
-                    console.log('hot" . Handsontable::$table_created .  " Data loaded');
+                    hot" . Handsontable::$createdTables . ".loadData(data.data);
+                    console.log('hot" . Handsontable::$createdTables . " Data loaded');
                 }).fail(function() {
-                    alert( 'hot" . Handsontable::$table_created .  " Data not loaded' );
+                    alert( 'hot" . Handsontable::$createdTables . " Data not loaded' );
                 });
             });
         ";
@@ -848,22 +947,22 @@ abstract class Handsontable {
       $.ajax('" . $this->saveDataSource . "',{
             method: 'POST',
             data: {
-                 tabledata : JSON.stringify({data: hot" . Handsontable::$table_created . ".getData()}),
+                 tabledata : JSON.stringify({data: hot" . Handsontable::$createdTables . ".getData()}),
                 },
             success: function (response) {
                 var saved = JSON.parse(response);
                 if (saved) {
-                  console.log('hot" . Handsontable::$table_created . " Data saved');
+                  console.log('hot" . Handsontable::$createdTables . " Data saved');
                 }
                 else {
-                 alert('hot" . Handsontable::$table_created . "Save error');
+                 alert('hot" . Handsontable::$createdTables . "Save error');
                 }
             }
         });    
     }); ";
     }
-    
-    public function generateContainerAndScript() { 
+
+    public function generateContainerAndScript() {
         return "
         <div id='{$this->getContainerName()}'>
         </div>
@@ -880,4 +979,27 @@ abstract class Handsontable {
      * @see \openSILEX\handsontablePHP\adapter\HandsontableSimple
      */
     abstract public function render();
+
+    /**
+     * If columns renderer option is date it permits to load automatically needed pikaday and moment js library
+     * @return boolean
+     */
+    protected function ifDateRendererSetInColumns() {
+        if (isset($this->columns) && $this->columns instanceof \openSILEX\handsontablePHP\classes\Columns) {
+            $columns = $this->getColumns()->getColumns();
+            foreach ($columns as $column) {
+                $properties = $column->getProperties();
+                if (isset($properties) && isset($properties['renderer'])) {
+                    switch ($properties['renderer']) {
+                        case 'date':
+                            return true;
+                        default:
+                            break;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
 }

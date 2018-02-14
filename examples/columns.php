@@ -19,7 +19,8 @@ $data = [
     ];
 $hd->setData($data);
 $hd->setColumns([
-    new ColumnConfig(['data' => 1])
+    new ColumnConfig(['data' => 1]),
+     new ColumnConfig(['data' => 1, 'renderer' => "date"])
     ]);
 
 ?>

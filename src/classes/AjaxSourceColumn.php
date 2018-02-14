@@ -45,7 +45,7 @@ class AjaxSourceColumn implements \JsonSerializable
 
     /**
      *
-     * @var boolean if data need to be showed in browser console
+     * @var bool if data need to be showed in browser console
      */
     protected $debug;
 

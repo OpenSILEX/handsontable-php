@@ -30,7 +30,7 @@ class JavascriptFormatter
     /**
      * This static method permits to clean any javascript text in order to be understood by a browser
      * @param string $javascriptText javascript text which will be cleaned
-     * @param boolean $utf8 if needed to be convert in UTF-8
+     * @param bool $utf8 if needed to be convert in UTF-8
      *
      * @return string formatted javascript text
      */

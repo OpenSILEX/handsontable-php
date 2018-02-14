@@ -42,7 +42,7 @@ class CellConfigDefinition implements \JsonSerializable {
 
     /**
      *
-     * @var boolean if the cell can be modified or not
+     * @var bool if the cell can be modified or not
      */
     protected $readOnly = false;
 
@@ -54,7 +54,7 @@ class CellConfigDefinition implements \JsonSerializable {
 
     /**
      * If this cell is correctly defined
-     * @return boolean
+     * @return bool
      */
     public function isValid() {
         return (!is_null($this->row) && !is_null($this->column));

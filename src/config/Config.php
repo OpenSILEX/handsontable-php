@@ -37,8 +37,15 @@ class Config
     {
         return [
             'handsontable' => [
-                'js' => ['https://cdnjs.cloudflare.com/ajax/libs/handsontable/0.34.5/handsontable.min.js'],
-                'css' => ['https://cdnjs.cloudflare.com/ajax/libs/handsontable/0.34.5/handsontable.min.css']
+                'js' => ['https://docs.handsontable.com/0.35.1/bower_components/handsontable/dist/handsontable.full.js'],
+                'css' => ['https://docs.handsontable.com/0.35.1/bower_components/handsontable/dist/handsontable.full.min.css']
+            ],
+            'moment' => [
+                'js' => ['https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.js'],
+            ],
+            'pikaday' => [
+                'js' => ['https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.js'],
+                'css' => ['https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.css']
             ],
             'jquery' => [ 'js' => ['https://code.jquery.com/jquery-3.2.1.min.js']]
         ];

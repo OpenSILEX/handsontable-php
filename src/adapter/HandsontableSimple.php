@@ -25,13 +25,12 @@ namespace openSILEX\handsontablePHP\adapter;
  * @author Arnaud Charleroy <arnaud.charleroy@inra.fr>
  * @since 1.0
  */
-class HandsontableSimple extends \openSILEX\handsontablePHP\classes\Handsontable
-{
+class HandsontableSimple extends \openSILEX\handsontablePHP\classes\Handsontable {
 
     /**
      * Load all required js librairies
      * Inherited from \openSILEX\handsontablePHP\classes\Handsontable::loadJSLibraries() method
-     * @param boolean $jquery if jquery need to be loaded
+     * @param bool $jquery if jquery need to be loaded
      * @param array $librairiesPath array which contains required Javascript librairy 
      *              $librairiesPath = [
      *                      'handsontable' => [
@@ -44,8 +43,7 @@ class HandsontableSimple extends \openSILEX\handsontablePHP\classes\Handsontable
      *
      * @return string contains html script tag which will be put in head tags
      */
-    public function loadJSLibraries($jquery = false, $librairiesPath = [])
-    {
+    public function loadJSLibraries($jquery = false, $librairiesPath = []) {
         if (empty($librairiesPath)) {
             $librairiesPath = \openSILEX\handsontablePHP\config\Config::getLibrairiesPath();
         }
@@ -67,13 +65,31 @@ class HandsontableSimple extends \openSILEX\handsontablePHP\classes\Handsontable
                 }
             }
         }
+
+        if ($this->ifDateRendererSetInColumns()) {
+            if (isset($librairiesPath['pikaday'])) {
+                if (isset($librairiesPath['pikaday']['js'])) {
+                    foreach ($librairiesPath['pikaday']['js'] as $jsScript) {
+                        $js .= '<script src="' . $jsScript . '"></script>' . PHP_EOL;
+                    }
+                }
+            }
+            if (isset($librairiesPath['moment'])) {
+                if (isset($librairiesPath['moment']['js'])) {
+                    foreach ($librairiesPath['moment']['js'] as $jsScript) {
+                        $js .= '<script src="' . $jsScript . '"></script>' . PHP_EOL;
+                    }
+                }
+            }
+        }
+
         return $js;
     }
 
     /**
      * Load all required css librairies
      * Inherited from \openSILEX\handsontablePHP\classes\Handsontable::loadCSSLibraries() method
-     * @param boolean $jquery if jquery need to be loaded
+     * @param bool $jquery if jquery need to be loaded
      * @param array $librairiesPath array which contains required Javascript librairy 
      *              $librairiesPath = [
      *                      'handsontable' => [
@@ -86,8 +102,7 @@ class HandsontableSimple extends \openSILEX\handsontablePHP\classes\Handsontable
      *
      * @return string contains html link tag which will be put in head tags
      */
-    public function loadCSSLibraries($jquery = false, $librairiesPath = [])
-    {
+    public function loadCSSLibraries($jquery = false, $librairiesPath = []) {
         if (empty($librairiesPath)) {
             $librairiesPath = \openSILEX\handsontablePHP\config\Config::getLibrairiesPath();
         }
@@ -99,6 +114,7 @@ class HandsontableSimple extends \openSILEX\handsontablePHP\classes\Handsontable
                 }
             }
         }
+
         if ($jquery) {
             if (isset($librairiesPath['jquery'])) {
                 if (isset($librairiesPath['jquery']['css'])) {
@@ -109,15 +125,26 @@ class HandsontableSimple extends \openSILEX\handsontablePHP\classes\Handsontable
             }
         }
 
+        if ($this->ifDateRendererSetInColumns()) {
+            if (isset($librairiesPath['pikaday'])) {
+                if (isset($librairiesPath['pikaday']['css'])) {
+                    foreach ($librairiesPath['pikaday']['css'] as $cssScript) {
+                        $css .= '<link type="text/css" rel="stylesheet" href="' . $cssScript . '">' . PHP_EOL;
+                    }
+                }
+            }
+        }
+
         return $css;
     }
+
     /**
      * Generate handsontable JS code
      * Inherited from \openSILEX\handsontablePHP\classes\Handsontable::render() method
      * @see \openSILEX\handsontablePHP\classes\Handsontable
      */
-    public function render()
-    {
+    public function render() {
         return $this->generateContainerAndScript();
     }
+
 }

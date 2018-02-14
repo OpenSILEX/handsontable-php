@@ -40,7 +40,7 @@ class HandSontableZend extends \openSILEX\handsontablePHP\classes\Handsontable {
     /**
      * Load all required jss librairies with Zend Helper
      * Inherited from \openSILEX\handsontablePHP\classes\Handsontable::loadJSLibraries() method
-     * @param boolean $jquery if jquery need to be loaded
+     * @param bool $jquery if jquery need to be loaded
      * @param array $librairiesPath array which contains required Javascript librairy 
      *              $librairiesPath = [
      *                      'handsontable' => [
@@ -87,7 +87,7 @@ class HandSontableZend extends \openSILEX\handsontablePHP\classes\Handsontable {
     /**
      * Load all required css librairies with Zend Helper
      * Inherited from \openSILEX\handsontablePHP\classes\Handsontable::loadCSSLibraries() method
-     * @param boolean $jquery if jquery need to be loaded
+     * @param bool $jquery if jquery need to be loaded
      * @param array $librairiesPath array which contains required Javascript librairy 
      *              $librairiesPath = [
      *                      'handsontable' => [
