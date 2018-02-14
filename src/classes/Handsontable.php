@@ -880,8 +880,9 @@ abstract class Handsontable {
         $method_not_rendered = array(
             "data", "containername", "loadlibrairy", "loaddatasource",
             "infodivid", "save", "autosave", "load", "savedatasource",
-            "loadelementid", "spreadsheetdatahelper", "createdtables",
-            "events", "customcells", "updatesettings", "jsvariablename"
+            "loadelementid", "saveelementid" ,"spreadsheetdatahelper", 
+            "createdtables", "events", "customcells", "updatesettings", 
+            "jsvariablename"
         );
         //SILEX:conception
         // It's easier to remove getMethod for attribute that will not be rendered but some
