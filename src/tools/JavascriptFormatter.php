@@ -29,10 +29,10 @@ class JavascriptFormatter
 
     /**
      * This static method permits to clean any javascript text in order to be understood by a browser
-     * @param string $javascriptText javascript text which will be cleaned
+     * @param  $javascriptText javascript text which will be cleaned
      * @param bool $utf8 if needed to be convert in UTF-8
      *
-     * @return string formatted javascript text
+     * @return  formatted javascript text
      */
     public static function prepareJavascriptText($javascriptText, $utf8 = false)
     {
@@ -64,7 +64,7 @@ class JavascriptFormatter
         foreach ($array as $key => $value) {
             if (is_array($value)) {
                 $newValue = static::preparePHPArrayToJSArray($value);
-            } elseif (is_string($value)) {
+            } elseif (is_($value)) {
                 $newValue = '\'' . $value . '\''; // replace double quote by simple quote
             } else {
                 $newValue = $value;

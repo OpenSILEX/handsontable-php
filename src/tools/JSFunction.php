@@ -18,7 +18,7 @@
  * @license https://www.gnu.org/licenses/agpl-3.0.fr.html AGPL-3.0
  */
 
-namespace openSILEX\handsontablePHP\tools;
+namespace openSILEX\handsontablePHP\classes;
 
 use \openSILEX\handsontablePHP\tools\JavascriptFormatter;
 
@@ -37,7 +37,7 @@ class JSFunction implements \JsonSerializable
      */
     protected $function;
 
-    function __construct(string $function) {
+    function __construct($function) {
         $this->function = $function;
     }
 

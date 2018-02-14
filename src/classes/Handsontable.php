@@ -564,7 +564,7 @@ abstract class Handsontable {
         $this->fixedRowsTop = $fixedRowsTop;
     }
 
-    function setLanguage(string $language) {
+    function setLanguage( $language) {
         $this->language = $language;
     }
 
@@ -600,7 +600,7 @@ abstract class Handsontable {
         $this->data = $data;
     }
 
-    public function setContainerName(string $containerName) {
+    public function setContainerName( $containerName) {
         $this->containerName = $containerName;
     }
 
@@ -640,7 +640,7 @@ abstract class Handsontable {
      * 
      * @param string $saveDataSource path to save json
      */
-    public function setSaveAction(string $saveDataSource) {
+    public function setSaveAction( $saveDataSource) {
         $this->save = true;
         $this->saveDataSource = $saveDataSource;
     }
@@ -649,7 +649,7 @@ abstract class Handsontable {
      * 
      * @param string $loadDataSource path to load json
      */
-    public function setLoadAction(string $loadDataSource) {
+    public function setLoadAction( $loadDataSource) {
         $this->load = true;
         $this->loadDataSource = $loadDataSource;
     }
@@ -1101,7 +1101,7 @@ abstract class Handsontable {
      * @param string $eventName
      * @param string $eventFunction
      */
-    public function addEvent(string $destinationContainerId, string $eventName, string $eventFunction) {
+    public function addEvent( $destinationContainerId,  $eventName,  $eventFunction) {
         $eventJSFunction = new JSFunction($eventFunction);
         $event = "var $destinationContainerId{$this->jsVariableName} = document.getElementById('$destinationContainerId');" . PHP_EOL;
         $event .= "document.dom.addEvent($destinationContainerId{$this->jsVariableName}, '{$eventName}', function () { " . PHP_EOL
@@ -1118,13 +1118,13 @@ abstract class Handsontable {
         $this->customCells[$customCell->getName()] = $customCell;
     }
 
-    public function removeEvent(string $eventName) {
+    public function removeEvent( $eventName) {
         if (!empty($this->events) && isset($this->events[$eventName])) {
             unset($this->events[$eventName]);
         }
     }
 
-    public function removeCustomCellType(string $customCellName) {
+    public function removeCustomCellType( $customCellName) {
         if (!empty($this->customCells) && isset($this->customCells[$customCellName])) {
             unset($this->customCells[$customCellName]);
         }
