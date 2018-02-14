@@ -526,7 +526,7 @@ abstract class Handsontable {
      * @param int $rowNumber number of rows that need to be created
      * @param int $columnNumber number of columns that need to be created
      */
-    public function generateSpreadsheetDataHelper(int $rowNumber, int $columnNumber) {
+    public function generateSpreadsheetDataHelper( $rowNumber,  $columnNumber) {
         $this->spreadsheetDataHelper = "var myData" . Handsontable::$createdTables . " = Handsontable.helper.createSpreadsheetData({$rowNumber}, {$columnNumber})";
     }
 
@@ -556,11 +556,11 @@ abstract class Handsontable {
         $this->manualColumnFreeze = $manualColumnFreeze;
     }
 
-    function setFixedColumnsLeft(int $fixedColumnsLeft) {
+    function setFixedColumnsLeft( $fixedColumnsLeft) {
         $this->fixedColumnsLeft = $fixedColumnsLeft;
     }
 
-    function setFixedRowsTop(int $fixedRowsTop) {
+    function setFixedRowsTop( $fixedRowsTop) {
         $this->fixedRowsTop = $fixedRowsTop;
     }
 
@@ -572,11 +572,11 @@ abstract class Handsontable {
         $this->sortIndicator = $sortIndicator;
     }
 
-    public function setRowHeights(int $rowHeights) {
+    public function setRowHeights( $rowHeights) {
         $this->rowHeights = $rowHeights;
     }
 
-    public function setColWidths(int $colWidths) {
+    public function setColWidths( $colWidths) {
         $this->colWidths = $colWidths;
     }
 
@@ -588,7 +588,7 @@ abstract class Handsontable {
         $this->manualRowResize = $manualRowResize;
     }
 
-    public function setMinSpareRows(int $minSpareRows) {
+    public function setMinSpareRows( $minSpareRows) {
         $this->minSpareRows = $minSpareRows;
     }
 
@@ -616,19 +616,19 @@ abstract class Handsontable {
         $this->saveElementId = $saveElementId;
     }
 
-    public function setStartRows(int $startRows) {
+    public function setStartRows( $startRows) {
         $this->startRows = $startRows;
     }
 
-    public function setStartCols(int $startCols) {
+    public function setStartCols( $startCols) {
         $this->startCols = $startCols;
     }
 
-    public function setWidth(int $width) {
+    public function setWidth( $width) {
         $this->width = $width;
     }
 
-    public function setHeight(int $height) {
+    public function setHeight( $height) {
         $this->height = $height;
     }
 
