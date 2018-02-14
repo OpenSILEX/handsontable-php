@@ -1,7 +1,7 @@
 <?php
 
 //******************************************************************************
-//                              ColumnConfig.php
+//                              UpdateSettings.php
 //
 // Author(s): Arnaud Charleroy
 // SILEX version 1.0
@@ -28,7 +28,7 @@ use openSILEX\handsontablePHP\tools\JavascriptFormatter;
  * @since 1.0
  * @see openSILEX\handsontablePHP\classes\Columns
  */
-class ColumnConfig implements \JsonSerializable {
+class UpdateSettings implements \JsonSerializable {
 
     /**
      *
@@ -36,17 +36,23 @@ class ColumnConfig implements \JsonSerializable {
      */
     protected $properties;
 
-    public function __construct($properties = null) {
+    /**
+     *
+     * @var array defines a column properties
+     */
+    protected $handsontableVariableName;
+
+    function __construct($properties) {
         $this->properties = $properties;
     }
 
-    function setAProperty($name,$value) {
+    function setAProperty($name, $value) {
         if (!isset($this->properties)) {
             $this->properties = [];
         }
         $this->properties[$name] = $value;
     }
-    
+
     function setProperties($properties) {
         return $this->properties = $properties;
     }
@@ -55,44 +61,32 @@ class ColumnConfig implements \JsonSerializable {
         return $this->properties;
     }
 
+    function getHandsontableVariableName() {
+        return $this->handsontableVariableName;
+    }
+
+    function setHandsontableVariableName($handsontableVariableName) {
+        $this->handsontableVariableName = $handsontableVariableName;
+    }
+
     /**
      * Specify data which should be serialized to JSON
      * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
      * Inherited from \JsonSerializable::jsonSerialize() method
      * @example 
-     * columns: [
-     * {},
-     *  ...,
-     * {data: 0},
-     *  ...,
-     *  {data: 'id'},
-     *  ...,
-     *  {
-     *   type: 'autocomplete',
-     *   source: function (query, process) {
-     *    $.ajax({
-     *      //url: 'php/cars.php', // commented out because our website is hosted as a set of static pages
-     *      url: 'scripts/json/autocomplete.json',
-     *      dataType: 'json',
-     *      data: {
-     *        query: query
-     *      },
-     *     success: function (response) {
-     *        console.log("response", response);
-     *        //process(JSON.parse(response.data)); // JSON.parse takes string as a argument
-     *        process(response.data);
-     *      }
-     *    });
-     *  }
-     *  ]
+     * hot.updateSettings({
+     *  columnSorting: false
+     * });
      * @return mixed data which can be serialized by <b>json_encode</b>
      */
     public function jsonSerialize() {
         if (!isset($this->properties) || empty($this->properties)) {
-            return '{}';
+            return '';
         }
         $newArray = JavascriptFormatter::preparePHPArrayToJSArray($this->properties);
-        return $newArray;
+        return "{$this->handsontableVariableName}.updateSettings( " . JavascriptFormatter::prepareJavascriptText(PHP_EOL
+                        . json_encode($newArray) . PHP_EOL
+                ) . ");";
     }
 
 }

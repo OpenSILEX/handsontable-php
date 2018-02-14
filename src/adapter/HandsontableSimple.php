@@ -144,7 +144,7 @@ class HandsontableSimple extends \openSILEX\handsontablePHP\classes\Handsontable
      * @see \openSILEX\handsontablePHP\classes\Handsontable
      */
     public function render() {
-        return $this->generateContainerAndScript();
+        return $this->generateContainerHTScript();
     }
 
 }

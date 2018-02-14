@@ -23,6 +23,7 @@ namespace openSILEX\handsontablePHP\classes;
 use openSILEX\handsontablePHP\tools\JavascriptFormatter;
 use openSILEX\handsontablePHP\classes\Columns;
 use openSILEX\handsontablePHP\classes\CellsConfig;
+use openSILEX\handsontablePHP\tools\JSFunction;
 
 /**
  * Handsontable class represents a spreadsheet table
@@ -101,9 +102,33 @@ abstract class Handsontable {
 
     /**
      *
+     * @var string used to save js variable name
+     */
+    protected $jsVariableName;
+
+    /**
+     *
      * @var string used to generate data for examples
      */
     protected $spreadsheetDataHelper;
+
+    /**
+     *
+     * @var array associative array of event
+     */
+    protected $events = [];
+
+    /**
+     *
+     * @var array array of openSILEX\handsontablePHP\classes\CustomCellType
+     */
+    protected $customCells = [];
+
+    /**
+     *
+     * @var openSILEX\handsontablePHP\classes\UpdateSettings define update settings
+     */
+    protected $updateSettings;
 
 // french langage is in a pull request at this time maybe soon
 // @link https://github.com/handsontable/handsontable/pull/4775
@@ -335,10 +360,11 @@ abstract class Handsontable {
         if (is_null($container_name)) { // create handsontable instance if it doesn't exist
             $hash = new \DateTime();
             $this->containerName = 'handsontable' . Handsontable::$createdTables . md5($hash->getTimestamp());
-            Handsontable::$createdTables++;
         } else {
             $this->containerName = $container_name;
         }
+        $this->jsVariableName = 'hot' . Handsontable::$createdTables;
+        Handsontable::$createdTables++;
     }
 
     public function getContainerName() {
@@ -495,6 +521,19 @@ abstract class Handsontable {
         return $this->manualColumnFreeze;
     }
 
+    /**
+     * Create a example set
+     * @param int $rowNumber number of rows that need to be created
+     * @param int $columnNumber number of columns that need to be created
+     */
+    public function generateSpreadsheetDataHelper(int $rowNumber, int $columnNumber) {
+        $this->spreadsheetDataHelper = "var myData" . Handsontable::$createdTables . " = Handsontable.helper.createSpreadsheetData({$rowNumber}, {$columnNumber})";
+    }
+
+    function getJsVariableName() {
+        return $this->jsVariableName;
+    }
+
     function setManualColumnFreeze(bool $manualColumnFreeze) {
         // context menu must be set on before activate manual columnFreeze
         if ($manualColumnFreeze) {
@@ -616,15 +655,6 @@ abstract class Handsontable {
     }
 
     /**
-     * Create a example set
-     * @param int $rowNumber number of rows that need to be created
-     * @param int $columnNumber number of columns that need to be created
-     */
-    public function generateSpreadsheetDataHelper(int $rowNumber, int $columnNumber) {
-        $this->spreadsheetDataHelper = "var myData" . Handsontable::$createdTables . " = Handsontable.helper.createSpreadsheetData({$rowNumber}, {$columnNumber})";
-    }
-
-    /**
      * Possibly values :
      * Implemented
      * Setting true or false will enable or disable the default column headers (A, B, C).
@@ -691,6 +721,35 @@ abstract class Handsontable {
 
     public function setLoadElementId($load_element_id) {
         $this->loadElementId = $load_element_id;
+    }
+
+    function getEvents() {
+        return $this->events;
+    }
+
+    function getCustomCells() {
+        return $this->customCells;
+    }
+
+    /**
+     * 
+     * @return null|openSILEX\handsontablePHP\classes\UpdateSettings 
+     */
+    function getUpdateSettings() {
+        return $this->updateSettings;
+    }
+
+    function setEvents($events) {
+        $this->events = $events;
+    }
+
+    function setCustomCells($customCells) {
+        $this->customCells = $customCells;
+    }
+
+    function setUpdateSettings(\openSILEX\handsontablePHP\classes\UpdateSettings $updateSettings) {
+        $updateSettings->setHandsontableVariableName($this->jsVariableName);
+        $this->updateSettings = $updateSettings;
     }
 
     protected function getInfoDivId() {
@@ -766,16 +825,25 @@ abstract class Handsontable {
         if ($this->getLoad()) { // if a table need to be loaded
             $js_code .= $this->prepareLoad();
         }
-        $js_code .= $this->generateTableJSCode();
+        if (isset($this->events) && !empty($this->events)) {
+            foreach ($this->events as $eventName => $event) {
+                $js_code .= PHP_EOL . $event;
+            }
+        }
+        $js_code .= PHP_EOL . $this->generateTableJSCode();
         if ($this->getAutosave()) { // generate autosave custom functions
             $js_code .= "," . PHP_EOL . $this->saveTableChangesFunctions();
         }
-        $js_code .= PHP_EOL . " });";
+        $js_code .= PHP_EOL . " });" . PHP_EOL;
         if ($this->getSave()) { // generate save custom functions
             $js_code .= PHP_EOL . $this->saveTableFunctions();
         }
         if ($this->getLoad()) { // generate load custom functions
-            $js_code .= $this->loadTable();
+            $js_code .= PHP_EOL . $this->loadTable();
+        }
+
+        if (isset($this->updateSettings)) {
+            $js_code .= PHP_EOL . $this->updateSettings->jsonSerialize();
         }
         return $js_code;
     }
@@ -812,14 +880,15 @@ abstract class Handsontable {
         $method_not_rendered = array(
             "data", "containername", "loadlibrairy", "loaddatasource",
             "infodivid", "save", "autosave", "load", "savedatasource",
-            "loadelementid", "spreadsheetDataHelper", "createdTables"
+            "loadelementid", "spreadsheetdatahelper", "createdtables",
+            "events", "customcells", "updatesettings", "jsvariablename"
         );
         //SILEX:conception
         // It's easier to remove getMethod for attribute that will not be rendered but some
         // attribute need to be modified before be retreived
         //SILEx:conception
         // javascript handsontable variable
-        $js_table_code = "var hot" . Handsontable::$createdTables . " = new Handsontable(container, {";
+        $js_table_code = "var {$this->jsVariableName} = new Handsontable(container, {";
 
         // this instance
         $handsontable_reflection_class = new \ReflectionClass(__CLASS__);
@@ -891,10 +960,10 @@ abstract class Handsontable {
             $.ajax('" . $this->loadDataSource . "')
                 .done(function (res) {
                     var data = JSON.parse(res);
-                    hot" . Handsontable::$createdTables . ".loadData(data.data);
-                    console.log('hot" . Handsontable::$createdTables . " Data loaded');
+                    {$this->jsVariableName}.loadData(data.data);
+                    console.log('{$this->jsVariableName} Data loaded');
                 }).fail(function() {
-                    alert( 'hot" . Handsontable::$createdTables . " Data not loaded' );
+                    alert( '{$this->jsVariableName} Data not loaded' );
                 });
             });
         ";
@@ -943,29 +1012,44 @@ abstract class Handsontable {
         // Need to be more generic
         //\SILEX:conception
         return " Handsontable.dom.addEvent(save, 'click', function() {
-      // save all cell's data
-      $.ajax('" . $this->saveDataSource . "',{
+            // save all cell's data
+            $.ajax('" . $this->saveDataSource . "',{
             method: 'POST',
             data: {
-                 tabledata : JSON.stringify({data: hot" . Handsontable::$createdTables . ".getData()}),
+                 tabledata : JSON.stringify({data: {$this->jsVariableName}.getData()}),
                 },
             success: function (response) {
                 var saved = JSON.parse(response);
                 if (saved) {
-                  console.log('hot" . Handsontable::$createdTables . " Data saved');
+                  console.log('{$this->jsVariableName} Data saved');
                 }
                 else {
-                 alert('hot" . Handsontable::$createdTables . "Save error');
+                 alert('{$this->jsVariableName} Save error');
                 }
             }
         });    
     }); ";
     }
 
-    public function generateContainerAndScript() {
+    /**
+     * 
+     * @return string container with handsontable scripts
+     */
+    public function generateContainerHTScript() {
         return "
         <div id='{$this->getContainerName()}'>
         </div>
+        <script>
+           {$this->generateJavascriptCode()}
+        </script>";
+    }
+
+    public function generateLibrairyContainerHTScript($jquery = false, $libraries = []) {
+        return "
+        <div id='{$this->getContainerName()}'>
+        </div>
+        {$this->loadCSSLibraries($jquery, $libraries)}
+        {$this->loadJSLibraries($jquery, $libraries)}
         <script>
            {$this->generateJavascriptCode()}
         </script>";
@@ -997,9 +1081,53 @@ abstract class Handsontable {
                             break;
                     }
                 }
+                if (isset($properties) && isset($properties['type'])) {
+                    switch ($properties['type']) {
+                        case 'date':
+                            return true;
+                        default:
+                            break;
+                    }
+                }
             }
         }
         return false;
+    }
+
+    /**
+     * Add Handsontable dom event
+     * // Todo debug
+     * @param string $destinationContainerId
+     * @param string $eventName
+     * @param string $eventFunction
+     */
+    public function addEvent(string $destinationContainerId, string $eventName, string $eventFunction) {
+        $eventJSFunction = new JSFunction($eventFunction);
+        $event = "var $destinationContainerId{$this->jsVariableName} = document.getElementById('$destinationContainerId');" . PHP_EOL;
+        $event .= "document.dom.addEvent($destinationContainerId{$this->jsVariableName}, '{$eventName}', function () { " . PHP_EOL
+                . " {$eventJSFunction->jsonSerialize()} " . PHP_EOL
+                . "});";
+        $this->events[$eventName] = $event;
+    }
+
+    /**
+     * Register custom cell type
+     * @param \openSILEX\handsontablePHP\classes\CustomCellType $customCell
+     */
+    public function addCustomCellType(\openSILEX\handsontablePHP\classes\CustomCellType $customCell) {
+        $this->customCells[$customCell->getName()] = $customCell;
+    }
+
+    public function removeEvent(string $eventName) {
+        if (!empty($this->events) && isset($this->events[$eventName])) {
+            unset($this->events[$eventName]);
+        }
+    }
+
+    public function removeCustomCellType(string $customCellName) {
+        if (!empty($this->customCells) && isset($this->customCells[$customCellName])) {
+            unset($this->customCells[$customCellName]);
+        }
     }
 
 }
