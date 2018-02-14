@@ -18,7 +18,7 @@
  * @license https://www.gnu.org/licenses/agpl-3.0.fr.html AGPL-3.0
  */
 
-namespace openSILEX\handsontablePHP\classes;
+namespace openSILEX\handsontablePHP\tools;
 
 use \openSILEX\handsontablePHP\tools\JavascriptFormatter;
 
