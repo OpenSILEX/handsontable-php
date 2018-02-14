@@ -64,7 +64,7 @@ class JavascriptFormatter
         foreach ($array as $key => $value) {
             if (is_array($value)) {
                 $newValue = static::preparePHPArrayToJSArray($value);
-            } elseif (is_($value)) {
+            } elseif (is_string($value)) {
                 $newValue = '\'' . $value . '\''; // replace double quote by simple quote
             } else {
                 $newValue = $value;
