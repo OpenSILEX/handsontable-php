@@ -107,6 +107,9 @@ $hd->setColumns([
 ?>
 
 <html>
+    <br>
+    <h3><b>Autocomplete with ajax</b></h3>
+    <br>
     <!--other way to load handsontable-->
     <?= $hd->generateLibrairyContainerHTScript(true) ?>
 </html>
