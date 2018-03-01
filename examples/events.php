@@ -2,6 +2,7 @@
 require_once './config/configLibrairy.php';
 
 use openSILEX\handsontablePHP\adapter\HandsontableSimple;
+
 // NOT WORKING
 
 /**
@@ -18,13 +19,16 @@ $data = [
     ['2021', 10, 11, 12, 13, 15, 16]
 ];
 $hd->setData($data);
-$hd->addEvent('test','click', "alert('click');");
+$hd->addEvent('test', 'click', "alert('click');");
 ?>
 <html>
     <head>
-<?= $hd->loadJSLibraries(true); ?>
+        <?= $hd->loadJSLibraries(true); ?>
         <?= $hd->loadCSSLibraries(); ?>
-    </head>
-        <?= $hd->render() ?>
-    <div id="test"></div>
+    <br>
+    <h3><b>Try events (not working)</b></h3>
+    <br>
+</head>
+<?= $hd->render() ?>
+<div id="test"></div>
 </html>

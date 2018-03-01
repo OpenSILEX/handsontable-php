@@ -19,19 +19,25 @@ $data = [
     ['2021', 10, 11, 12, 13, 15, 16]
 ];
 $hd->setData($data);
-$updateSettings = new UpdateSettings(['columns' => [new ColumnConfig([
+$updateSettings = new UpdateSettings([
+    'columns' => [
+        new ColumnConfig([
             'data' => 0,
             'type' => 'autocomplete',
-            'source' => new AjaxSourceColumn('ajax/array.php')])
-            , new ColumnConfig(),
-            new ColumnConfig()]
-    ]);
+            'source' => new AjaxSourceColumn('ajax/array.php')]),
+        new ColumnConfig(),
+        new ColumnConfig()
+    ]
+]);
 $hd->setUpdateSettings($updateSettings);
 ?>
 <html>
     <head>
-<?= $hd->loadJSLibraries(true); ?>
+        <?= $hd->loadJSLibraries(true); ?>
         <?= $hd->loadCSSLibraries(); ?>
     </head>
+        <br>
+        <h3><b>Load custom settigns after initialization</b></h3>
+        <br>
         <?= $hd->render() ?>
 </html>

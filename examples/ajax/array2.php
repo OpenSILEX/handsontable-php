@@ -3,4 +3,4 @@
  * Ajax data example
  */
 
-echo json_encode(['Tesla', 'Nissan', 'Toyota', 'Hodddnda', 'Mazda', 'Ford']);
+echo json_encode([ 'data' => ['Tesla', 'Nissan', 'Toyota', 'Hodddnda', 'Mazda', 'Ford']]);

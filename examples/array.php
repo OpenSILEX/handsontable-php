@@ -10,13 +10,13 @@ use openSILEX\handsontablePHP\adapter\HandsontableSimple;
 
 $hd = new HandsontableSimple();
 $data = [
-      ['', 'Tesla', 'Nissan', 'Toyota', 'Honda', 'Mazda', 'Ford'],
-      ['2017', 10, 11, 12, 13, 15, 16],
-      ['2018', 10, 11, 12, 13, 15, 16],
-      ['2019', 10, 11, 12, 13, 15, 16],
-      ['2020', 10, 11, 12, 13, 15, 16],
-      ['2021', 10, 11, 12, 13, 15, 16]
-    ];
+    ['', 'Tesla', 'Nissan', 'Toyota', 'Honda', 'Mazda', 'Ford'],
+    ['2017', 10, 11, 12, 13, 15, 16],
+    ['2018', 10, 11, 12, 13, 15, 16],
+    ['2019', 10, 11, 12, 13, 15, 16],
+    ['2020', 10, 11, 12, 13, 15, 16],
+    ['2021', 10, 11, 12, 13, 15, 16]
+];
 $hd->setData($data);
 
 ?>
@@ -25,5 +25,8 @@ $hd->setData($data);
         <?= $hd->loadJSLibraries(true); ?>
         <?= $hd->loadCSSLibraries(); ?>
     </head>
+    <br>
+    <h3><b>Simple array</b></h3>
+    <br>
     <?= $hd->render() ?>
 </html>

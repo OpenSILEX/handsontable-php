@@ -21,5 +21,8 @@ $hd->setFixedRowsTop(2);
         <?= $hd->loadJSLibraries(true); ?>
         <?= $hd->loadCSSLibraries(); ?>
     </head>
+    <br>
+    <h3><b>Freezin rows and columns example</b></h3>
+    <br>
     <?= $hd->render() ?>
 </html>
