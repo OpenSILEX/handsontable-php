@@ -40,7 +40,8 @@ class ColumnConfig implements \JsonSerializable {
         $this->properties = $properties;
     }
 
-    function setAProperty($name,$value) {
+    function setProperty($name,$value) {
+        // if properties not set
         if (!isset($this->properties)) {
             $this->properties = [];
         }

@@ -7,7 +7,7 @@ use openSILEX\handsontablePHP\classes\ColumnConfig;
 use openSILEX\handsontablePHP\classes\AjaxSourceColumn;
 
 /**
- * An example to load a PHP array in Handsontable
+ * An example to load a PHP array in Handsontable and change settings after initialization
  */
 $hd = new HandsontableSimple();
 $data = [

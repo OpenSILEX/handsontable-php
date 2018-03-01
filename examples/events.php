@@ -5,7 +5,8 @@ use openSILEX\handsontablePHP\adapter\HandsontableSimple;
 // NOT WORKING
 
 /**
- * An example to load a PHP array in Handsontable
+ * An example to set handsontable events
+ * @todo Need more development 
  */
 $hd = new HandsontableSimple();
 $data = [

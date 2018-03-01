@@ -7,7 +7,7 @@ use openSILEX\handsontablePHP\classes\AjaxSourceColumn;
 use openSILEX\handsontablePHP\classes\ColumnConfig;
 use \openSILEX\handsontablePHP\classes\JSFunction;
 /**
- * An example to load a PHP array in Handsontable
+ * An example to load a PHP array and custom column cell type
  */
 
 $hd = new HandsontableSimple();
@@ -23,6 +23,7 @@ $hd->setColHeaders(['Year', 'Tesla', 'Date', 'Toyota', 'Honda', 'Mazda', 'Ford']
 $hd->setColumns([
         new ColumnConfig(['data' => 0]),
         new ColumnConfig(['data' => 2, 'type' => 'date']), // date exemple
+        // two way to create an ajax call
         new ColumnConfig(['data' => 1, 'type' => 'autocomplete' ,'source' => new AjaxSourceColumn('ajax/array2.php')]),
         new ColumnConfig(['data' => 3, 'type' => 'autocomplete' ,
                     'source' => new JSFunction(

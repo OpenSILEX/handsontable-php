@@ -5,7 +5,7 @@ require_once './config/configLibrairy.php';
 use openSILEX\handsontablePHP\adapter\HandsontableSimple;
 
 /**
- * An example to load a PHP array in Handsontable
+ * An example to save Handsontable data with ajax
  */
 
 $hd = new HandsontableSimple();

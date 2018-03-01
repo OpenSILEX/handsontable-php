@@ -25,7 +25,7 @@ class CustomCellType implements \JsonSerializable {
 
     /**
      * 
-     * @param string $name
+     * @param string $name custome cell name
      */
     function __construct(string $name) {
         $this->name = $name;

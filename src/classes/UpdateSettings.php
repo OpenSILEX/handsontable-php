@@ -45,8 +45,14 @@ class UpdateSettings implements \JsonSerializable {
     function __construct($properties) {
         $this->properties = $properties;
     }
-
-    function setAProperty($name, $value) {
+    
+    /**
+     * Set a property with her value
+     * @param string $name property name
+     * @param mixed $value property value
+     */
+    function setProperty($name, $value) {
+        // create properties array if not set
         if (!isset($this->properties)) {
             $this->properties = [];
         }
@@ -84,9 +90,9 @@ class UpdateSettings implements \JsonSerializable {
             return '';
         }
         $newArray = JavascriptFormatter::preparePHPArrayToJSArray($this->properties);
-        return "{$this->handsontableVariableName}.updateSettings( " . JavascriptFormatter::prepareJavascriptText(PHP_EOL
-                        . json_encode($newArray) . PHP_EOL
-                ) . ");";
+        return "{$this->handsontableVariableName}.updateSettings( " 
+                . JavascriptFormatter::prepareJavascriptText(PHP_EOL . json_encode($newArray) . PHP_EOL) 
+                . ");";
     }
 
 }

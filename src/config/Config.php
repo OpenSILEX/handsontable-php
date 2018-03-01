@@ -37,15 +37,15 @@ class Config
     {
         return [
             'handsontable' => [
-                'js' => ['https://docs.handsontable.com/0.35.1/bower_components/handsontable/dist/handsontable.full.js'],
-                'css' => ['https://docs.handsontable.com/0.35.1/bower_components/handsontable/dist/handsontable.full.min.css']
+                'js' => ['https://cdnjs.cloudflare.com/ajax/libs/handsontable/0.37.0/handsontable.full.min.js'],
+                'css' => ['https://cdnjs.cloudflare.com/ajax/libs/handsontable/0.37.0/handsontable.full.min.css']
             ],
             'moment' => [
-                'js' => ['https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.js'],
+                'js' => ['https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js'],
             ],
             'pikaday' => [
-                'js' => ['https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.js'],
-                'css' => ['https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.css']
+                'js' => ['https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js'],
+                'css' => ['https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.min.css']
             ],
             'jquery' => [ 'js' => ['https://code.jquery.com/jquery-3.2.1.min.js']]
         ];
