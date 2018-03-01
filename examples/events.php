@@ -7,7 +7,7 @@ use openSILEX\handsontablePHP\adapter\HandsontableSimple;
 
 /**
  * An example to set handsontable events
- * @todo Need more development 
+ * @todo Need more development
  */
 $hd = new HandsontableSimple();
 $data = [

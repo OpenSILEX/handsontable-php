@@ -90,12 +90,12 @@ class ContextMenuOption implements \JsonSerializable
         $this->name = $name;
     }
 
-    public function setDisabled( $disabled)
+    public function setDisabled($disabled)
     {
         $this->disabled = $disabled;
     }
 
-    public function setCallback( $callback)
+    public function setCallback($callback)
     {
         $this->callback = $callback;
     }

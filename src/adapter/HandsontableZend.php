@@ -25,7 +25,8 @@ namespace openSILEX\handsontablePHP\adapter;
  * @author Arnaud Charleroy <arnaud.charleroy@inra.fr>
  * @since 1.0
  */
-class HandSontableZend extends \openSILEX\handsontablePHP\classes\Handsontable {
+class HandSontableZend extends \openSILEX\handsontablePHP\classes\Handsontable
+{
 
     /**
      * Used to render table and load handsontable js/css library
@@ -33,7 +34,8 @@ class HandSontableZend extends \openSILEX\handsontablePHP\classes\Handsontable {
      */
     protected $view;
 
-    public function setView($view) {
+    public function setView($view)
+    {
         $this->view = $view;
     }
 
@@ -41,7 +43,7 @@ class HandSontableZend extends \openSILEX\handsontablePHP\classes\Handsontable {
      * Load all required jss librairies with Zend Helper
      * Inherited from \openSILEX\handsontablePHP\classes\Handsontable::loadJSLibraries() method
      * @param bool $jquery if jquery need to be loaded
-     * @param array $librairiesPath array which contains required Javascript librairy 
+     * @param array $librairiesPath array which contains required Javascript librairy
      *              $librairiesPath = [
      *                      'handsontable' => [
      *                          'js => '...',
@@ -52,7 +54,8 @@ class HandSontableZend extends \openSILEX\handsontablePHP\classes\Handsontable {
      *                      ]
      *
      */
-    public function loadJSLibraries($jquery = false, $librairiesPath = []) {
+    public function loadJSLibraries($jquery = false, $librairiesPath = [])
+    {
         if (empty($librairiesPath)) {
             $librairiesPath = \openSILEX\handsontablePHP\config\Config::getLibrairiesPath();
         }
@@ -80,7 +83,8 @@ class HandSontableZend extends \openSILEX\handsontablePHP\classes\Handsontable {
      * Inherited from \openSILEX\handsontablePHP\classes\Handsontable::render() method
      * @see \openSILEX\handsontablePHP\classes\Handsontable
      */
-    public function render() {
+    public function render()
+    {
         return $this->generateContainerAndScript();
     }
 
@@ -88,7 +92,7 @@ class HandSontableZend extends \openSILEX\handsontablePHP\classes\Handsontable {
      * Load all required css librairies with Zend Helper
      * Inherited from \openSILEX\handsontablePHP\classes\Handsontable::loadCSSLibraries() method
      * @param bool $jquery if jquery need to be loaded
-     * @param array $librairiesPath array which contains required Javascript librairy 
+     * @param array $librairiesPath array which contains required Javascript librairy
      *              $librairiesPath = [
      *                      'handsontable' => [
      *                          'js => '...',
@@ -99,7 +103,8 @@ class HandSontableZend extends \openSILEX\handsontablePHP\classes\Handsontable {
      *                      ]
      *
      */
-    public function loadCSSLibraries($jquery = false, $librairiesPath = []) {
+    public function loadCSSLibraries($jquery = false, $librairiesPath = [])
+    {
         if (empty($librairiesPath)) {
             $librairiesPath = \openSILEX\handsontablePHP\config\Config::getLibrairiesPath();
         }
@@ -120,5 +125,4 @@ class HandSontableZend extends \openSILEX\handsontablePHP\classes\Handsontable {
             }
         }
     }
-
 }

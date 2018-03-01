@@ -25,13 +25,14 @@ namespace openSILEX\handsontablePHP\adapter;
  * @author Arnaud Charleroy <arnaud.charleroy@inra.fr>
  * @since 1.0
  */
-class HandsontableSimple extends \openSILEX\handsontablePHP\classes\Handsontable {
+class HandsontableSimple extends \openSILEX\handsontablePHP\classes\Handsontable
+{
 
     /**
      * Load all required js librairies
      * Inherited from \openSILEX\handsontablePHP\classes\Handsontable::loadJSLibraries() method
      * @param bool $jquery if jquery need to be loaded
-     * @param array $librairiesPath array which contains required Javascript librairy 
+     * @param array $librairiesPath array which contains required Javascript librairy
      *              $librairiesPath = [
      *                      'handsontable' => [
      *                          'js => '...',
@@ -43,7 +44,8 @@ class HandsontableSimple extends \openSILEX\handsontablePHP\classes\Handsontable
      *
      * @return string contains html script tag which will be put in head tags
      */
-    public function loadJSLibraries($jquery = false, $librairiesPath = []) {
+    public function loadJSLibraries($jquery = false, $librairiesPath = [])
+    {
         if (empty($librairiesPath)) {
             $librairiesPath = \openSILEX\handsontablePHP\config\Config::getLibrairiesPath();
         }
@@ -90,7 +92,7 @@ class HandsontableSimple extends \openSILEX\handsontablePHP\classes\Handsontable
      * Load all required css librairies
      * Inherited from \openSILEX\handsontablePHP\classes\Handsontable::loadCSSLibraries() method
      * @param bool $jquery if jquery need to be loaded
-     * @param array $librairiesPath array which contains required Javascript librairy 
+     * @param array $librairiesPath array which contains required Javascript librairy
      *              $librairiesPath = [
      *                      'handsontable' => [
      *                          'js => '...',
@@ -102,7 +104,8 @@ class HandsontableSimple extends \openSILEX\handsontablePHP\classes\Handsontable
      *
      * @return string contains html link tag which will be put in head tags
      */
-    public function loadCSSLibraries($jquery = false, $librairiesPath = []) {
+    public function loadCSSLibraries($jquery = false, $librairiesPath = [])
+    {
         if (empty($librairiesPath)) {
             $librairiesPath = \openSILEX\handsontablePHP\config\Config::getLibrairiesPath();
         }
@@ -143,8 +146,8 @@ class HandsontableSimple extends \openSILEX\handsontablePHP\classes\Handsontable
      * Inherited from \openSILEX\handsontablePHP\classes\Handsontable::render() method
      * @see \openSILEX\handsontablePHP\classes\Handsontable
      */
-    public function render() {
+    public function render()
+    {
         return $this->generateContainerHTScript();
     }
-
 }

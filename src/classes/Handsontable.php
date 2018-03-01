@@ -30,7 +30,8 @@ use openSILEX\handsontablePHP\tools\JSFunction;
  * @author Arnaud Charleroy <arnaud.charleroy@inra.fr>
  * @since 1.0
  */
-abstract class Handsontable {
+abstract class Handsontable
+{
 
     /**
      *
@@ -130,9 +131,9 @@ abstract class Handsontable {
      */
     protected $updateSettings;
 
-// french langage is in a pull request at this time maybe soon
-// @link https://github.com/handsontable/handsontable/pull/4775
-//  const LANGUAGE_FRENCH = 'fr-FR';
+    // french langage is in a pull request at this time maybe soon
+    // @link https://github.com/handsontable/handsontable/pull/4775
+    //  const LANGUAGE_FRENCH = 'fr-FR';
 
     const LANGUAGE_POLISH = 'pl-PL  ';
     const LANGUAGE_ENGLISH = 'en-US';
@@ -144,8 +145,8 @@ abstract class Handsontable {
      */
 
     /**
-     * Overwrite configuration for a particular cell 
-     * @var array list of \openSILEX\handsontablePHP\classes\CellConfigDefinition 
+     * Overwrite configuration for a particular cell
+     * @var array list of \openSILEX\handsontablePHP\classes\CellConfigDefinition
      * with \openSILEX\handsontablePHP\classes\CellConfig::MODE_CELL
      * @link https://docs.handsontable.com/0.35.1/Options.html#cell
      */
@@ -153,7 +154,7 @@ abstract class Handsontable {
 
     /**
      * Defines the cell properties for given row, col, prop coordinates.
-     * @var \Closure use of \openSILEX\handsontablePHP\classes\CellConfig 
+     * @var \Closure use of \openSILEX\handsontablePHP\classes\CellConfig
      * with \openSILEX\handsontablePHP\classes\CellConfig::MODE_CELLS
      * @link https://docs.handsontable.com/0.35.1/Options.html#cells
      */
@@ -183,7 +184,7 @@ abstract class Handsontable {
      * ['2020', 10, 11, 12, 13, 15, 16],
      * ['2021', 10, 11, 12, 13, 15, 16]
      * ];
-     * 
+     *
      * @var array array of array of data (number,string ...)
      * @link https://docs.handsontable.com/0.35.1/Options.html#data
      */
@@ -198,22 +199,22 @@ abstract class Handsontable {
 
     /**
      * Width of the grid
-     * Can be a number 
-     * //SILEX:notImplemented  
+     * Can be a number
+     * //SILEX:notImplemented
      * or function that returns a value
-     * //\SILEX:notImplemented 
-     * @var int Width of the grid 
+     * //\SILEX:notImplemented
+     * @var int Width of the grid
      * @link https://docs.handsontable.com/0.35.1/Options.html#width
      */
     protected $width = null;
 
     /**
      * Height of the grid.
-     * Can be a number 
-     * //SILEX:notImplemented  
+     * Can be a number
+     * //SILEX:notImplemented
      * or function that returns a value
-     * //\SILEX:notImplemented  
-     * @var int Height of the grid 
+     * //\SILEX:notImplemented
+     * @var int Height of the grid
      * @link https://docs.handsontable.com/0.35.1/Options.html#height
      */
     protected $height = null;
@@ -242,14 +243,14 @@ abstract class Handsontable {
     protected $dataSchema = null;
 
     /**
-     * Defines if the right-click context menu should be enabled. 
+     * Defines if the right-click context menu should be enabled.
      * Possible values:
      * true (to enable default options),
      * false (to disable completely)
      * an array of predefined options,
-     * //SILEX:notImplemented  
+     * //SILEX:notImplemented
      * an object with defined structure
-     * //\SILEX:notImplemented  
+     * //\SILEX:notImplemented
      * @var mixed multiple values
      * @link https://docs.handsontable.com/0.35.1/Options.html#contextMenu
      */
@@ -278,22 +279,22 @@ abstract class Handsontable {
 
     /**
      * @var int Defines row heights in pixels.
-     * //SILEX:notImplemented  
+     * //SILEX:notImplemented
      *  as string
      *  as array
      *  as function
-     * //\SILEX:notImplemented  
+     * //\SILEX:notImplemented
      * @link https://docs.handsontable.com/0.35.1/Options.html#rowHeights
      */
     protected $rowHeights;
 
     /**
      * @var int Defines columns heights in pixels
-     * //SILEX:notImplemented  
+     * //SILEX:notImplemented
      *  as string
      *  as array
      *  as function
-     * //\SILEX:notImplemented  
+     * //\SILEX:notImplemented
      * @link https://docs.handsontable.com/0.35.1/Options.html#colWidths
      */
     protected $colWidths;
@@ -306,18 +307,18 @@ abstract class Handsontable {
 
     /**
      * @var bool To enable resizing on columns
-     * /SILEX:notImplemented  
+     * /SILEX:notImplemented
      *  as array
-     * //\SILEX:notImplemented  
+     * //\SILEX:notImplemented
      * @link https://docs.handsontable.com/0.35.1/Options.html#manualColumnResize
      */
     protected $manualColumnResize = false;
 
     /**
      * @var bool To enable resizing on rows
-     * * /SILEX:notImplemented  
+     * * /SILEX:notImplemented
      *  as array
-     * //\SILEX:notImplemented  
+     * //\SILEX:notImplemented
      * @link https://docs.handsontable.com/0.35.1/Options.html#manualRowResize
      */
     protected $manualRowResize = false;
@@ -353,7 +354,8 @@ abstract class Handsontable {
      * instance (array of openSILEX\handsontablePHP\classe\CellConfigDefinition)
      * @link https://docs.handsontable.com/0.35.1/Options.html#cell     *
      */
-    public function __construct($container_name = null, $cellConfig = null) {
+    public function __construct($container_name = null, $cellConfig = null)
+    {
         if ($cellConfig != null) { // load cell configuration
             $this->setCell($cellConfig);
         }
@@ -367,62 +369,76 @@ abstract class Handsontable {
         Handsontable::$createdTables++;
     }
 
-    public function getContainerName() {
+    public function getContainerName()
+    {
         return $this->containerName;
     }
 
-    public function getLoadLibrairy() {
+    public function getLoadLibrairy()
+    {
         return $this->loadLibrairy;
     }
 
-    public function getLoadDataSource() {
+    public function getLoadDataSource()
+    {
         return $this->loadDataSource;
     }
 
-    public function getSaveDataSource() {
+    public function getSaveDataSource()
+    {
         return $this->saveDataSource;
     }
 
-    public function getSave() {
+    public function getSave()
+    {
         return $this->save;
     }
 
-    public function getAutosave() {
+    public function getAutosave()
+    {
         return $this->autosave;
     }
 
-    public function getLoad() {
+    public function getLoad()
+    {
         return $this->load;
     }
 
-    public function getSaveElementId() {
+    public function getSaveElementId()
+    {
         if (is_null($this->saveElementId)) {
             $this->saveElementId = 'save' . Handsontable::$createdTables;
         }
         return $this->saveElementId;
     }
 
-    public function getStartRows() {
+    public function getStartRows()
+    {
         return $this->startRows;
     }
 
-    public function getStartCols() {
+    public function getStartCols()
+    {
         return $this->startCols;
     }
 
-    public function getWidth() {
+    public function getWidth()
+    {
         return $this->width;
     }
 
-    public function getHeight() {
+    public function getHeight()
+    {
         return $this->height;
     }
 
-    public function getRowHeaders() {
+    public function getRowHeaders()
+    {
         return $this->rowHeaders;
     }
 
-    public function getColHeaders() {
+    public function getColHeaders()
+    {
         return $this->colHeaders;
     }
 
@@ -440,34 +456,41 @@ abstract class Handsontable {
      *
      * @return mixed the contextMenu value
      */
-    public function getContextMenu() {
+    public function getContextMenu()
+    {
         if (!is_array($this->contextMenu) && !is_bool($this->contextMenu)) {
             return false;
         }
         return $this->contextMenu;
     }
 
-    public function getAutoWrapRow() {
+    public function getAutoWrapRow()
+    {
         return $this->autoWrapRow;
     }
 
-    public function getMaxCols() {
+    public function getMaxCols()
+    {
         return $this->maxCols;
     }
 
-    public function getData() {
+    public function getData()
+    {
         return json_encode($this->data);
     }
 
-    public function getDataSchema() {
+    public function getDataSchema()
+    {
         return $this->dataSchema;
     }
 
-    public function getMinSpareRows() {
+    public function getMinSpareRows()
+    {
         return $this->minSpareRows;
     }
 
-    public function getRowHeights() {
+    public function getRowHeights()
+    {
         // rowheights must be an array or an int
         if (!is_array($this->rowHeights) && !is_int($this->rowHeights)) {
             return null;
@@ -475,7 +498,8 @@ abstract class Handsontable {
         return $this->rowHeights;
     }
 
-    public function getColWidths() {
+    public function getColWidths()
+    {
         // colswidths must be an array or an int
         if (!is_array($this->colWidths) && !is_int($this->colWidths)) {
             return null;
@@ -483,43 +507,53 @@ abstract class Handsontable {
         return $this->colWidths;
     }
 
-    public function getManualColumnResize() {
+    public function getManualColumnResize()
+    {
         return $this->manualColumnResize;
     }
 
-    public function getManualRowResize() {
+    public function getManualRowResize()
+    {
         return $this->manualRowResize;
     }
 
-    public function getSortIndicator() {
+    public function getSortIndicator()
+    {
         return $this->sortIndicator;
     }
 
-    function getFixedColumnsLeft() {
+    public function getFixedColumnsLeft()
+    {
         return $this->fixedColumnsLeft;
     }
 
-    function getFixedRowsTop() {
+    public function getFixedRowsTop()
+    {
         return $this->fixedRowsTop;
     }
 
-    function getLanguage() {
+    public function getLanguage()
+    {
         return $this->language;
     }
 
-    public function getColumns() {
+    public function getColumns()
+    {
         return $this->columns;
     }
 
-    public function getCell() {
+    public function getCell()
+    {
         return $this->cell;
     }
 
-    public function getCells() {
+    public function getCells()
+    {
         return $this->cells;
     }
 
-    function getManualColumnFreeze() {
+    public function getManualColumnFreeze()
+    {
         return $this->manualColumnFreeze;
     }
 
@@ -528,15 +562,18 @@ abstract class Handsontable {
      * @param int $rowNumber number of rows that need to be created
      * @param int $columnNumber number of columns that need to be created
      */
-    public function generateSpreadsheetDataHelper($rowNumber, $columnNumber) {
+    public function generateSpreadsheetDataHelper($rowNumber, $columnNumber)
+    {
         $this->spreadsheetDataHelper = "var myData" . Handsontable::$createdTables . " = Handsontable.helper.createSpreadsheetData({$rowNumber}, {$columnNumber})";
     }
 
-    function getJsVariableName() {
+    public function getJsVariableName()
+    {
         return $this->jsVariableName;
     }
 
-    function setManualColumnFreeze(bool $manualColumnFreeze) {
+    public function setManualColumnFreeze(bool $manualColumnFreeze)
+    {
         // context menu must be set on before activate manual columnFreeze
         if ($manualColumnFreeze) {
             $contextMenu = $this->getContextMenu();
@@ -558,100 +595,122 @@ abstract class Handsontable {
         $this->manualColumnFreeze = $manualColumnFreeze;
     }
 
-    function setFixedColumnsLeft($fixedColumnsLeft) {
+    public function setFixedColumnsLeft($fixedColumnsLeft)
+    {
         $this->fixedColumnsLeft = $fixedColumnsLeft;
     }
 
-    function setFixedRowsTop($fixedRowsTop) {
+    public function setFixedRowsTop($fixedRowsTop)
+    {
         $this->fixedRowsTop = $fixedRowsTop;
     }
 
-    function setLanguage($language) {
+    public function setLanguage($language)
+    {
         $this->language = $language;
     }
 
-    public function setSortIndicator(bool $sortIndicator) {
+    public function setSortIndicator(bool $sortIndicator)
+    {
         $this->sortIndicator = $sortIndicator;
     }
 
-    public function setRowHeights($rowHeights) {
+    public function setRowHeights($rowHeights)
+    {
         $this->rowHeights = $rowHeights;
     }
 
-    public function setColWidths($colWidths) {
+    public function setColWidths($colWidths)
+    {
         $this->colWidths = $colWidths;
     }
 
-    public function setManualColumnResize(bool $manualColumnResize) {
+    public function setManualColumnResize(bool $manualColumnResize)
+    {
         $this->manualColumnResize = $manualColumnResize;
     }
 
-    public function setManualRowResize(bool $manualRowResize) {
+    public function setManualRowResize(bool $manualRowResize)
+    {
         $this->manualRowResize = $manualRowResize;
     }
 
-    public function setMinSpareRows($minSpareRows) {
+    public function setMinSpareRows($minSpareRows)
+    {
         $this->minSpareRows = $minSpareRows;
     }
 
-    public function setDataSchema(\openSILEX\handsontablePHP\classes\DataSchema $dataSchema) {
+    public function setDataSchema(\openSILEX\handsontablePHP\classes\DataSchema $dataSchema)
+    {
         $this->dataSchema = $dataSchema;
     }
 
-    public function setData(array $data) {
+    public function setData(array $data)
+    {
         $this->data = $data;
     }
 
-    public function setContainerName($containerName) {
+    public function setContainerName($containerName)
+    {
         $this->containerName = $containerName;
     }
 
-    public function setLoadLibrairy($loadLibrairy) {
+    public function setLoadLibrairy($loadLibrairy)
+    {
         $this->loadLibrairy = $loadLibrairy;
     }
 
-    public function setAutosave($autosave) {
+    public function setAutosave($autosave)
+    {
         $this->autosave = $autosave;
     }
 
-    public function setSaveElementId($saveElementId) {
+    public function setSaveElementId($saveElementId)
+    {
         $this->saveElementId = $saveElementId;
     }
 
-    public function setStartRows($startRows) {
+    public function setStartRows($startRows)
+    {
         $this->startRows = $startRows;
     }
 
-    public function setStartCols($startCols) {
+    public function setStartCols($startCols)
+    {
         $this->startCols = $startCols;
     }
 
-    public function setWidth($width) {
+    public function setWidth($width)
+    {
         $this->width = $width;
     }
 
-    public function setHeight($height) {
+    public function setHeight($height)
+    {
         $this->height = $height;
     }
 
-    public function setRowHeaders($rowHeaders) {
+    public function setRowHeaders($rowHeaders)
+    {
         $this->rowHeaders = $rowHeaders;
     }
 
     /**
-     * 
+     *
      * @param string $saveDataSource path to save json
      */
-    public function setSaveAction($saveDataSource) {
+    public function setSaveAction($saveDataSource)
+    {
         $this->save = true;
         $this->saveDataSource = $saveDataSource;
     }
 
     /**
-     * 
+     *
      * @param string $loadDataSource path to load json
      */
-    public function setLoadAction($loadDataSource) {
+    public function setLoadAction($loadDataSource)
+    {
         $this->load = true;
         $this->loadDataSource = $loadDataSource;
     }
@@ -667,22 +726,26 @@ abstract class Handsontable {
      *
      * @return mixed colHeaders value
      */
-    public function setColHeaders($colHeaders) {
+    public function setColHeaders($colHeaders)
+    {
         if (!is_array($this->colHeaders) && !is_bool($this->colHeaders)) {
             return true; // default value
         }
         $this->colHeaders = $colHeaders;
     }
 
-    public function setContextMenu($contextMenu) {
+    public function setContextMenu($contextMenu)
+    {
         $this->contextMenu = $contextMenu;
     }
 
-    public function setAutoWrapRow($autoWrapRow) {
+    public function setAutoWrapRow($autoWrapRow)
+    {
         $this->autoWrapRow = $autoWrapRow;
     }
 
-    public function setMaxCols($maxCols) {
+    public function setMaxCols($maxCols)
+    {
         $this->maxCols = $maxCols;
     }
 
@@ -692,84 +755,99 @@ abstract class Handsontable {
      * For more information look at the link
      * @link https://docs.handsontable.com/0.35.1/tutorial-setting-options.html
      */
-    public function setCells($cells) {
+    public function setCells($cells)
+    {
         $this->cells = new CellsConfig($cells, CellsConfig::CELLS_MODE);
     }
 
     /**
-     * 
+     *
      * @param array $cell represent array of cell config
      * For more information look at the link
      * @link https://docs.handsontable.com/0.35.1/tutorial-setting-options.html
      */
-    public function setCell(array $cell) {
+    public function setCell(array $cell)
+    {
         $this->cell = new CellsConfig($cell, CellsConfig::CELL_MODE);
     }
 
-    public function setColumns($columns) {
+    public function setColumns($columns)
+    {
         $this->columns = new Columns($columns);
     }
 
-    public static function setTable_created($table_created) {
+    public static function setTable_created($table_created)
+    {
         self::$createdTables = $table_created;
     }
 
-    public function getLoadElementId() {
+    public function getLoadElementId()
+    {
         if (is_null($this->loadElementId)) {
             $this->loadElementId = "load" . Handsontable::$createdTables;
         }
         return $this->loadElementId;
     }
 
-    public function setLoadElementId($load_element_id) {
+    public function setLoadElementId($load_element_id)
+    {
         $this->loadElementId = $load_element_id;
     }
 
-    function getEvents() {
+    public function getEvents()
+    {
         return $this->events;
     }
 
-    function getCustomCells() {
+    public function getCustomCells()
+    {
         return $this->customCells;
     }
 
     /**
-     * 
-     * @return null|openSILEX\handsontablePHP\classes\UpdateSettings 
+     *
+     * @return null|openSILEX\handsontablePHP\classes\UpdateSettings
      */
-    function getUpdateSettings() {
+    public function getUpdateSettings()
+    {
         return $this->updateSettings;
     }
 
-    function setEvents($events) {
+    public function setEvents($events)
+    {
         $this->events = $events;
     }
 
-    function setCustomCells($customCells) {
+    public function setCustomCells($customCells)
+    {
         $this->customCells = $customCells;
     }
 
     /**
-     * 
+     *
      * @param \openSILEX\handsontablePHP\classes\UpdateSettings $updateSettings must be an instance of UpdateSettings
      */
-    function setUpdateSettings(\openSILEX\handsontablePHP\classes\UpdateSettings $updateSettings) {
+    public function setUpdateSettings(\openSILEX\handsontablePHP\classes\UpdateSettings $updateSettings)
+    {
         $updateSettings->setHandsontableVariableName($this->jsVariableName);
         $this->updateSettings = $updateSettings;
     }
 
-    protected function getInfoDivId() {
+    protected function getInfoDivId()
+    {
         if (is_null($this->infoDivId)) {
             $this->infoDivId = "tableconsole" . Handsontable::$createdTables;
         }
         return $this->infoDivId;
     }
 
-    protected function setInfoDivId($info_div_id) {
+    protected function setInfoDivId($info_div_id)
+    {
         $this->infoDivId = $info_div_id;
     }
 
-    public function generateDivInfo() {
+    public function generateDivInfo()
+    {
         return '<pre id="' . $this->getInfoDivId() . '"></pre>';
     }
 
@@ -778,7 +856,8 @@ abstract class Handsontable {
      *
      * @return string javascript text generated
      */
-    public function generateLoadButton() {
+    public function generateLoadButton()
+    {
         //SILEX:conception
         // Need to be more generic, maybe only get element id and implement own button
         //\SILEX:conception
@@ -790,7 +869,8 @@ abstract class Handsontable {
      *
      * @return string javascript text generated
      */
-    public function generateSaveButton() {
+    public function generateSaveButton()
+    {
         //SILEX:conception
         // Need to be more generic, maybe only get element id and implement own button
         //\SILEX:conception
@@ -816,7 +896,8 @@ abstract class Handsontable {
      *
      * @return string javascript text generated
      */
-    public function generateJavascriptCode() {
+    public function generateJavascriptCode()
+    {
         $js_code = $this->prepareInfo();
         $js_code .= $this->prepareContainer();
         if ($this->getSave()) { // if a table need to be saved
@@ -881,7 +962,8 @@ abstract class Handsontable {
      *
      * @return string handsontable javascript text
      */
-    public function generateTableJSCode() {
+    public function generateTableJSCode()
+    {
         // internal class attributes which will not rendered (must be in lowercase)
         $method_not_rendered = array(
             "data", "containername", "loadlibrairy", "loaddatasource",
@@ -936,23 +1018,28 @@ abstract class Handsontable {
         return $js_table_code;
     }
 
-    protected function prepareLoad() {
+    protected function prepareLoad()
+    {
         return "var load = document.getElementById('" . $this->getLoadElementId() . "');" . PHP_EOL;
     }
 
-    protected function prepareInfo() {
+    protected function prepareInfo()
+    {
         return "var tableconsole = document.getElementById('" . $this->getInfoDivId() . "');" . PHP_EOL;
     }
 
-    private function prepareAutoSave() {
+    private function prepareAutoSave()
+    {
         return "var autosaveNotification;" . PHP_EOL;
     }
 
-    private function prepareSave() {
+    private function prepareSave()
+    {
         return "var save = document.getElementById('" . $this->getSaveElementId() . "');" . PHP_EOL;
     }
 
-    private function prepareContainer() {
+    private function prepareContainer()
+    {
         return "var  container =  document.getElementById('" . $this->getContainerName() . "');" . PHP_EOL;
     }
 
@@ -961,7 +1048,8 @@ abstract class Handsontable {
      *
      * @return string javascript text generated
      */
-    public function loadTable() {
+    public function loadTable()
+    {
         return "
          Handsontable.dom.addEvent(load, 'click', function() {
             $.ajax('" . $this->loadDataSource . "')
@@ -981,7 +1069,8 @@ abstract class Handsontable {
      *
      * @return string javascript text generated
      */
-    public function saveTableChangesFunctions() {
+    public function saveTableChangesFunctions()
+    {
         //SILEX:conception
         // Need to be more generic
         //\SILEX:conception
@@ -1014,7 +1103,8 @@ abstract class Handsontable {
      *
      * @return string javascript text generated
      */
-    protected function saveTableFunctions() {
+    protected function saveTableFunctions()
+    {
         //SILEX:conception
         // Need to be more generic
         //\SILEX:conception
@@ -1039,10 +1129,11 @@ abstract class Handsontable {
     }
 
     /**
-     * 
+     *
      * @return string div container with handsontable scripts
      */
-    public function generateContainerHTScript() {
+    public function generateContainerHTScript()
+    {
         return "
         <div id='{$this->getContainerName()}'>
         </div>
@@ -1052,10 +1143,11 @@ abstract class Handsontable {
     }
 
     /**
-     * 
+     *
      * @return string div container with handsontable scripts and other needed css and scripts links
      */
-    public function generateLibrairyContainerHTScript($jquery = false, $libraries = []) {
+    public function generateLibrairyContainerHTScript($jquery = false, $libraries = [])
+    {
         return "
         <div id='{$this->getContainerName()}'>
         </div>
@@ -1079,7 +1171,8 @@ abstract class Handsontable {
      * If columns renderer option is date it permits to load automatically needed pikaday and moment js library
      * @return boolean
      */
-    protected function ifDateRendererSetInColumns() {
+    protected function ifDateRendererSetInColumns()
+    {
         // if set columns
         if (isset($this->columns) && $this->columns instanceof \openSILEX\handsontablePHP\classes\Columns) {
             $columns = $this->getColumns()->getColumns();
@@ -1104,13 +1197,14 @@ abstract class Handsontable {
     }
 
     /**
-     * Add Handsontable dom event (not working for now) 
+     * Add Handsontable dom event (not working for now)
      * @param string $destinationContainerId
      * @param string $eventName
      * @param string $eventFunction
      * @todo need to be test it's not working
      */
-    public function addEvent($destinationContainerId, $eventName, $eventFunction) {
+    public function addEvent($destinationContainerId, $eventName, $eventFunction)
+    {
         $eventJSFunction = new JSFunction($eventFunction);
         $event = "var $destinationContainerId{$this->jsVariableName} = document.getElementById('$destinationContainerId');" . PHP_EOL;
         $event .= "document.dom.addEvent($destinationContainerId{$this->jsVariableName}, '{$eventName}', function () { " . PHP_EOL
@@ -1123,28 +1217,30 @@ abstract class Handsontable {
      * Register custom cell type
      * @param \openSILEX\handsontablePHP\classes\CustomCellType $customCell
      */
-    public function addCustomCellType(\openSILEX\handsontablePHP\classes\CustomCellType $customCell) {
+    public function addCustomCellType(\openSILEX\handsontablePHP\classes\CustomCellType $customCell)
+    {
         $this->customCells[$customCell->getName()] = $customCell;
     }
 
     /**
-     * 
+     *
      * @param type $eventName event name
      */
-    public function removeEvent($eventName) {
+    public function removeEvent($eventName)
+    {
         if (!empty($this->events) && isset($this->events[$eventName])) {
             unset($this->events[$eventName]);
         }
     }
 
     /**
-     * 
+     *
      * @param type $customCellName cell name
      */
-    public function removeCustomCellType($customCellName) {
+    public function removeCustomCellType($customCellName)
+    {
         if (!empty($this->customCells) && isset($this->customCells[$customCellName])) {
             unset($this->customCells[$customCellName]);
         }
     }
-
 }

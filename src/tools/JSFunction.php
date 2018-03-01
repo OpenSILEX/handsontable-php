@@ -33,15 +33,16 @@ class JSFunction implements \JsonSerializable
 
     /**
      *
-     * @var string js function 
+     * @var string js function
      */
     protected $function;
 
-    function __construct($function) {
+    public function __construct($function)
+    {
         $this->function = $function;
     }
 
-        /**
+    /**
      * Specify data which should be serialized to JSON
      * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
      * Inherited from \JsonSerializable::jsonSerialize() method

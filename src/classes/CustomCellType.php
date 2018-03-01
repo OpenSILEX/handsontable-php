@@ -21,76 +21,92 @@ use \openSILEX\handsontablePHP\tools\JSFunction;
  * @copyright Copyright © INRA - 2018
  * @license https://www.gnu.org/licenses/agpl-3.0.fr.html AGPL-3.0
  */
-class CustomCellType implements \JsonSerializable {
+class CustomCellType implements \JsonSerializable
+{
 
     /**
-     * 
+     *
      * @param string $name custome cell name
      */
-    function __construct(string $name) {
+    public function __construct(string $name)
+    {
         $this->name = $name;
     }
     
-    function getEditor(): type {
+    public function getEditor(): type
+    {
         return $this->editor;
     }
 
-    function getRenderer() {
+    public function getRenderer()
+    {
         return $this->renderer;
     }
 
-    function getValidator() {
+    public function getValidator()
+    {
         return $this->validator;
     }
 
-    function getClassName() {
+    public function getClassName()
+    {
         return $this->className;
     }
 
-    function getAllowInvalid() {
+    public function getAllowInvalid()
+    {
         return $this->allowInvalid;
     }
 
-    function getMyCustomCellState() {
+    public function getMyCustomCellState()
+    {
         return $this->myCustomCellState;
     }
 
-    function getName() {
+    public function getName()
+    {
         return $this->name;
     }
 
-    function setEditor(type $editor) {
+    public function setEditor(type $editor)
+    {
         $this->editor = $editor;
     }
 
-    function setRenderer($renderer) {
+    public function setRenderer($renderer)
+    {
         $this->renderer = $renderer;
     }
 
-    function setValidator($validator) {
+    public function setValidator($validator)
+    {
         $this->validator = $validator;
     }
 
-    function setClassName($className) {
+    public function setClassName($className)
+    {
         $this->className = $className;
     }
 
-    function setAllowInvalid($allowInvalid) {
+    public function setAllowInvalid($allowInvalid)
+    {
         $this->allowInvalid = $allowInvalid;
     }
 
-    function setMyCustomCellState($myCustomCellState) {
+    public function setMyCustomCellState($myCustomCellState)
+    {
         $this->myCustomCellState = $myCustomCellState;
     }
 
-    function setName($name) {
+    public function setName($name)
+    {
         $this->name = $name;
     }
 
     
     /**
      * Handsontable.editors.TextEditor.prototype.extend();
-     * @var type 
+     * @var type
      */
     protected $editor;
 
@@ -98,7 +114,7 @@ class CustomCellType implements \JsonSerializable {
      * function customRenderer(hotInstance, td, row, column, prop, value, cellProperties) {
      *   // ...renderer logic => $renderer
      *    }
-     * @var string 
+     * @var string
      */
     protected $renderer;
 
@@ -106,13 +122,13 @@ class CustomCellType implements \JsonSerializable {
      * function customValidator(query, callback) {
      * // ...validator logic callback(* Pass `true` or `false` *); =>  $validator
      * }
-     * @var string 
+     * @var string
      */
     protected $validator;
 
     /**
      *
-     * @var string 
+     * @var string
      */
     protected $className;
 
@@ -123,13 +139,13 @@ class CustomCellType implements \JsonSerializable {
     // Or you can add custom properties which will be accessible in `cellProperties`
     /**
      *
-     * @var string 
+     * @var string
      */
     protected $myCustomCellState;
 
     /**
      *
-     * @var string name of the cell type 
+     * @var string name of the cell type
      */
     protected $name;
 
@@ -151,7 +167,8 @@ class CustomCellType implements \JsonSerializable {
      *
      * @return mixed data which can be serialized by <b>json_encode</b>
      */
-    public function jsonSerialize() {
+    public function jsonSerialize()
+    {
         $str = "(function(Handsontable){ " . PHP_EOL
             . "Handsontable.cellTypes.registerCellType('{$this->name}', {" . PHP_EOL;
 
@@ -184,5 +201,4 @@ class CustomCellType implements \JsonSerializable {
                 '})(Handsontable);';
         return $str;
     }
-
 }

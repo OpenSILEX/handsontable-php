@@ -23,11 +23,11 @@ $hd->setColumns([
             'data' => 1
             ]),
         new ColumnConfig([
-            'data' => 2, 
+            'data' => 2,
             'type' => 'date'
             ]), // date exemple
         new ColumnConfig([
-            'data' => 2, 
+            'data' => 2,
             'type' => 'date'
             ])
     ]);
