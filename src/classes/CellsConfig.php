@@ -30,8 +30,7 @@ use \openSILEX\handsontablePHP\tools\JavascriptFormatter;
  * @author Arnaud Charleroy <arnaud.charleroy@inra.fr>
  * @since 1.0
  */
-class CellsConfig implements \JsonSerializable
-{
+class CellsConfig implements \JsonSerializable {
 
     /**
      * List of the cell definition that will be specified
@@ -63,8 +62,7 @@ class CellsConfig implements \JsonSerializable
      * @param int $cellMode for cell openSILEX\handsontablePHP\classes\CellsConfig::CELLS_MODE
      * or cells attribute openSILEX\handsontablePHP\classes\CellsConfig::CELLS_MODE
      */
-    public function __construct($cellsConfig, $cellMode = CellsConfig::CELLS_MODE)
-    {
+    public function __construct($cellsConfig, $cellMode = CellsConfig::CELLS_MODE) {
         $this->cellsConfig = $cellsConfig;
         $this->cellMode = $cellMode;
     }
@@ -85,8 +83,7 @@ class CellsConfig implements \JsonSerializable
      * }
      * @return mixed data which can be serialized by <b>json_encode</b>
      */
-    public function jsonSerialize()
-    {
+    public function jsonSerialize() {
         /**
          *  @link https://docs.handsontable.com/latest/Options.html#cells
          */

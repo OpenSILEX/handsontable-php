@@ -28,8 +28,7 @@ use openSILEX\handsontablePHP\tools\JavascriptFormatter;
  * @since 1.0
  * @see openSILEX\handsontablePHP\classes\Columns
  */
-class UpdateSettings implements \JsonSerializable
-{
+class UpdateSettings implements \JsonSerializable {
 
     /**
      *
@@ -43,8 +42,7 @@ class UpdateSettings implements \JsonSerializable
      */
     protected $handsontableVariableName;
 
-    public function __construct($properties)
-    {
+    public function __construct($properties) {
         $this->properties = $properties;
     }
     
@@ -53,8 +51,7 @@ class UpdateSettings implements \JsonSerializable
      * @param string $name property name
      * @param mixed $value property value
      */
-    public function setProperty($name, $value)
-    {
+    public function setProperty($name, $value) {
         // create properties array if not set
         if (!isset($this->properties)) {
             $this->properties = [];
@@ -62,23 +59,19 @@ class UpdateSettings implements \JsonSerializable
         $this->properties[$name] = $value;
     }
 
-    public function setProperties($properties)
-    {
+    public function setProperties($properties) {
         return $this->properties = $properties;
     }
 
-    public function getProperties()
-    {
+    public function getProperties() {
         return $this->properties;
     }
 
-    public function getHandsontableVariableName()
-    {
+    public function getHandsontableVariableName() {
         return $this->handsontableVariableName;
     }
 
-    public function setHandsontableVariableName($handsontableVariableName)
-    {
+    public function setHandsontableVariableName($handsontableVariableName) {
         $this->handsontableVariableName = $handsontableVariableName;
     }
 
@@ -92,8 +85,7 @@ class UpdateSettings implements \JsonSerializable
      * });
      * @return mixed data which can be serialized by <b>json_encode</b>
      */
-    public function jsonSerialize()
-    {
+    public function jsonSerialize() {
         if (!isset($this->properties) || empty($this->properties)) {
             return '';
         }

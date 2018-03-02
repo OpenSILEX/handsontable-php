@@ -21,85 +21,69 @@ use \openSILEX\handsontablePHP\tools\JSFunction;
  * @copyright Copyright © INRA - 2018
  * @license https://www.gnu.org/licenses/agpl-3.0.fr.html AGPL-3.0
  */
-class CustomCellType implements \JsonSerializable
-{
+class CustomCellType implements \JsonSerializable {
 
     /**
      *
      * @param string $name custome cell name
      */
-    public function __construct(string $name)
-    {
+    public function __construct(string $name) {
         $this->name = $name;
     }
     
-    public function getEditor(): type
-    {
+    public function getEditor(): type {
         return $this->editor;
     }
 
-    public function getRenderer()
-    {
+    public function getRenderer() {
         return $this->renderer;
     }
 
-    public function getValidator()
-    {
+    public function getValidator() {
         return $this->validator;
     }
 
-    public function getClassName()
-    {
+    public function getClassName() {
         return $this->className;
     }
 
-    public function getAllowInvalid()
-    {
+    public function getAllowInvalid() {
         return $this->allowInvalid;
     }
 
-    public function getMyCustomCellState()
-    {
+    public function getMyCustomCellState() {
         return $this->myCustomCellState;
     }
 
-    public function getName()
-    {
+    public function getName() {
         return $this->name;
     }
 
-    public function setEditor(type $editor)
-    {
+    public function setEditor(type $editor) {
         $this->editor = $editor;
     }
 
-    public function setRenderer($renderer)
-    {
+    public function setRenderer($renderer) {
         $this->renderer = $renderer;
     }
 
-    public function setValidator($validator)
-    {
+    public function setValidator($validator) {
         $this->validator = $validator;
     }
 
-    public function setClassName($className)
-    {
+    public function setClassName($className) {
         $this->className = $className;
     }
 
-    public function setAllowInvalid($allowInvalid)
-    {
+    public function setAllowInvalid($allowInvalid) {
         $this->allowInvalid = $allowInvalid;
     }
 
-    public function setMyCustomCellState($myCustomCellState)
-    {
+    public function setMyCustomCellState($myCustomCellState) {
         $this->myCustomCellState = $myCustomCellState;
     }
 
-    public function setName($name)
-    {
+    public function setName($name) {
         $this->name = $name;
     }
 
@@ -167,8 +151,7 @@ class CustomCellType implements \JsonSerializable
      *
      * @return mixed data which can be serialized by <b>json_encode</b>
      */
-    public function jsonSerialize()
-    {
+    public function jsonSerialize() {
         $str = "(function(Handsontable){ " . PHP_EOL
             . "Handsontable.cellTypes.registerCellType('{$this->name}', {" . PHP_EOL;
 

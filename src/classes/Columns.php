@@ -28,8 +28,7 @@ use \openSILEX\handsontablePHP\tools\JavascriptFormatter;
  * @since 1.0
  * @link https://docs.handsontable.com/latest/Options.html#columns
  */
-class Columns implements \JsonSerializable
-{
+class Columns implements \JsonSerializable {
 
     /**
      * @var mixed array of ColumnConfig instances or function javascript string
@@ -111,13 +110,11 @@ class Columns implements \JsonSerializable
      *    );
      * @param mixed $columns may be a function or an  array
      */
-    public function __construct($columns)
-    {
+    public function __construct($columns) {
         $this->columns = $columns;
     }
 
-    public function getColumns()
-    {
+    public function getColumns() {
         return $this->columns;
     }
         
@@ -158,8 +155,7 @@ class Columns implements \JsonSerializable
      *              ]
      * @return mixed data which can be serialized by <b>json_encode</b>
      */
-    public function jsonSerialize()
-    {
+    public function jsonSerialize() {
         // if array convert array in javascript format
         if (is_array($this->columns)) {
             return $this->columns;

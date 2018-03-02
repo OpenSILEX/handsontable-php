@@ -25,8 +25,7 @@ namespace openSILEX\handsontablePHP\adapter;
  * @author Arnaud Charleroy <arnaud.charleroy@inra.fr>
  * @since 1.0
  */
-class HandsontableSimple extends \openSILEX\handsontablePHP\classes\Handsontable
-{
+class HandsontableSimple extends \openSILEX\handsontablePHP\classes\Handsontable {
 
     /**
      * Load all required js librairies
@@ -44,8 +43,7 @@ class HandsontableSimple extends \openSILEX\handsontablePHP\classes\Handsontable
      *
      * @return string contains html script tag which will be put in head tags
      */
-    public function loadJSLibraries($jquery = false, $librairiesPath = [])
-    {
+    public function loadJSLibraries($jquery = false, $librairiesPath = []) {
         if (empty($librairiesPath)) {
             $librairiesPath = \openSILEX\handsontablePHP\config\Config::getLibrairiesPath();
         }
@@ -104,8 +102,7 @@ class HandsontableSimple extends \openSILEX\handsontablePHP\classes\Handsontable
      *
      * @return string contains html link tag which will be put in head tags
      */
-    public function loadCSSLibraries($jquery = false, $librairiesPath = [])
-    {
+    public function loadCSSLibraries($jquery = false, $librairiesPath = []) {
         if (empty($librairiesPath)) {
             $librairiesPath = \openSILEX\handsontablePHP\config\Config::getLibrairiesPath();
         }
@@ -146,8 +143,7 @@ class HandsontableSimple extends \openSILEX\handsontablePHP\classes\Handsontable
      * Inherited from \openSILEX\handsontablePHP\classes\Handsontable::render() method
      * @see \openSILEX\handsontablePHP\classes\Handsontable
      */
-    public function render()
-    {
+    public function render() {
         return $this->generateContainerHTScript();
     }
 }

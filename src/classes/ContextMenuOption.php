@@ -28,8 +28,7 @@ use \openSILEX\handsontablePHP\tools\JavascriptFormatter;
  * @since 1.0
  * @link https://docs.handsontable.com/latest/demo-context-menu.html#page-default
  */
-class ContextMenuOption implements \JsonSerializable
-{
+class ContextMenuOption implements \JsonSerializable {
     /**
      *
      * @var string menu item key (id)
@@ -54,49 +53,40 @@ class ContextMenuOption implements \JsonSerializable
      */
     protected $callback;
 
-    public function __construct($key, $name)
-    {
+    public function __construct($key, $name) {
         $this->key = $key;
         $this->name = $name;
     }
 
-    public function getKey()
-    {
+    public function getKey() {
         return $this->key;
     }
 
-    public function getName()
-    {
+    public function getName() {
         return $this->name;
     }
 
-    public function getDisabled()
-    {
+    public function getDisabled() {
         return $this->disabled;
     }
 
-    public function getCallback()
-    {
+    public function getCallback() {
         return $this->callback;
     }
 
-    public function setKey($key)
-    {
+    public function setKey($key) {
         $this->key = $key;
     }
 
-    public function setName($name)
-    {
+    public function setName($name) {
         $this->name = $name;
     }
 
-    public function setDisabled($disabled)
-    {
+    public function setDisabled($disabled) {
         $this->disabled = $disabled;
     }
 
-    public function setCallback($callback)
-    {
+    public function setCallback($callback) {
         $this->callback = $callback;
     }
 
@@ -114,8 +104,7 @@ class ContextMenuOption implements \JsonSerializable
     * }
     * @return mixed data which can be serialized by <b>json_encode</b>
     */
-    public function jsonSerialize()
-    {
+    public function jsonSerialize() {
         $js = "{
           key: '{$this->key}',"
                 . "name: '{$this->name}'";
