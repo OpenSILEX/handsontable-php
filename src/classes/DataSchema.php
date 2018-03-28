@@ -49,5 +49,4 @@ class DataSchema implements \JsonSerializable {
     public function jsonSerialize() {
         return $this->schema;
     }
-
 }

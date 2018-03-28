@@ -70,7 +70,7 @@ class CellConfigDefinition implements \JsonSerializable {
      * Inherited from \JsonSerializable::jsonSerialize() method
      * @example  {
      *      row: 0,
-     *      col: 0, 
+     *      col: 0,
      *      readOnly: true
      *      }
      * @return mixed data which can be serialized by <b>json_encode</b>
@@ -82,5 +82,4 @@ class CellConfigDefinition implements \JsonSerializable {
             'readOnly' => $this->readOnly
         ];
     }
-
 }

@@ -31,7 +31,7 @@ class HandsontableSimple extends \openSILEX\handsontablePHP\classes\Handsontable
      * Load all required js librairies
      * Inherited from \openSILEX\handsontablePHP\classes\Handsontable::loadJSLibraries() method
      * @param bool $jquery if jquery need to be loaded
-     * @param array $librairiesPath array which contains required Javascript librairy 
+     * @param array $librairiesPath array which contains required Javascript librairy
      *              $librairiesPath = [
      *                      'handsontable' => [
      *                          'js => '...',
@@ -90,7 +90,7 @@ class HandsontableSimple extends \openSILEX\handsontablePHP\classes\Handsontable
      * Load all required css librairies
      * Inherited from \openSILEX\handsontablePHP\classes\Handsontable::loadCSSLibraries() method
      * @param bool $jquery if jquery need to be loaded
-     * @param array $librairiesPath array which contains required Javascript librairy 
+     * @param array $librairiesPath array which contains required Javascript librairy
      *              $librairiesPath = [
      *                      'handsontable' => [
      *                          'js => '...',
@@ -146,5 +146,4 @@ class HandsontableSimple extends \openSILEX\handsontablePHP\classes\Handsontable
     public function render() {
         return $this->generateContainerHTScript();
     }
-
 }

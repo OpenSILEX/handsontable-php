@@ -40,18 +40,19 @@ class ColumnConfig implements \JsonSerializable {
         $this->properties = $properties;
     }
 
-    function setAProperty($name,$value) {
+    public function setProperty($name, $value) {
+        // if properties not set
         if (!isset($this->properties)) {
             $this->properties = [];
         }
         $this->properties[$name] = $value;
     }
     
-    function setProperties($properties) {
+    public function setProperties($properties) {
         return $this->properties = $properties;
     }
 
-    function getProperties() {
+    public function getProperties() {
         return $this->properties;
     }
 
@@ -59,7 +60,7 @@ class ColumnConfig implements \JsonSerializable {
      * Specify data which should be serialized to JSON
      * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
      * Inherited from \JsonSerializable::jsonSerialize() method
-     * @example 
+     * @example
      * columns: [
      * {},
      *  ...,
@@ -94,5 +95,4 @@ class ColumnConfig implements \JsonSerializable {
         $newArray = JavascriptFormatter::preparePHPArrayToJSArray($this->properties);
         return $newArray;
     }
-
 }

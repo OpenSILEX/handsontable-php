@@ -42,30 +42,36 @@ class UpdateSettings implements \JsonSerializable {
      */
     protected $handsontableVariableName;
 
-    function __construct($properties) {
+    public function __construct($properties) {
         $this->properties = $properties;
     }
-
-    function setAProperty($name, $value) {
+    
+    /**
+     * Set a property with her value
+     * @param string $name property name
+     * @param mixed $value property value
+     */
+    public function setProperty($name, $value) {
+        // create properties array if not set
         if (!isset($this->properties)) {
             $this->properties = [];
         }
         $this->properties[$name] = $value;
     }
 
-    function setProperties($properties) {
+    public function setProperties($properties) {
         return $this->properties = $properties;
     }
 
-    function getProperties() {
+    public function getProperties() {
         return $this->properties;
     }
 
-    function getHandsontableVariableName() {
+    public function getHandsontableVariableName() {
         return $this->handsontableVariableName;
     }
 
-    function setHandsontableVariableName($handsontableVariableName) {
+    public function setHandsontableVariableName($handsontableVariableName) {
         $this->handsontableVariableName = $handsontableVariableName;
     }
 
@@ -73,7 +79,7 @@ class UpdateSettings implements \JsonSerializable {
      * Specify data which should be serialized to JSON
      * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
      * Inherited from \JsonSerializable::jsonSerialize() method
-     * @example 
+     * @example
      * hot.updateSettings({
      *  columnSorting: false
      * });
@@ -84,9 +90,8 @@ class UpdateSettings implements \JsonSerializable {
             return '';
         }
         $newArray = JavascriptFormatter::preparePHPArrayToJSArray($this->properties);
-        return "{$this->handsontableVariableName}.updateSettings( " . JavascriptFormatter::prepareJavascriptText(PHP_EOL
-                        . json_encode($newArray) . PHP_EOL
-                ) . ");";
+        return "{$this->handsontableVariableName}.updateSettings( "
+                . JavascriptFormatter::prepareJavascriptText(PHP_EOL . json_encode($newArray) . PHP_EOL)
+                . ");";
     }
-
 }

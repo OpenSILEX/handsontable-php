@@ -84,7 +84,7 @@ class Columns implements \JsonSerializable {
      *
      *         return columnMeta;";
      *    });
-     *   A string 
+     *   A string
      *  $handsontable_instance->setColumns(
      *       "var columnMeta = {};
      *
@@ -114,7 +114,7 @@ class Columns implements \JsonSerializable {
         $this->columns = $columns;
     }
 
-    function getColumns() {
+    public function getColumns() {
         return $this->columns;
     }
         
@@ -172,5 +172,4 @@ class Columns implements \JsonSerializable {
         }
         return null;
     }
-
 }

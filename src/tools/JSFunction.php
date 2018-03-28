@@ -28,20 +28,19 @@ use \openSILEX\handsontablePHP\tools\JavascriptFormatter;
  * @since 1.0
  * @link https://docs.handsontable.com/latest/demo-autocomplete.html
  */
-class JSFunction implements \JsonSerializable
-{
+class JSFunction implements \JsonSerializable {
 
     /**
      *
-     * @var string js function 
+     * @var string js function
      */
     protected $function;
 
-    function __construct($function) {
+    public function __construct($function) {
         $this->function = $function;
     }
 
-        /**
+    /**
      * Specify data which should be serialized to JSON
      * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
      * Inherited from \JsonSerializable::jsonSerialize() method
@@ -64,8 +63,7 @@ class JSFunction implements \JsonSerializable
      *
      *  @return mixed data which can be serialized by <b>json_encode</b>
      */
-    public function jsonSerialize()
-    {
+    public function jsonSerialize() {
         return JavascriptFormatter::prepareJavascriptText($this->function);
     }
 }

@@ -28,8 +28,7 @@ use \openSILEX\handsontablePHP\tools\JavascriptFormatter;
  * @since 1.0
  * @link https://docs.handsontable.com/latest/demo-autocomplete.html
  */
-class AjaxSourceColumn implements \JsonSerializable
-{
+class AjaxSourceColumn implements \JsonSerializable {
 
     /**
      *
@@ -49,8 +48,7 @@ class AjaxSourceColumn implements \JsonSerializable
      */
     protected $debug;
 
-    public function __construct($url, $dataType = 'json', $debug = false)
-    {
+    public function __construct($url, $dataType = 'json', $debug = false) {
         $this->url = $url;
         $this->dataType = $dataType;
         $this->debug = $debug;
@@ -81,8 +79,7 @@ class AjaxSourceColumn implements \JsonSerializable
      *
      *  @return mixed data which can be serialized by <b>json_encode</b>
      */
-    public function jsonSerialize()
-    {
+    public function jsonSerialize() {
         $debugString = ($this->debug) ? "console.log('response', response);" : "" ;
         return JavascriptFormatter::prepareJavascriptText("function (query, process) {
           $.ajax({

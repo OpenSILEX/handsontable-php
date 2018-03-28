@@ -10,18 +10,26 @@ use openSILEX\handsontablePHP\classes\ColumnConfig;
 
 $hd = new HandsontableSimple();
 $data = [
-      ['2017', 10, '05/02/2018', 12, 13, 15, 16],
-      ['2018', 10, '05/02/2018', 12, 13, 15, 16],
-      ['2019', 10, '05/02/2018', 12, 13, 15, 16],
-      ['2020', 10, '05/02/2018', 12, 13, 15, 16],
-      ['2021', 10, '05/02/2018', 12, 13, 15, 16]
-    ];
+    ['2017', 10, '05/02/2018', 12, 13, 15, 16],
+    ['2018', 10, '05/02/2018', 12, 13, 15, 16],
+    ['2019', 10, '05/02/2018', 12, 13, 15, 16],
+    ['2020', 10, '05/02/2018', 12, 13, 15, 16],
+    ['2021', 10, '05/02/2018', 12, 13, 15, 16]
+];
 $hd->setData($data);
 $hd->setColHeaders(['Year', 'Tesla', 'Date', 'Toyota', 'Honda', 'Mazda', 'Ford']);
 $hd->setColumns([
-        new ColumnConfig(['data' => 1]),
-        new ColumnConfig(['data' => 2, 'type' => 'date']), // date exemple
-        new ColumnConfig(['data' => 2, 'type' => 'date'])
+        new ColumnConfig([
+            'data' => 1
+            ]),
+        new ColumnConfig([
+            'data' => 2,
+            'type' => 'date'
+            ]), // date exemple
+        new ColumnConfig([
+            'data' => 2,
+            'type' => 'date'
+            ])
     ]);
 
 ?>
@@ -30,5 +38,8 @@ $hd->setColumns([
         <?= $hd->loadJSLibraries(true); ?>
         <?= $hd->loadCSSLibraries(); ?>
     </head>
+    <br>
+    <h3><b>Load column</b></h3>
+    <br>
     <?= $hd->render() ?>
 </html>

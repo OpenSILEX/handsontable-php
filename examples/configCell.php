@@ -11,13 +11,13 @@ use openSILEX\handsontablePHP\classes\CellConfigDefinition;
 
 $hd = new HandsontableSimple();
 $data = [
-      ['', 'Tesla', 'Nissan', 'Toyota', 'Honda', 'Mazda', 'Ford'],
-      ['2017', 10, 11, 12, 13, 15, 16],
-      ['2018', 10, 11, 12, 13, 15, 16],
-      ['2019', 10, 11, 12, 13, 15, 16],
-      ['2020', 10, 11, 12, 13, 15, 16],
-      ['2021', 10, 11, 12, 13, 15, 16]
-    ];
+    ['', 'Tesla', 'Nissan', 'Toyota', 'Honda', 'Mazda', 'Ford'],
+    ['2017', 10, 11, 12, 13, 15, 16],
+    ['2018', 10, 11, 12, 13, 15, 16],
+    ['2019', 10, 11, 12, 13, 15, 16],
+    ['2020', 10, 11, 12, 13, 15, 16],
+    ['2021', 10, 11, 12, 13, 15, 16]
+];
 $hd->setData($data);
 // Cell config $row, $col, $readOnly
 $hd->setCell([
@@ -26,16 +26,13 @@ $hd->setCell([
 $hd->setCells(
     'var cellProperties = {};
 
-      if (row === 0 && col === 0) {
-        cellProperties.readOnly = true;
-      }
+    if (row === 0 && col === 0) {
+      cellProperties.readOnly = true;
+    }
 
-      return cellProperties;
-      '
+    return cellProperties;
+    '
 );
-
-
-
 
 ?>
 <html>
@@ -43,5 +40,8 @@ $hd->setCells(
         <?= $hd->loadJSLibraries(true); ?>
         <?= $hd->loadCSSLibraries(); ?>
     </head>
+    <br>
+    <h3><b>Set config cell</b></h3>
+    <br>
     <?= $hd->render() ?>
 </html>
