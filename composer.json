@@ -19,7 +19,7 @@
     "require": {
         "php": "^5.5 || ^7.0",
 	"oomphinc/composer-installers-extender": "^1.1",
-    	"bower-asset/bootstrap": "0.35.1"
+    	"bower-asset/handsontable": "0.35.1"
     },
     "require-dev": {
         "phpunit/phpunit": "^6.5"
