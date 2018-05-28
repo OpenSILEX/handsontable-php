@@ -130,10 +130,8 @@ abstract class Handsontable {
      */
     protected $updateSettings;
 
-    // french langage is in a pull request at this time maybe soon
-    // @link https://github.com/handsontable/handsontable/pull/4775
-    //  const LANGUAGE_FRENCH = 'fr-FR';
-
+    // languages
+    const LANGUAGE_FRENCH = 'fr-FR';
     const LANGUAGE_POLISH = 'pl-PL  ';
     const LANGUAGE_ENGLISH = 'en-US';
 

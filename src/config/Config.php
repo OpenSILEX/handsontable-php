@@ -27,25 +27,63 @@ namespace openSILEX\handsontablePHP\config;
  */
 class Config {
 
+    protected static $vendorPathUrl;
+
+    /**
+     * Define vendor url path 
+     * @param string 
+     */
+    public static function setVendorPath($vendorPathUrl) {
+        static::$vendorPathUrl = $vendorPathUrl;
+    }
+
+    /**
+     * Get vendor url path
+     * @return string
+     */
+    public static function getVendorPath() {
+        return static::$vendorPathUrl;
+    }
+
     /**
      * Return an array which contains handsontable JS librairies and CSS web paths
      *
      * @return array contains handsontable JS librairies and CSS web paths
      */
-    public static function getLibrairiesPath() {
-        return [
-            'handsontable' => [
-                'js' => ['https://cdnjs.cloudflare.com/ajax/libs/handsontable/0.37.0/handsontable.full.min.js'],
-                'css' => ['https://cdnjs.cloudflare.com/ajax/libs/handsontable/0.37.0/handsontable.full.min.css']
-            ],
-            'moment' => [
-                'js' => ['https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js'],
-            ],
-            'pikaday' => [
-                'js' => ['https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js'],
-                'css' => ['https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.min.css']
-            ],
-            'jquery' => [ 'js' => ['https://code.jquery.com/jquery-3.2.1.min.js']]
-        ];
+    public static function getLibrairiesPath($online = false) {
+        // online assets
+        if (!isset(static::$vendorPathUrl)) {
+            return [
+                'handsontable' => [
+                    'js' => ['https://cdnjs.cloudflare.com/ajax/libs/handsontable/3.0.0/handsontable.full.min.js'],
+                    'css' => ['https://cdnjs.cloudflare.com/ajax/libs/handsontable/3.0.0/handsontable.full.min.css']
+                ],
+                'moment' => [
+                    'js' => ['https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js'],
+                ],
+                'pikaday' => [
+                    'js' => ['https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js'],
+                    'css' => ['https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.min.css']
+                ],
+                'jquery' => ['js' => ['https://code.jquery.com/jquery-3.2.1.min.js']]
+            ];
+        } else {
+            // local assetss
+            return [
+                'handsontable' => [
+                    'js' => [static::$vendorPathUrl . '/handsontable/dist/handsontable.full.js'],
+                    'css' => [static::$vendorPathUrl . '/handsontable/dist/handsontable.full.min.css']
+                ],
+                'moment' => [
+                    'js' => [static::$vendorPathUrl . '/moment/moment.js'],
+                ],
+                'pikaday' => [
+                    'js' => [static::$vendorPathUrl . '/moment/moment.js'],
+                    'css' => [static::$vendorPathUrl . '/pikaday/pikaday.min.css']
+                ],
+                'jquery' => ['js' => [static::$vendorPathUrl . '/jquery/dist/jquery.min.js']]
+            ];
+        }
     }
+
 }

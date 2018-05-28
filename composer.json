@@ -19,7 +19,8 @@
     "require": {
         "php": "^5.5 || ^7.0",
 	"oomphinc/composer-installers-extender": "^1.1",
-    	"bower-asset/handsontable": "0.35.1"
+    	"bower-asset/handsontable": "3.0.0",
+        "bower-asset/jquery": "^3.2.1"
     },
     "require-dev": {
         "phpunit/phpunit": "^6.5"
@@ -35,9 +36,10 @@
         }
     },
     "extra": {
-        "installer-types": ["bower-asset", "npm-asset"],
+        "installer-types": ["npm-asset","bower-asset"],
         "installer-paths": {
-            "public/assets/{$vendor}/{$name}/": ["type:bower-asset", "type:npm-asset"]
+            "{$vendor}/{$name}": [ "type:npm-asset"],
+            "{$vendor}/{$name}": ["type:bower-asset"]
         }
     },	
     "repositories": [
