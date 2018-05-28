@@ -1,0 +1,52 @@
+{
+    "name": "openSILEX/handsontable-php",
+    "description": "A php wrapper of handsontable js library",
+    "type": "library",
+    "license": "AGPL-3.0",
+    "keywords": [
+        "handsontable",
+        "spreadsheet", 
+        "php",
+        "javascript"
+    ],
+    "authors": [
+        {
+            "name": "Arnaud CHARLEROY",
+            "email": "arnaud.charleroy@inra.fr",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^5.5 || ^7.0",
+	"oomphinc/composer-installers-extender": "^1.1",
+    	"bower-asset/handsontable": "3.0.0",
+        "bower-asset/jquery": "^3.2.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "openSILEX\\handsontablePHP\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "openSILEX\\handsontable-php\\": "tests/"
+        }
+    },
+    "extra": {
+        "installer-types": ["npm-asset","bower-asset"],
+        "installer-paths": {
+            "{$vendor}/{$name}": [ "type:npm-asset"],
+            "{$vendor}/{$name}": ["type:bower-asset"]
+        }
+    },	
+    "repositories": [
+	{
+	    "type": "composer",
+	    "url": "https://asset-packagist.org"
+	}
+    ],
+    "minimum-stability": "dev"
+}

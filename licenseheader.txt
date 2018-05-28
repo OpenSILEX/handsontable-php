@@ -1,0 +1,11 @@
+//******************************************************************************
+//                                       ${nameAndExt}
+//
+// Author(s): ${user}
+// PHIS-SILEX version 1.0
+// Copyright © - INRA - ${date?date?string("yyyy")}
+// Creation date: ${date}
+// Contact: ${email}, anne.tireau@inra.fr, pascal.neveu@inra.fr
+// Last modification date:  ${date}
+// Subject:
+//******************************************************************************
